@@ -1,11 +1,11 @@
 import AppLayout from "../components/AppLayout";
 
-const Home = () => {
+const Shop = () => {
   return (
     <AppLayout>
-      채팅방 목록
+      샵
     </AppLayout>
   );
 };
 
-export default Home;
+export default Shop;
