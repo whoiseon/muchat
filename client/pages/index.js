@@ -3,7 +3,9 @@ import AppLayout from "../components/AppLayout";
 const Home = () => {
   return (
     <AppLayout>
-      채팅방 목록
+      <div>
+        채팅목록
+      </div>
     </AppLayout>
   );
 };

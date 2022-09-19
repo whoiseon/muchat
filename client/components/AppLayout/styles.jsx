@@ -91,3 +91,7 @@ export const ChatTab = styled.div`
     }
   }
 `;
+
+export const ContentWrapper = styled.div`
+  padding: 40px;
+`;

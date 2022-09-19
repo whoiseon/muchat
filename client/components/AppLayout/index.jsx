@@ -1,6 +1,6 @@
 import Link from "next/link";
 import {useRouter} from "next/router";
-import {AppWrapper, ChatTab} from "./styles";
+import {AppWrapper, ChatTab, ContentWrapper} from "./styles";
 import {BACKGROUND_COLOR, WHITE_COLOR} from "../../styles/common";
 
 const AppLayout = ({ children }) => {
@@ -34,7 +34,7 @@ const AppLayout = ({ children }) => {
           </Link>
         </div>
       </ChatTab>
-      <div>{children}</div>
+      <ContentWrapper>{children}</ContentWrapper>
     </AppWrapper>
   );
 };
