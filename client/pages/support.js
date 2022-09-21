@@ -1,14 +1,14 @@
 import AppLayout from "../components/AppLayout";
-import ChatList from "../components/ChatList";
 import CurrentUser from "../components/CurrentUser";
+import SupportPage from "../components/SupportPage";
 
-const Home = () => {
+const Support = () => {
   return (
     <AppLayout>
-      <ChatList />
+      <SupportPage />
       <CurrentUser />
     </AppLayout>
   );
 };
 
-export default Home;
+export default Support;

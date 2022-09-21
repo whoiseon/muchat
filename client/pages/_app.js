@@ -1,4 +1,5 @@
 import '../styles/globals.css';
+import wrapper from "../store/configureStore";
 
 const App = ({ Component, pageProps }) => {
   return (
@@ -6,4 +7,4 @@ const App = ({ Component, pageProps }) => {
   );
 };
 
-export default App;
+export default wrapper.withRedux(App);

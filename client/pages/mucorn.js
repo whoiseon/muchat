@@ -1,14 +1,14 @@
 import AppLayout from "../components/AppLayout";
-import ChatList from "../components/ChatList";
 import CurrentUser from "../components/CurrentUser";
+import MucornShop from "../components/MucornShop";
 
-const Home = () => {
+const Mucorn = () => {
   return (
     <AppLayout>
-      <ChatList />
+      <MucornShop />
       <CurrentUser />
     </AppLayout>
   );
 };
 
-export default Home;
+export default Mucorn;

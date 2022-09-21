@@ -9,7 +9,7 @@ body {
   sans-serif;
   background-color: #2B2B36;
   color: #F5F5F5;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 html, body, #__next {
@@ -21,10 +21,20 @@ a {
   text-decoration: none;
 }
 
-ul, li, h1 {
+ul, li, h1, p {
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+input:focus {
+  outline: none;
+}
+
+button {
+  background-color: #2B2B36;
+  cursor: pointer;
+  border: none;
 }
 
 * {

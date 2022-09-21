@@ -14,7 +14,11 @@ const AppLayout = ({ children }) => {
   return (
     <AppWrapper>
       <ChatTab>
-        <h1 style={router.pathname === "/" ? active : {}}>
+        <h1 style={
+          router.pathname === "/" || router.pathname === "/search" || router.pathname === "/mucorn" || router.pathname === "/support"
+            ? active
+            : {}
+        }>
           <Link
             href="/"
           >

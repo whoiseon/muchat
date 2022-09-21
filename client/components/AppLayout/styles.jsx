@@ -23,7 +23,7 @@ export const ChatTab = styled.div`
   h1 {
     width: 180px;
     height: 48px;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 500;
     padding: 6px;
     color: ${GRAY_COLOR};
@@ -93,5 +93,8 @@ export const ChatTab = styled.div`
 `;
 
 export const ContentWrapper = styled.div`
-  padding: 40px;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 `;
