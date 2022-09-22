@@ -1,7 +1,8 @@
 import styled from "@emotion/styled";
 
 export const SectionWrapper = styled.div`
-  margin-bottom: 70px;
+  width: 100%;
+  margin-bottom: 40px;
 `;
 
 export const Header = styled.div`
@@ -13,5 +14,11 @@ export const Header = styled.div`
 `;
 
 export const Content = styled.div`
-
+  display: flex;
+  align-items: center;
+  ul {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+  }
 `;

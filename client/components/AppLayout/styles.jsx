@@ -94,7 +94,14 @@ export const ChatTab = styled.div`
 
 export const ContentWrapper = styled.div`
   display: flex;
-  width: 100%;
+  min-width: 1680px;
+  margin: 0 auto;
   height: 100%;
   overflow: hidden;
+  @media (max-width: 1680px) {
+    min-width: 1440px;
+  }
+  @media (max-width: 1440px) {
+    min-width: 1280px;
+  }
 `;

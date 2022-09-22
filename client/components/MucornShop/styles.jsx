@@ -19,7 +19,7 @@ export const Header = styled.div`
     padding: 12px 16px;
   }
   span {
-    margin-left: auto;
+    margin-left: 14px;
     color: ${SEMI_GRAY_COLOR};
   }
 `;

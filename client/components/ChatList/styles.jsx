@@ -11,12 +11,12 @@ import {
 export const ChatListWrapper = styled.div`
   padding: 40px 20px 40px 40px;
   overflow-y: scroll;
-  width: 80%;
+  width: 76%;
 `;
 
 export const Header = styled.div`
   display: flex;
-  margin-bottom: 70px;
+  margin-bottom: 40px;
   button {
     margin-left: auto;
     width: 180px;
