@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import {SEMI_GRAY_COLOR} from "../../styles/common";
 
 export const SectionWrapper = styled.div`
   width: 100%;
@@ -10,6 +11,7 @@ export const Header = styled.div`
     margin-bottom: 20px;
     font-size: 18px;
     font-weight: bold;
+    color: ${SEMI_GRAY_COLOR};
   }
 `;
 

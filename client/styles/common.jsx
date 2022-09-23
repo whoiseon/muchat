@@ -1,5 +1,9 @@
+import styled from "@emotion/styled";
+
 export const BACKGROUND_COLOR = '#2B2B36';
+export const BACKGROUND_EXTRA_BLACK = '#1A1C22';
 export const BACKGROUND_BLACK = '#20212A';
+export const BACKGROUND_BLACK_HOVER = '#24262F';
 export const BACKGROUND_WHITE = '#353541';
 export const BACKGROUND_WHITE_CLICK = '#424250';
 
@@ -9,3 +13,8 @@ export const MAIN_COLOR_HOVER = '#7275ED';
 export const RED_COLOR = '#E25D5D';
 export const GRAY_COLOR = '#4B4B5C';
 export const SEMI_GRAY_COLOR = '#66667C';
+
+export const ErrorMessage = styled.p`
+  color: ${RED_COLOR};
+  margin-bottom: 20px;
+`;

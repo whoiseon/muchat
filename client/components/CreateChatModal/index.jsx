@@ -1,15 +1,26 @@
 import CloseIcon from '@mui/icons-material/Close';
+import {useCallback, useEffect, useRef} from "react";
 import {Background, CreateChatForm, Header, ModalInput, ModalSelect, ModalTextArea, ModalWrapper} from "./styles";
-import {useCallback} from "react";
-import {Select} from "@mui/material";
 
 const CreateChatModal = ({ setShowCreateChat }) => {
-  const onCloseModal = useCallback(() => {
+  const inputRef = useRef();
+
+  const onCloseBackgroundModal = useCallback((e) => {
+    if (e.target === e.currentTarget) {
+      setShowCreateChat(false);
+    }
+  }, []);
+
+  const onCloseModal = useCallback((e) => {
     setShowCreateChat(false);
   }, []);
 
+  useEffect(() => {
+    inputRef.current.focus();
+  }, [inputRef]);
+
   return (
-    <Background>
+    <Background onClick={onCloseBackgroundModal}>
       <ModalWrapper>
         <Header>
           <h1>
@@ -22,7 +33,7 @@ const CreateChatModal = ({ setShowCreateChat }) => {
         <CreateChatForm>
           <ModalInput>
             <p>제목</p>
-            <input type="text" />
+            <input type="text" ref={inputRef} />
           </ModalInput>
           <ModalSelect>
             <p>장르</p>
@@ -37,9 +48,7 @@ const CreateChatModal = ({ setShowCreateChat }) => {
             <p>설명</p>
             <textarea
               placeholder="심한 욕설 또는 불법적인 내용의 채팅방은&#10;따로 통보하지 않고 삭제 조치 될 수 있습니다."
-            >
-              1
-            </textarea>
+            />
           </ModalTextArea>
           <button type="button">개설하기</button>
         </CreateChatForm>

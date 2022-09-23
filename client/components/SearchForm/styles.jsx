@@ -3,8 +3,8 @@ import {keyframes} from "@emotion/css";
 import {BACKGROUND_BLACK, SEMI_GRAY_COLOR, WHITE_COLOR} from "../../styles/common";
 
 export const SearchFormWrapper = styled.form`
-  padding: 40px;
-  width: 100%;
+  padding: 40px 20px 40px 40px;
+  width: 76%;
   overflow-y: scroll;
 `;
 
@@ -28,6 +28,9 @@ export const SearchBar = styled.div`
     border-radius: 6px;
     padding: 20px 20px 20px 60px;
     border: none;
+    &::placeholder {
+      color: ${SEMI_GRAY_COLOR};
+    }
   }
   svg {
     position: absolute;

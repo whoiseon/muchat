@@ -1,6 +1,6 @@
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import {Content, Header, ShopWrapper} from "./styles";
 import {useRouter} from "next/router";
+import {Content, Header, ShopWrapper} from "./styles";
 
 const MucornShop = () => {
   const router = useRouter();

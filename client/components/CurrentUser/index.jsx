@@ -1,5 +1,6 @@
 import {CurrentUserWrapper, Header, UserList} from "./styles";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import UserProfile from "../UserProfile";
 
 const dummyUser = [
   {
@@ -36,10 +37,7 @@ const CurrentUser = () => {
           {
             dummyUser.map((user, i) => {
               return (
-                <li key={user.id}>
-                  <AccountCircleIcon />
-                  { user.name }
-                </li>
+                <UserProfile key={user.name} user={user} />
               );
             })
           }

@@ -29,25 +29,5 @@ export const Header = styled.div`
 `;
 
 export const UserList = styled.div`
-  li {
-    display: flex;
-    align-items: center;
-    padding: 12px 16px;
-    cursor: pointer;
-    background-color: ${BACKGROUND_COLOR};
-    border-radius: 6px;
-    transition: background-color 0.16s ease-in;
-    &:hover {
-      background-color: ${BACKGROUND_WHITE};
-    }
-    &:active {
-      background-color: ${BACKGROUND_WHITE_CLICK};
-    }
-    svg {
-      width: 24px;
-      height: 24px;
-      margin-right: 10px;
-      color: ${SEMI_GRAY_COLOR};
-    }
-  }
+
 `;

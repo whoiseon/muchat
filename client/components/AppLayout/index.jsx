@@ -1,7 +1,9 @@
 import Link from "next/link";
 import {useRouter} from "next/router";
-import {AppWrapper, ChatTab, ContentWrapper} from "./styles";
+import {AppWrapper, ChatTab, ContentWrapper, LoginBtn, Logo} from "./styles";
+import WhiteLogo from "../../public/image/logo/white_logo.svg";
 import {BACKGROUND_COLOR, WHITE_COLOR} from "../../styles/common";
+import Image from "next/image";
 
 const AppLayout = ({ children }) => {
   const router = useRouter();
@@ -18,11 +20,12 @@ const AppLayout = ({ children }) => {
           router.pathname === "/" || router.pathname === "/search" || router.pathname === "/mucorn" || router.pathname === "/support"
             ? active
             : {}
-        }>
+          }
+        >
           <Link
             href="/"
           >
-            Muchat
+            Muchat - 홈
           </Link>
         </h1>
         <ul>
@@ -32,11 +35,11 @@ const AppLayout = ({ children }) => {
             </Link>
           </li>
         </ul>
-        <div>
+        <LoginBtn>
           <Link href="/login">
             로그인
           </Link>
-        </div>
+        </LoginBtn>
       </ChatTab>
       <ContentWrapper>{children}</ContentWrapper>
     </AppWrapper>

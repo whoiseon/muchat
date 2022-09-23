@@ -42,6 +42,9 @@ export const SearchWrapper = styled.div`
     border-radius: 6px;
     padding: 20px 20px 20px 60px;
     border: none;
+    &::placeholder {
+      color: ${SEMI_GRAY_COLOR};
+    }
   }
   svg {
     position: absolute;

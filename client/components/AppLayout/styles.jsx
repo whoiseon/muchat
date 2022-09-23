@@ -16,11 +16,18 @@ export const AppWrapper = styled.div`
   overflow: hidden;
 `;
 
+export const Logo = styled.div`
+  display: flex;
+  width: 100%;
+`;
+
 export const ChatTab = styled.div`
+  position: relative;
   display: flex;
   width: 100%;
   background-color: ${BACKGROUND_BLACK};
   h1 {
+    display: flex;
     width: 180px;
     height: 48px;
     font-size: 14px;
@@ -68,40 +75,41 @@ export const ChatTab = styled.div`
       }
     }
   }
-  div {
-    margin-left: auto;
-    margin-right: 14px;
-    height: 48px;
-    padding: 6px;
-    a {
-      display: flex;
-      font-size: 14px;
-      font-weight: bold;
-      width: 100%;
-      padding: 9px 30px 8px;
-      background-color: ${MAIN_COLOR};
-      border-radius: 6px;
-      transition: background-color 0.14s ease-in;
-      &:hover {
-        background-color: ${MAIN_COLOR_HOVER};
-      }
-      &:active {
-        background-color: #4E52DD;
-      }
+`;
+
+export const LoginBtn = styled.div`
+  margin-left: auto;
+  margin-right: 14px;
+  height: 48px;
+  padding: 6px;
+  a {
+    display: flex;
+    font-size: 14px;
+    font-weight: bold;
+    width: 100%;
+    padding: 9px 30px 8px;
+    background-color: ${MAIN_COLOR};
+    border-radius: 6px;
+    transition: background-color 0.14s ease-in;
+    &:hover {
+      background-color: ${MAIN_COLOR_HOVER};
+    }
+    &:active {
+      background-color: #4E52DD;
     }
   }
 `;
 
 export const ContentWrapper = styled.div`
   display: flex;
-  min-width: 1680px;
+  width: 1680px;
   margin: 0 auto;
   height: 100%;
   overflow: hidden;
   @media (max-width: 1680px) {
-    min-width: 1440px;
+    width: 1440px;
   }
   @media (max-width: 1440px) {
-    min-width: 1280px;
+    width: 1280px;
   }
 `;
