@@ -5,6 +5,16 @@ export const FormWrapper = styled.form`
   display: flex;
   flex-direction: column;
   width: 360px;
+  span {
+    text-align: center;
+    a {
+      margin-left: 6px;
+      color: ${MAIN_COLOR};
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
 `;
 
 export const Header = styled.div`
@@ -15,6 +25,12 @@ export const Header = styled.div`
     margin-bottom: 40px;
     width: 80px;
     height: 40px;
+    cursor: pointer;
+    transform: scale(1);
+    transition: transform 0.16s ease-in;
+    &:hover {
+      transform: scale(1.1);
+    }
   }
   h1 {
     font-size: 20px;
@@ -29,6 +45,7 @@ export const LoginWrapper = styled.div`
     background-color: ${MAIN_COLOR};
     color: ${WHITE_COLOR};
     border-radius: 6px;
+    margin-bottom: 20px;
     transition: background-color 0.16s ease-in;
     &:hover {
       background-color: ${MAIN_COLOR_HOVER};

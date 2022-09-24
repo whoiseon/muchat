@@ -2,6 +2,7 @@ import Image from "next/image";
 import {useCallback, useEffect, useRef} from "react";
 import {FormWrapper, Header, LoginInput, LoginWrapper} from "./styles";
 import {ErrorMessage} from "../../styles/common";
+import Link from "next/link";
 
 const LoginForm = () => {
   const emailRef = useRef();
@@ -17,7 +18,9 @@ const LoginForm = () => {
   return (
     <FormWrapper onSubmit={onSubmitLogin}>
       <Header>
-        <img src="/image/logo/gray_logo.svg" alt="Logo" />
+        <Link href="/">
+          <img src="/image/logo/gray_logo.svg" alt="Logo" />
+        </Link>
         <h1>로그인</h1>
       </Header>
       <LoginWrapper>
@@ -34,6 +37,12 @@ const LoginForm = () => {
           로그인
         </button>
       </LoginWrapper>
+      <span>
+        아직 회원이 아니신가요?
+        <Link href="/register">
+          회원가입
+        </Link>
+      </span>
     </FormWrapper>
   );
 };
