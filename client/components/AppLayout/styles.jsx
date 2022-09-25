@@ -101,15 +101,7 @@ export const LoginBtn = styled.div`
 `;
 
 export const ContentWrapper = styled.div`
-  display: flex;
-  width: 1680px;
-  margin: 0 auto;
+  width: 100%;
   height: 100%;
   overflow: hidden;
-  @media (max-width: 1680px) {
-    width: 1440px;
-  }
-  @media (max-width: 1440px) {
-    width: 1280px;
-  }
 `;

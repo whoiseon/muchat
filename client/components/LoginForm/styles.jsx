@@ -55,7 +55,7 @@ export const LoginWrapper = styled.div`
 
 export const LoginInput = styled.div`
   margin-bottom: 20px;
-  &:nth-of-type(2) {
+  &:last-of-type {
     margin-bottom: 40px;
   }
   p {

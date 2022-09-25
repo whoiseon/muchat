@@ -3,9 +3,12 @@ import {useCallback, useEffect, useRef} from "react";
 import {FormWrapper, Header, LoginInput, LoginWrapper} from "./styles";
 import {ErrorMessage} from "../../styles/common";
 import Link from "next/link";
+import useInput from "../../hooks/useInput";
 
 const LoginForm = () => {
   const emailRef = useRef();
+  const [email, onChangeEmail, setEmail] = useInput('');
+  const [password, onChangePassword, setPassword] = useInput('');
 
   const onSubmitLogin = useCallback((e) => {
     e.preventDefault();
@@ -26,11 +29,11 @@ const LoginForm = () => {
       <LoginWrapper>
         <LoginInput>
           <p>이메일</p>
-          <input type="text" ref={emailRef} />
+          <input type="text" ref={emailRef} value={email} onChange={onChangeEmail} />
         </LoginInput>
         <LoginInput>
           <p>비밀번호</p>
-          <input type="password" />
+          <input type="password" value={password} onChange={onChangePassword} />
         </LoginInput>
         {/*<ErrorMessage>123</ErrorMessage>*/}
         <button type="submit">

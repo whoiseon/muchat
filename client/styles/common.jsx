@@ -18,3 +18,17 @@ export const ErrorMessage = styled.p`
   color: ${RED_COLOR};
   margin-bottom: 20px;
 `;
+
+export const MainWrapper = styled.div`
+  display: flex;
+  width: 1680px;
+  height: 100%;
+  overflow: hidden;
+  margin: 0 auto;
+  @media (max-width: 1680px) {
+    width: 1440px;
+  }
+  @media (max-width: 1440px) {
+    width: 1280px;
+  }
+`;
