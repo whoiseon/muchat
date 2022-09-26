@@ -1,5 +1,12 @@
 import styled from "@emotion/styled";
-import {BACKGROUND_BLACK, MAIN_COLOR, MAIN_COLOR_HOVER, SEMI_GRAY_COLOR, WHITE_COLOR} from "../../styles/common";
+import {
+  BACKGROUND_BLACK,
+  MAIN_COLOR,
+  MAIN_COLOR_HOVER,
+  RED_COLOR,
+  SEMI_GRAY_COLOR,
+  WHITE_COLOR
+} from "../../styles/common";
 
 export const FormWrapper = styled.form`
   display: flex;
@@ -69,5 +76,57 @@ export const LoginInput = styled.div`
     border: none;
     border-radius: 6px;
     color: ${WHITE_COLOR};
+  }
+`;
+
+// Agreement
+
+export const AgreementWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  p {
+    color: ${WHITE_COLOR};
+    margin-bottom: 14px;
+    i {
+      font-style: normal;
+      color: ${RED_COLOR};
+    }
+  }
+  textarea {
+    width: 100%;
+    height: 180px;
+    padding: 16px;
+    background-color: ${BACKGROUND_BLACK};
+    color: ${SEMI_GRAY_COLOR};
+    border: none;
+    border-radius: 6px;
+    resize: none;
+    margin-bottom: 20px;
+  }
+  button {
+    width: 100%;
+    padding: 18px;
+    background-color: ${MAIN_COLOR};
+    color: ${WHITE_COLOR};
+    border-radius: 6px;
+    margin-bottom: 20px;
+    transition: background-color 0.16s ease-in;
+    &:hover {
+      background-color: ${MAIN_COLOR_HOVER};
+    }
+    &:disabled {
+      background-color: ${SEMI_GRAY_COLOR};
+      cursor: unset;
+    }
+  }
+`;
+
+export const CheckBox = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  input {
+    margin-right: 8px;
   }
 `;

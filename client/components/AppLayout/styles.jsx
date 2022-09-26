@@ -4,8 +4,8 @@ import {
   BACKGROUND_COLOR,
   GRAY_COLOR,
   MAIN_COLOR,
-  MAIN_COLOR_HOVER,
-  SEMI_GRAY_COLOR
+  MAIN_COLOR_HOVER, RED_COLOR,
+  SEMI_GRAY_COLOR, WHITE_COLOR
 } from "../../styles/common";
 
 export const AppWrapper = styled.div`
