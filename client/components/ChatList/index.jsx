@@ -18,6 +18,7 @@ const dummySupporters = [
     },
     membership: '1,028',
     current: '240',
+    code: '11022',
   },
   {
     title: '진지하게 고민상담 좀 들어주실 분 서포터즈',
@@ -27,6 +28,7 @@ const dummySupporters = [
     },
     membership: '138',
     current: '1,512',
+    code: '11023',
   },
   {
     title: '발로란트 팀 모집 초월자 이상',
@@ -36,6 +38,7 @@ const dummySupporters = [
     },
     membership: '1,002',
     current: '523',
+    code: '11024',
   },
   {
     title: '프론트엔드 개발은 왜 이렇게 어려운 걸까요?',
@@ -45,6 +48,7 @@ const dummySupporters = [
     },
     membership: '620',
     current: '1,002',
+    code: '11025',
   },
 ];
 
@@ -88,7 +92,7 @@ const ChatList = () => {
           {
             dummySupporters.map((data, i) => {
               return (
-                <SupportersCard key={data.manager} data={data} />
+                <SupportersCard key={data.code} data={data} />
               );
             })
           }
@@ -98,7 +102,7 @@ const ChatList = () => {
             {
               dummySupporters.map((data, i) => {
                 return (
-                  <ChatRoomCard key={data.manager} data={data} />
+                  <ChatRoomCard key={data.code} data={data} />
                 );
               })
             }

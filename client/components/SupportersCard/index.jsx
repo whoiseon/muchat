@@ -1,9 +1,15 @@
 import {useCallback, useState} from "react";
 import PersonIcon from '@mui/icons-material/Person';
+import {useRouter} from "next/router";
 import {CardWrapper, ChatInfo, CurrentUserBox} from "./styles";
 
 const SupportersCard = ({ data }) => {
   const [showCurrentUser, setShowCurrentUser] = useState(false);
+  const router = useRouter();
+
+  const onClickMoveChat = useCallback(() => {
+    router.push(`/chat/${data.code}`);
+  }, [data.code]);
 
   const onMouseEnterCurrentUser = useCallback(() => {
     setShowCurrentUser(true);
@@ -15,6 +21,7 @@ const SupportersCard = ({ data }) => {
 
   return (
     <CardWrapper
+      onClick={onClickMoveChat}
       onMouseEnter={onMouseEnterCurrentUser}
       onMouseLeave={onMouseLeaveCurrentUser}
     >

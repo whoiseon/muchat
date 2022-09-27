@@ -1,9 +1,17 @@
 import PersonIcon from '@mui/icons-material/Person';
 import {CardWrapper, ChatInfo} from "./styles";
+import {useCallback} from "react";
+import {useRouter} from "next/router";
 
-const ChatRoomCard = ({data}) => {
+const ChatRoomCard = ({ data }) => {
+  const router = useRouter();
+
+  const onClickMoveChat = useCallback(() => {
+    router.push(`/chat/${data.code}`);
+  }, [data.code]);
+
   return (
-    <CardWrapper>
+    <CardWrapper onClick={onClickMoveChat}>
       <h1>
         {data.title}
       </h1>
