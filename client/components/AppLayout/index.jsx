@@ -1,9 +1,27 @@
 import Link from "next/link";
 import {useRouter} from "next/router";
 import {AppWrapper, ChatTab, ContentWrapper, LoginBtn, Logo} from "./styles";
-import WhiteLogo from "../../public/image/logo/white_logo.svg";
 import {BACKGROUND_COLOR, WHITE_COLOR} from "../../styles/common";
-import Image from "next/image";
+
+const dummyCurrentChat = [
+  {
+    title: '롤 듀오 모집방',
+    code: '11022',
+  },
+  {
+    title: '진지하게 고민상담 좀 들어주실 분 서포터즈',
+    code: '11023',
+  },
+  {
+    title: '발로란트 팀 모집 초월자 이상',
+
+    code: '11024',
+  },
+  {
+    title: '프론트엔드 개발은 왜 이렇게 어려운 걸까요?',
+    code: '11025',
+  },
+];
 
 const AppLayout = ({ children }) => {
   const router = useRouter();
@@ -25,19 +43,25 @@ const AppLayout = ({ children }) => {
           <Link
             href="/"
           >
-            Muchat - 홈
+            <a>Muchat - 홈</a>
           </Link>
         </h1>
         <ul>
-          <li style={router.pathname === "/shop" ? active : {}}>
-            <Link href="/shop">
-              shop
-            </Link>
-          </li>
+          {
+            dummyCurrentChat.map((chat, i) => {
+              return (
+                <li style={router.query.code === chat.code ? active : {}}>
+                  <Link href={`/chat/${chat.code}`}>
+                    <a>{ chat.title }</a>
+                  </Link>
+                </li>
+              );
+            })
+          }
         </ul>
         <LoginBtn>
           <Link href="/login">
-            로그인
+            <a>로그인</a>
           </Link>
         </LoginBtn>
       </ChatTab>
