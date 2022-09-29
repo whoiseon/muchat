@@ -52,6 +52,7 @@ export const ChatTab = styled.div`
   ul {
     display: flex;
     li {
+      position: relative;
       width: 180px;
       height: 48px;
       font-weight: 500;

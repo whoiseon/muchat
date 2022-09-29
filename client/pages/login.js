@@ -1,11 +1,17 @@
+import Head from "next/head";
 import styled from "@emotion/styled";
 import LoginForm from "../components/LoginForm";
 
 const Login = () => {
   return (
-    <Background>
-      <LoginForm />
-    </Background>
+    <>
+      <Head>
+        <title>Muchat - 로그인</title>
+      </Head>
+      <Background>
+        <LoginForm />
+      </Background>
+    </>
   );
 };
 

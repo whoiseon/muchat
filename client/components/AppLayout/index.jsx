@@ -14,7 +14,6 @@ const dummyCurrentChat = [
   },
   {
     title: '발로란트 팀 모집 초월자 이상',
-
     code: '11024',
   },
   {
@@ -50,7 +49,10 @@ const AppLayout = ({ children }) => {
           {
             dummyCurrentChat.map((chat, i) => {
               return (
-                <li style={router.query.code === chat.code ? active : {}}>
+                <li
+                  key={chat.code}
+                  style={router.query.code === chat.code ? active : {}}
+                >
                   <Link href={`/chat/${chat.code}`}>
                     <a>{ chat.title }</a>
                   </Link>

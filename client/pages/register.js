@@ -1,11 +1,17 @@
+import Head from "next/head";
 import styled from "@emotion/styled";
 import RegisterForm from "../components/RegisterForm";
 
 const Register = () => {
   return (
-    <Background>
-      <RegisterForm />
-    </Background>
+    <>
+      <Head>
+        <title>Muchat - 회원가입</title>
+      </Head>
+      <Background>
+        <RegisterForm />
+      </Background>
+    </>
   );
 };
 
