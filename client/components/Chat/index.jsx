@@ -56,7 +56,7 @@ const Chat = () => {
           {
             dummyChat.map((chat, i) => {
               return (
-                <li>
+                <li key={chat.content}>
                   <div>
                     <AccountCircleIcon />
                     { chat.nickname }

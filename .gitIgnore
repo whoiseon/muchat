@@ -8,5 +8,5 @@ client/.DS_Store
 client/.next
 
 #Server
-node_modules/
-.env
+server/node_modules
+server/.env
