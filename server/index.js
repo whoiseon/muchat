@@ -3,22 +3,19 @@ const app = express();
 const port = 3065;
 require('dotenv').config();
 
+// Mongoose
+const connect = require('./schemas');
+
+// Routers
+const indexRouter = require('./routes');
+
 // body-parser
 app.use(express.json());
 app.use(express.urlencoded( {extended : true } ));
 
-// Router
-const indexRouter = require('./routes');
 
 // MongoDB
-const mongoose = require('mongoose');
-mongoose.connect(process.env.MONGODB_URL)
-  .then(() => {
-    console.log('MongoDB conected');
-  })
-  .catch((error) => {
-    console.log(error);
-  })
+connect();
 
 // Routes
 app.use('/', indexRouter);
