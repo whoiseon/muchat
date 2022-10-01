@@ -1,11 +1,14 @@
 import {useCallback, useEffect, useRef, useState} from "react";
 import Link from "next/link";
+import {useDispatch} from "react-redux";
 import {FormWrapper, Header, LoginInput, LoginWrapper} from "../LoginForm/styles";
 import useInput from "../../hooks/useInput";
 import {AgreementWrapper, CheckBox} from "../LoginForm/styles";
+import {userSignUp} from "../../slices/userSlice";
 
 const RegisterForm = () => {
   const InputRef = useRef();
+  const dispatch = useDispatch();
 
   const [agreeCheckBox, setAgreeCheckBox] = useState(false);
   const [agreement, setAgreement] = useState(false);
@@ -25,7 +28,15 @@ const RegisterForm = () => {
 
   const onSubmitRegister = useCallback((e) => {
     e.preventDefault();
-  }, []);
+    if (password !== passwordCheck) {
+      return;
+    }
+    dispatch(userSignUp({
+      nickname,
+      email,
+      password,
+    }));
+  }, [nickname, email, password]);
 
   const loadAgreementText = useCallback((url) => {
     let content = '';

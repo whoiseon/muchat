@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
-const dayjs = require('dayjs');
 
 const { Schema } = mongoose;
-
 const userSchema = new Schema({
   nickname: {
     type: String,
@@ -20,6 +18,20 @@ const userSchema = new Schema({
   },
   createdAt: {
     type: Date,
-    default: dayjs().format(),
+    default: Date.now,
+  },
+  mucorn: {
+    type: String,
+    default: '1001',
+  },
+  openedChat: {
+    type: Array,
+    default: [],
+  },
+  membership: {
+    type: Array,
+    default: [],
   }
 });
+
+module.exports = mongoose.model('user', userSchema)
