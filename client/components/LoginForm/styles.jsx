@@ -8,7 +8,7 @@ import {
   WHITE_COLOR
 } from "../../styles/common";
 
-export const FormWrapper = styled.form`
+export const FormWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 360px;
@@ -66,8 +66,18 @@ export const LoginInput = styled.div`
     margin-bottom: 40px;
   }
   p {
+    display: flex;
     color: ${SEMI_GRAY_COLOR};
     margin-bottom: 10px;
+    i {
+      color: ${RED_COLOR};
+      font-style: normal;
+      margin-left: auto;
+    }
+    span {
+      margin-left: auto;
+      opacity: 0.5;
+    }
   }
   input {
     width: 100%;

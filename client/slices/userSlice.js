@@ -2,9 +2,8 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = {
-  userInfo: null,
   userSignUpLoading: false,
-  userSignUpDone: true,
+  userSignUpDone: false,
   userSignUpError: null,
 };
 
@@ -18,7 +17,7 @@ export const userSignUp = createAsyncThunk("USER_SIGNUP", async ({ nickname, ema
 
     return response.data;
   } catch (error) {
-    console.log(error);
+    throw error.response.data.errors.message;
   }
 });
 
