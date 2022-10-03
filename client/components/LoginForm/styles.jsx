@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import {keyframes} from "@emotion/react";
 import {
   BACKGROUND_BLACK,
   MAIN_COLOR,
@@ -8,7 +9,7 @@ import {
   WHITE_COLOR
 } from "../../styles/common";
 
-export const FormWrapper = styled.div`
+export const FormWrapper = styled.form`
   display: flex;
   flex-direction: column;
   width: 360px;
@@ -60,6 +61,24 @@ export const LoginWrapper = styled.div`
   }
 `;
 
+const inputErrorAnimation = keyframes`
+  0% {
+    transform: translateY(0);
+  }
+  32% {
+    transform: translateY(-4px);
+  }
+  50% {
+    transform: translateY(0);
+  }
+  75% {
+    transform: translateY(-8px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+`;
+
 export const LoginInput = styled.div`
   margin-bottom: 20px;
   &:last-of-type {
@@ -73,6 +92,7 @@ export const LoginInput = styled.div`
       color: ${RED_COLOR};
       font-style: normal;
       margin-left: auto;
+      animation: ${inputErrorAnimation} 0.4s ease-in;
     }
     span {
       margin-left: auto;
@@ -138,5 +158,63 @@ export const CheckBox = styled.div`
   margin-bottom: 20px;
   input {
     margin-right: 8px;
+  }
+`;
+
+// success signup
+
+export const Background = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+`;
+
+export const SignUpAfter = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 360px;
+  span {
+    text-align: center;
+    a {
+      margin-left: 6px;
+      color: ${MAIN_COLOR};
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+  div:nth-of-type(2) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 40px;
+    div {
+      display: flex;
+      align-items: center;
+      img {
+        width: 24px;
+        height: 24px;
+        margin-right: 8px;
+      }
+      p {
+        font-size: 16px;
+      }
+    }
+  }
+  a {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 18px;
+    background-color: ${MAIN_COLOR};
+    color: ${WHITE_COLOR};
+    border-radius: 6px;
+    margin-bottom: 20px;
+    transition: background-color 0.16s ease-in;
+    &:hover {
+      background-color: ${MAIN_COLOR_HOVER};
+    }
   }
 `;

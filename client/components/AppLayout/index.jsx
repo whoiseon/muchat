@@ -1,7 +1,10 @@
 import Link from "next/link";
 import {useRouter} from "next/router";
+import {useDispatch, useSelector} from "react-redux";
+import {useEffect} from "react";
 import {AppWrapper, ChatTab, ContentWrapper, LoginBtn, Logo} from "./styles";
 import {BACKGROUND_COLOR, WHITE_COLOR} from "../../styles/common";
+import {loadMyInfo} from "../../slices/userSlice";
 
 const dummyCurrentChat = [
   {
@@ -23,12 +26,19 @@ const dummyCurrentChat = [
 ];
 
 const AppLayout = ({ children }) => {
+  const { userLoginDone } = useSelector((state) => state.user);
+
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const active = {
     backgroundColor: BACKGROUND_COLOR,
     color: WHITE_COLOR,
   };
+
+  useEffect(() => {
+    dispatch(loadMyInfo());
+  }, []);
 
   return (
     <AppWrapper>

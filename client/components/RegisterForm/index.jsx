@@ -2,7 +2,7 @@ import {useCallback, useEffect, useRef, useState} from "react";
 import Link from "next/link";
 import {useDispatch, useSelector} from "react-redux";
 import {useRouter} from "next/router";
-import {FormWrapper, Header, LoginInput, LoginWrapper} from "../LoginForm/styles";
+import {FormWrapper, Header, LoginInput, LoginWrapper, SignUpAfter} from "../LoginForm/styles";
 import useInput from "../../hooks/useInput";
 import {AgreementWrapper, CheckBox} from "../LoginForm/styles";
 import {userSignUp} from "../../slices/userSlice";
@@ -30,7 +30,7 @@ const RegisterForm = () => {
 
   const [errorMessage, setErrorMessage] = useState('');
 
-  const onClickRegister = useCallback((e) => {
+  const onSubmitRegister = useCallback((e) => {
     e.preventDefault();
     if (nickname === '') {
       nicknameInput.current?.focus();
@@ -66,12 +66,12 @@ const RegisterForm = () => {
     nicknameInput.current?.focus();
 
     if (userSignUpDone) {
-      router.push('/');
+      router.push('/login');
     }
-  }, [nicknameInput, userSignUpDone, router]);
+  }, [nicknameInput, router, userSignUpDone]);
 
   return (
-    <FormWrapper>
+    <FormWrapper onSubmit={onSubmitRegister}>
       <Header>
         <Link href="/">
           <img src="/image/logo/gray_logo.svg" alt="Logo" />
@@ -117,7 +117,7 @@ const RegisterForm = () => {
           <input type="password" value={passwordCheck} onChange={onChangePasswordCheck} />
         </LoginInput>
         {userSignUpError && <ErrorMessage>{ userSignUpError }</ErrorMessage>}
-        <button type="button" onClick={onClickRegister}>
+        <button type="submit">
           회원가입
         </button>
       </LoginWrapper>

@@ -1,22 +1,37 @@
 import Image from "next/image";
-import {useCallback, useEffect, useRef} from "react";
+import {useCallback, useEffect, useRef, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import Link from "next/link";
 import {FormWrapper, Header, LoginInput, LoginWrapper} from "./styles";
 import {ErrorMessage} from "../../styles/common";
-import Link from "next/link";
 import useInput from "../../hooks/useInput";
+import {userLogin} from "../../slices/userSlice";
+import {useRouter} from "next/router";
 
 const LoginForm = () => {
+  const { userSignUpDone, userLoginError, userLoginDone } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const router = useRouter();
+
   const emailRef = useRef();
   const [email, onChangeEmail, setEmail] = useInput('');
   const [password, onChangePassword, setPassword] = useInput('');
 
   const onSubmitLogin = useCallback((e) => {
     e.preventDefault();
-  }, []);
+    dispatch(userLogin({
+      email,
+      password,
+    }));
+  }, [email, password, userLoginError]);
 
   useEffect(() => {
     emailRef.current.focus();
-  }, []);
+
+    if (userLoginDone) {
+      router.push('/');
+    }
+  }, [emailRef, userLoginDone, router]);
 
   return (
     <FormWrapper onSubmit={onSubmitLogin}>
@@ -24,7 +39,11 @@ const LoginForm = () => {
         <Link href="/">
           <img src="/image/logo/gray_logo.svg" alt="Logo" />
         </Link>
-        <h1>로그인</h1>
+        {
+          userSignUpDone
+            ? <h1>가입을 축하합니다 🎉</h1>
+            : <h1>로그인</h1>
+        }
       </Header>
       <LoginWrapper>
         <LoginInput>
@@ -35,7 +54,7 @@ const LoginForm = () => {
           <p>비밀번호</p>
           <input type="password" value={password} onChange={onChangePassword} />
         </LoginInput>
-        {/*<ErrorMessage>123</ErrorMessage>*/}
+        {userLoginError && <ErrorMessage>{userLoginError}</ErrorMessage>}
         <button type="submit">
           로그인
         </button>
