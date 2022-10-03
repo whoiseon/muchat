@@ -53,18 +53,15 @@ router.post("/", async (req, res) => {
 
       jwt.sign(
         payload,
-        process.env.JWT_SECRET_KEY,
+        process.env.ACCESS_SECRET_KEY,
         { expiresIn: "1h" },
         (err, token) => {
           if (err) throw err;
           res.cookie('AccessToken', token, {
-            httpOnly: true,
             maxAge: 1000 * 60 * 60 * 24 * 7,
           })
-          res.status(200).send({
-            code: 200,
-            message: '토큰이 발급되었습니다.',
-            token: token,
+          res.status(200).json({
+            token,
           });
         }
       );

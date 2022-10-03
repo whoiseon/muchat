@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const jwt = require("jsonwebtoken");
 
 const { Schema } = mongoose;
 const userSchema = new Schema({
@@ -35,12 +36,4 @@ const userSchema = new Schema({
   }
 });
 
-// 비밀번호 암호화후 비교하는 메서드
-userSchema.methods.comparePassword = function(plainPassword, cb) {
-  bcrypt.compare(plainPassword, this.password, function(err, isMatch) {
-    if (err) return cb(err);
-    cb(null, isMatch);
-  });
-}
-
-module.exports = mongoose.model('user', userSchema)
+module.exports = mongoose.model('user', userSchema);

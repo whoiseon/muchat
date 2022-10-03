@@ -1,10 +1,11 @@
 import Link from "next/link";
 import {useRouter} from "next/router";
 import {useDispatch, useSelector} from "react-redux";
-import {useEffect} from "react";
+import {useCallback, useEffect} from "react";
 import {AppWrapper, ChatTab, ContentWrapper, LoginBtn, Logo} from "./styles";
 import {BACKGROUND_COLOR, WHITE_COLOR} from "../../styles/common";
 import {loadMyInfo} from "../../slices/userSlice";
+import {useCookies} from "react-cookie";
 
 const dummyCurrentChat = [
   {
@@ -27,6 +28,7 @@ const dummyCurrentChat = [
 
 const AppLayout = ({ children }) => {
   const { userLoginDone } = useSelector((state) => state.user);
+  const [cookie, setCookie] = useCookies('AccessToken');
 
   const router = useRouter();
   const dispatch = useDispatch();
@@ -37,8 +39,12 @@ const AppLayout = ({ children }) => {
   };
 
   useEffect(() => {
-    dispatch(loadMyInfo());
-  }, []);
+    if (cookie.AccessToken) {
+      dispatch(loadMyInfo({
+        token: cookie.AccessToken,
+      }));
+    };
+  }, [userLoginDone, dispatch, loadMyInfo, cookie]);
 
   return (
     <AppWrapper>

@@ -1,15 +1,19 @@
-import Image from "next/image";
 import {useCallback, useEffect, useRef, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import Link from "next/link";
+import {useRouter} from "next/router";
 import {FormWrapper, Header, LoginInput, LoginWrapper} from "./styles";
 import {ErrorMessage} from "../../styles/common";
 import useInput from "../../hooks/useInput";
 import {userLogin} from "../../slices/userSlice";
-import {useRouter} from "next/router";
 
 const LoginForm = () => {
-  const { userSignUpDone, userLoginError, userLoginDone } = useSelector((state) => state.user);
+  const {
+    userSignUpDone,
+    userLoginError,
+    userLoginDone,
+    userLoginToken,
+  } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const router = useRouter();
 

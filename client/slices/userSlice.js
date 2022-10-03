@@ -1,12 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const setCookie = (name, value) => {
-  const date = new Date();
-  date.setTime(date.getTime() + 3600000);
-  document.cookie = `${name}=${value};expires=${date.toUTCString()};path=/`;
-};
-
 const initialState = {
   userInfo: null,
   userSignUpLoading: false,
@@ -14,6 +8,7 @@ const initialState = {
   userSignUpError: null,
   userLoginLoading: false,
   userLoginDone: false,
+  userLoginToken: null,
   userLoginError: null,
   loadMyInfoLoading: false,
   loadMyInfoDone: false,
@@ -49,11 +44,15 @@ export const userLogin = createAsyncThunk("USER_LOGIN", async ({ email, password
   }
 });
 
-export const loadMyInfo = createAsyncThunk("LOAD_MY_INFO", async () => {
+export const loadMyInfo = createAsyncThunk("LOAD_MY_INFO", async ({ token }) => {
   try {
-    const response = await axios.get("http://localhost:3065/api/auth");
+    const response = await axios.get("http://localhost:3065/api/auth", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
-    console.log(response);
+    return response.data;
   } catch (error) {
     console.log(error);
   }
@@ -85,7 +84,6 @@ const userSlice = createSlice({
     [userLogin.fulfilled]: (state, action) => {
       state.userLoginLoading = false;
       state.userLoginDone = true;
-      // setCookie('AccessToken', action.payload);
     },
     [userLogin.rejected]: (state, action) => {
       state.userLoginLoading = false;
@@ -99,6 +97,7 @@ const userSlice = createSlice({
     [loadMyInfo.fulfilled]: (state, action) => {
       state.loadMyInfoLoading = false;
       state.loadMyInfoDone = true;
+      state.userInfo = action.payload;
     },
     [loadMyInfo.rejected]: (state, action) => {
       state.loadMyInfoLoading = false;
