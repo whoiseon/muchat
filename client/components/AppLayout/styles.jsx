@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import {
   BACKGROUND_BLACK,
-  BACKGROUND_COLOR,
+  BACKGROUND_COLOR, BACKGROUND_WHITE,
   GRAY_COLOR,
   MAIN_COLOR,
   MAIN_COLOR_HOVER, RED_COLOR,
@@ -105,4 +105,33 @@ export const ContentWrapper = styled.div`
   width: 100%;
   height: 100%;
   overflow: hidden;
+`;
+
+export const MyProfile = styled.div`
+  margin-left: auto;
+  margin-right: 20px;
+  width: 100px;
+  height: 48px;
+  padding: 6px;
+  div {
+    display: flex;
+    align-items: center;
+    width: 100px;
+    background-color: ${BACKGROUND_BLACK};
+    padding: 8px 14px;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background-color 0.16s ease-in;
+    &:hover {
+      background-color: ${BACKGROUND_COLOR};
+    }
+    &:active {
+      background-color: ${BACKGROUND_WHITE};
+    }
+    img {
+      width: 20px;
+      height: 20px;
+      margin-right: 8px;
+    }
+  }
 `;

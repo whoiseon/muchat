@@ -38,6 +38,8 @@ export const userLogin = createAsyncThunk("USER_LOGIN", async ({ email, password
       withCredentials: true,
     });
 
+    axios.defaults.headers.common.Authorization = response.data.token;
+
     return response.data.token;
   } catch (error) {
     throw error.response.data.errors.message;

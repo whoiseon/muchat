@@ -2,10 +2,11 @@ import Link from "next/link";
 import {useRouter} from "next/router";
 import {useDispatch, useSelector} from "react-redux";
 import {useCallback, useEffect} from "react";
-import {AppWrapper, ChatTab, ContentWrapper, LoginBtn, Logo} from "./styles";
+import {AppWrapper, ChatTab, ContentWrapper, LoginBtn, Logo, MyProfile} from "./styles";
 import {BACKGROUND_COLOR, WHITE_COLOR} from "../../styles/common";
 import {loadMyInfo} from "../../slices/userSlice";
 import {useCookies} from "react-cookie";
+import wrapper from "../../store/configureStore";
 
 const dummyCurrentChat = [
   {
@@ -26,25 +27,13 @@ const dummyCurrentChat = [
   },
 ];
 
-const AppLayout = ({ children }) => {
-  const { userLoginDone } = useSelector((state) => state.user);
-  const [cookie, setCookie] = useCookies('AccessToken');
-
+const AppLayout = ({ children, userInfo }) => {
   const router = useRouter();
-  const dispatch = useDispatch();
 
   const active = {
     backgroundColor: BACKGROUND_COLOR,
     color: WHITE_COLOR,
   };
-
-  useEffect(() => {
-    if (cookie.AccessToken) {
-      dispatch(loadMyInfo({
-        token: cookie.AccessToken,
-      }));
-    };
-  }, [userLoginDone, dispatch, loadMyInfo, cookie]);
 
   return (
     <AppWrapper>
@@ -77,11 +66,24 @@ const AppLayout = ({ children }) => {
             })
           }
         </ul>
-        <LoginBtn>
-          <Link href="/login">
-            <a>로그인</a>
-          </Link>
-        </LoginBtn>
+        {
+          userInfo
+            ? (
+              <MyProfile>
+                <div>
+                  <img src={`/image/mucorn/${userInfo?.mucorn}.png`} alt=""/>
+                  <span>{ userInfo?.nickname } 님</span>
+                </div>
+              </MyProfile>
+            )
+            : (
+              <LoginBtn>
+                <Link href="/login">
+                  <a>로그인</a>
+                </Link>
+              </LoginBtn>
+            )
+        }
       </ChatTab>
       <ContentWrapper>{children}</ContentWrapper>
     </AppWrapper>
