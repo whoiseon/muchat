@@ -23,19 +23,28 @@ const connectDB = require('./Models');
 
 // Routers
 const indexRouter = require('./routes');
-const registerRouter = require('./routes/api/register');
-const loginRouter = require('./routes/api/login');
-const AuthRouter = require('./routes/api/auth');
+const registerRouter = require('./routes/api/user/register');
+const loginRouter = require('./routes/api/user/login');
+const AuthRouter = require('./routes/api/user/auth');
+const logoutRouter = require('./routes/api/user/logout');
+const createRouter = require('./routes/api/chat/create')
 
 
 // MongoDB connection
 connectDB();
 
 // Routes
+
+  // User api
 app.use('/', indexRouter);
 app.use('/api/register', registerRouter);
 app.use('/api/login', loginRouter);
 app.use('/api/auth', AuthRouter);
+app.use('/api/logout', logoutRouter);
+
+  // Chat api
+app.use('/api/create', createRouter);
+
 
 app.listen(port, () => {
   console.log(`Listening on Port is ${port}`);

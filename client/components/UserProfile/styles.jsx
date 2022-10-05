@@ -7,7 +7,7 @@ import {
   SEMI_GRAY_COLOR
 } from "../../styles/common";
 
-export const ProfileWrapper = styled.li`
+export const ProfileWrapper = styled.div`
   position: relative;
   div:nth-of-type(1) {
     display: flex;

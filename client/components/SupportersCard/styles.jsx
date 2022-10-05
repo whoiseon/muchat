@@ -7,13 +7,13 @@ import {
   SEMI_GRAY_COLOR,
   WHITE_COLOR
 } from "../../styles/common";
-import {keyframes} from "@emotion/css";
 
 export const CardWrapper = styled.div`
   position: relative;
   background-color: ${BACKGROUND_WHITE};
   border-radius: 6px;
   width: 25%;
+  max-width: 300px;
   min-height: 152px;
   padding: 20px;
   cursor: pointer;
@@ -30,6 +30,7 @@ export const CardWrapper = styled.div`
   }
   h1 {
     width: 100%;
+    max-width: 200px;
     font-size: 18px;
     overflow: hidden;
     text-overflow: ellipsis;

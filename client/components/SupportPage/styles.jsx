@@ -2,9 +2,9 @@ import styled from "@emotion/styled";
 import {BACKGROUND_BLACK, GRAY_COLOR, SEMI_GRAY_COLOR, WHITE_COLOR} from "../../styles/common";
 
 export const SupportWrapper = styled.div`
-  padding: 40px 20px 40px 40px;
+  padding: 40px;
   overflow-y: scroll;
-  width: 76%;
+  width: 100%;
 `;
 
 export const Header = styled.div`

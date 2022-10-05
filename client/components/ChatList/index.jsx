@@ -8,6 +8,7 @@ import MainSection from "../MainSection";
 import SupportersCard from "../SupportersCard";
 import ChatRoomCard from "../ChatRoomCard";
 import CreateChatModal from "../CreateChatModal";
+import {useSelector} from "react-redux";
 
 const dummySupporters = [
   {
@@ -50,9 +51,21 @@ const dummySupporters = [
     current: '1,002',
     code: '11025',
   },
+  {
+    title: '엥 이게 뭐야 흑흑',
+    manager: {
+      cornId: '1001',
+      name: '지림',
+    },
+    membership: '620',
+    current: '1,002',
+    code: '11026',
+  },
 ];
 
 const ChatList = () => {
+  const {userInfo} = useSelector((state) => state.user);
+
   const [showCreateChat, setShowCreateChat] = useState(false);
   const router = useRouter();
 
@@ -83,9 +96,13 @@ const ChatList = () => {
             서포터즈
           </Link>
         </TopMenu>
-        <button type="button" onClick={onClickShowCreateChatModal}>
-          채팅방 개설
-        </button>
+        {
+          userInfo && (
+            <button type="button" onClick={onClickShowCreateChatModal}>
+              채팅방 개설
+            </button>
+          )
+        }
       </Header>
       <Content>
         <MainSection title="서포터즈">

@@ -33,6 +33,14 @@ const userSchema = new Schema({
   membership: {
     type: Array,
     default: [],
+  },
+  operatedChat: {
+    type: Array,
+    default: [],
+  },
+  role: {
+    type: Number,
+    default: 0,
   }
 });
 

@@ -64,11 +64,7 @@ const RegisterForm = () => {
 
   useEffect(() => {
     nicknameInput.current?.focus();
-
-    if (userSignUpDone) {
-      router.push('/login');
-    }
-  }, [nicknameInput, router, userSignUpDone]);
+  }, [nicknameInput, router]);
 
   return (
     <FormWrapper onSubmit={onSubmitRegister}>

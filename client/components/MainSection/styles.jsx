@@ -8,7 +8,7 @@ export const SectionWrapper = styled.div`
 
 export const Header = styled.div`
   p {
-    margin-bottom: 20px;
+    margin-bottom: 40px;
     font-size: 18px;
     font-weight: bold;
     color: ${SEMI_GRAY_COLOR};

@@ -1,12 +1,10 @@
 import Link from "next/link";
 import {useRouter} from "next/router";
-import {useDispatch, useSelector} from "react-redux";
-import {useCallback, useEffect} from "react";
+import {useSelector} from "react-redux";
+import {useState, useCallback} from "react";
 import {AppWrapper, ChatTab, ContentWrapper, LoginBtn, Logo, MyProfile} from "./styles";
 import {BACKGROUND_COLOR, WHITE_COLOR} from "../../styles/common";
-import {loadMyInfo} from "../../slices/userSlice";
-import {useCookies} from "react-cookie";
-import wrapper from "../../store/configureStore";
+import MyProfileModal from "../MyProfileModal";
 
 const dummyCurrentChat = [
   {
@@ -27,8 +25,16 @@ const dummyCurrentChat = [
   },
 ];
 
-const AppLayout = ({ children, userInfo }) => {
+const AppLayout = ({ children }) => {
+  const { userInfo } = useSelector((state) => state.user);
+
   const router = useRouter();
+
+  const [showMyProfileModal, setShowMyProfileModal] = useState(false);
+
+  const onClickMyProfileModal = useCallback(() => {
+    setShowMyProfileModal((prev) => !prev);
+  }, []);
 
   const active = {
     backgroundColor: BACKGROUND_COLOR,
@@ -52,7 +58,7 @@ const AppLayout = ({ children, userInfo }) => {
         </h1>
         <ul>
           {
-            dummyCurrentChat.map((chat, i) => {
+            userInfo?.openedChat.map((chat, i) => {
               return (
                 <li
                   key={chat.code}
@@ -69,11 +75,16 @@ const AppLayout = ({ children, userInfo }) => {
         {
           userInfo
             ? (
-              <MyProfile>
+              <MyProfile onClick={onClickMyProfileModal}>
                 <div>
-                  <img src={`/image/mucorn/${userInfo?.mucorn}.png`} alt=""/>
+                  <img src={`/image/mucorn/${userInfo?.mucorn}.png`} alt={`mucorn_${userInfo?.mucorn}`} />
                   <span>{ userInfo?.nickname } 님</span>
                 </div>
+                {
+                  showMyProfileModal && (
+                    <MyProfileModal setShowMyProfileModal={setShowMyProfileModal} />
+                  )
+                }
               </MyProfile>
             )
             : (

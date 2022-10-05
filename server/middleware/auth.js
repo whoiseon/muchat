@@ -7,7 +7,12 @@ module.exports = async (req, res, next) => {
 
   // token check
   if (!token) {
-    return res.status(401).json({ msg: "No token, authorization denied" });
+    return res.status(401).json({
+        errors: {
+          message: "로그인 후 이용 가능합니다.",
+        },
+      }
+    );
   }
 
   // Verify token
@@ -18,6 +23,10 @@ module.exports = async (req, res, next) => {
     req.user = decoded.user.id;
     next();
   } catch (error) {
-    res.status(401).json({ msg: "Token is not valid" });
+    res.status(401).json({
+      errors: {
+        message: "로그인 후 이용 가능합니다.",
+      },
+    });
   }
 };

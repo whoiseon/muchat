@@ -8,8 +8,10 @@ const initialState = {
   userSignUpError: null,
   userLoginLoading: false,
   userLoginDone: false,
-  userLoginToken: null,
   userLoginError: null,
+  userLogoutLoading: false,
+  userLogoutDone: false,
+  userLogoutError: null,
   loadMyInfoLoading: false,
   loadMyInfoDone: false,
   loadMyInfoError: null,
@@ -46,6 +48,21 @@ export const userLogin = createAsyncThunk("USER_LOGIN", async ({ email, password
   }
 });
 
+export const userLogout = createAsyncThunk("USER_LOGOUT", async ({ token }) => {
+  try {
+    const response = await axios.post("http://localhost:3065/api/logout", {}, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      withCredentials: true,
+    });
+
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 export const loadMyInfo = createAsyncThunk("LOAD_MY_INFO", async ({ token }) => {
   try {
     const response = await axios.get("http://localhost:3065/api/auth", {
@@ -54,7 +71,12 @@ export const loadMyInfo = createAsyncThunk("LOAD_MY_INFO", async ({ token }) => 
       },
     });
 
-    return response.data;
+    const myInfo = {
+      data: response.data,
+      token,
+    };
+
+    return myInfo;
   } catch (error) {
     console.log(error);
   }
@@ -91,6 +113,20 @@ const userSlice = createSlice({
       state.userLoginLoading = false;
       state.userLoginError = action.error.message;
     },
+    [userLogout.pending]: (state) => {
+      state.userLogoutLoading = true;
+      state.userLogoutDone = false;
+      state.userLogoutError = null;
+    },
+    [userLogout.fulfilled]: (state, action) => {
+      state.userLogoutLoading = false;
+      state.userLogoutDone = true;
+      state.userInfo = null;
+    },
+    [userLogout.rejected]: (state, action) => {
+      state.userLogoutLoading = false;
+      state.userLogoutError = action.error.message;
+    },
     [loadMyInfo.pending]: (state) => {
       state.loadMyInfoLoading = true;
       state.loadMyInfoDone = false;
@@ -99,7 +135,8 @@ const userSlice = createSlice({
     [loadMyInfo.fulfilled]: (state, action) => {
       state.loadMyInfoLoading = false;
       state.loadMyInfoDone = true;
-      state.userInfo = action.payload;
+      state.userInfo = action.payload.data;
+      state.userInfo.token = action.payload.token;
     },
     [loadMyInfo.rejected]: (state, action) => {
       state.loadMyInfoLoading = false;

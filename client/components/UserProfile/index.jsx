@@ -14,7 +14,7 @@ const UserProfile = ({ user }) => {
     <ProfileWrapper onClick={onClickProfileModal}>
       <div>
         <AccountCircleIcon />
-        { user.name }
+        { user.nickname }
       </div>
       { showProfileModal && <UserProfileModal setShowProfileModal={setShowProfileModal} /> }
     </ProfileWrapper>

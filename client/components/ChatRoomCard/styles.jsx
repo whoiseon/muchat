@@ -4,13 +4,20 @@ import {BACKGROUND_WHITE, BACKGROUND_WHITE_CLICK, RED_COLOR, SEMI_GRAY_COLOR, WH
 export const CardWrapper = styled.li`
   display: flex;
   align-items: center;
-  width: 48.8%;
+  width: 50%;
+  max-width: 790px;
   margin-bottom: 20px;
   padding: 20px;
   background-color: ${BACKGROUND_WHITE};
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.1s ease-in;
+  @media (max-width: 1680px) {
+    max-width: 670px;
+  }
+  @media (max-width: 1440px) {
+    max-width: 590px;
+  }
   &:hover {
     transform: scale(1.01);
     background-color: ${BACKGROUND_WHITE_CLICK};
@@ -25,6 +32,11 @@ export const CardWrapper = styled.li`
   h1 {
     font-size: 14px;
     font-weight: 400;
+    width: 100%;
+    margin-right: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 `;
 

@@ -1,8 +1,9 @@
 import Head from "next/head";
 import AppLayout from "../components/AppLayout";
-import CurrentUser from "../components/CurrentUser";
 import SupportPage from "../components/SupportPage";
 import {MainWrapper} from "../styles/common";
+import wrapper from "../store/configureStore";
+import {loadMyInfo} from "../slices/userSlice";
 
 const Support = () => {
   return (
@@ -13,11 +14,24 @@ const Support = () => {
       <AppLayout>
         <MainWrapper>
           <SupportPage />
-          <CurrentUser />
         </MainWrapper>
       </AppLayout>
     </>
   );
 };
+
+export const getServerSideProps = wrapper.getServerSideProps(store => async ({req, res}) => {
+  const { AccessToken } = req.cookies;
+
+  if (AccessToken) {
+    await store.dispatch(loadMyInfo({
+      token: AccessToken,
+    }));
+  }
+
+  return {
+    props: {},
+  };
+});
 
 export default Support;

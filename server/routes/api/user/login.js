@@ -1,5 +1,5 @@
 const express = require('express');
-const User = require('../../Models/User');
+const User = require('../../../Models/User');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const jwt = require("jsonwebtoken");
@@ -39,7 +39,7 @@ router.post("/", async (req, res) => {
       if (!passwordCheck) {
         return res.status(400).json({
           errors: {
-            message: "비밀번호가 맞지 않습니다",
+            message: "올바르지 않는 비밀번호 입니다.",
           },
         });
       }
@@ -58,7 +58,8 @@ router.post("/", async (req, res) => {
         (err, token) => {
           if (err) throw err;
           res.cookie('AccessToken', token, {
-            maxAge: 1000 * 60 * 60 * 24 * 7,
+            httpOnly: true,
+            maxAge: 1000 * 60 * 120,
           })
           res.status(200).json({
             token,

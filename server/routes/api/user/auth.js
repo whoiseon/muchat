@@ -1,7 +1,7 @@
 const express = require('express');
-const User = require('../../Models/User');
+const User = require('../../../Models/User');
 const router = express.Router();
-const auth = require('../../middleware/auth');
+const auth = require('../../../middleware/auth');
 
 router.get('/', auth, async (req, res) => {
   try {

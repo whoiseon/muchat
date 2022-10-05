@@ -4,7 +4,7 @@ const ChatInfo = () => {
   return (
     <Background>
       <Membership>
-        <button type="button">멤버십</button>
+        <button type="button">멤버십 가입하기</button>
       </Membership>
       <InfoWrapper>
         <h1>롤 듀오 모집방</h1>
@@ -17,12 +17,6 @@ const ChatInfo = () => {
           </Info>
           <Info>
             멤버십 가입자 <span>230명</span>
-          </Info>
-          <Info>
-            누적 접속자 <span>12,569명</span>
-          </Info>
-          <Info>
-            최고 접속자 <span>245명</span>
           </Info>
           <Description>
             <p>

@@ -9,9 +9,9 @@ import {
 } from "../../styles/common";
 
 export const ChatListWrapper = styled.div`
-  padding: 40px 20px 40px 40px;
+  padding: 40px;
   overflow-y: scroll;
-  width: 76%;
+  width: 100%;
 `;
 
 export const Header = styled.div`

@@ -31,11 +31,7 @@ const LoginForm = () => {
 
   useEffect(() => {
     emailRef.current.focus();
-
-    if (userLoginDone) {
-      router.push('/');
-    }
-  }, [emailRef, userLoginDone, router]);
+  }, [emailRef, router]);
 
   return (
     <FormWrapper onSubmit={onSubmitLogin}>

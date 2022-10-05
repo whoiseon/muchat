@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import {
   BACKGROUND_BLACK,
-  BACKGROUND_COLOR, BACKGROUND_WHITE,
+  BACKGROUND_COLOR, BACKGROUND_WHITE, BACKGROUND_WHITE_CLICK,
   GRAY_COLOR,
   MAIN_COLOR,
   MAIN_COLOR_HOVER, RED_COLOR,
@@ -49,9 +49,9 @@ export const ChatTab = styled.div`
       }
     }
   }
-  ul {
+  & > ul {
     display: flex;
-    li {
+    & > li {
       position: relative;
       width: 180px;
       height: 48px;
@@ -89,14 +89,14 @@ export const LoginBtn = styled.div`
     font-weight: bold;
     width: 100%;
     padding: 9px 30px 8px;
-    background-color: ${MAIN_COLOR};
+    background-color: ${BACKGROUND_COLOR};
     border-radius: 6px;
     transition: background-color 0.14s ease-in;
     &:hover {
-      background-color: ${MAIN_COLOR_HOVER};
+      background-color: ${BACKGROUND_WHITE};
     }
     &:active {
-      background-color: #4E52DD;
+      background-color: ${BACKGROUND_WHITE_CLICK};
     }
   }
 `;
@@ -108,25 +108,26 @@ export const ContentWrapper = styled.div`
 `;
 
 export const MyProfile = styled.div`
+  position: relative;
   margin-left: auto;
   margin-right: 20px;
   width: 100px;
   height: 48px;
   padding: 6px;
-  div {
+  & > div:nth-of-type(1) {
     display: flex;
     align-items: center;
     width: 100px;
-    background-color: ${BACKGROUND_BLACK};
+    background-color: ${BACKGROUND_COLOR};
     padding: 8px 14px;
     cursor: pointer;
     border-radius: 6px;
     transition: background-color 0.16s ease-in;
     &:hover {
-      background-color: ${BACKGROUND_COLOR};
+      background-color: ${BACKGROUND_WHITE};
     }
     &:active {
-      background-color: ${BACKGROUND_WHITE};
+      background-color: ${BACKGROUND_WHITE_CLICK};
     }
     img {
       width: 20px;

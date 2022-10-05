@@ -1,5 +1,4 @@
-import {Background} from "./styles";
-import {CurrentUserWrapper, Header, UserList} from "../CurrentUser/styles";
+import {Background, CurrentUserWrapper, Header, UserList} from "./styles";
 import UserProfile from "../UserProfile";
 
 const dummyUser = [

@@ -4,11 +4,12 @@ import AppLayout from "../../components/AppLayout";
 import ChatInfo from "../../components/ChatInfo";
 import Chat from "../../components/Chat";
 import ChatCurrentUser from "../../components/ChatCurrentUser";
+import wrapper from "../../store/configureStore";
+import {loadMyInfo} from "../../slices/userSlice";
 
 const ChatRoom = () => {
   const router = useRouter();
 
-  console.log(Math.random().toString(36).substr(2, 6));
   return (
     <AppLayout>
       <ChatWrapper>
@@ -27,5 +28,19 @@ const ChatWrapper = styled.div`
   overflow: hidden;
   padding: 40px
 `;
+
+export const getServerSideProps = wrapper.getServerSideProps(store => async ({req, res}) => {
+  const { AccessToken } = req.cookies;
+
+  if (AccessToken) {
+    await store.dispatch(loadMyInfo({
+      token: AccessToken,
+    }));
+  }
+
+  return {
+    props: {},
+  };
+});
 
 export default ChatRoom;

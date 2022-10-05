@@ -1,8 +1,20 @@
 import Head from "next/head";
 import styled from "@emotion/styled";
 import LoginForm from "../components/LoginForm";
+import {useEffect} from "react";
+import {useSelector} from "react-redux";
+import {useRouter} from "next/router";
 
 const Login = () => {
+  const {userInfo, userLoginDone} = useSelector((state) => state.user);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (userInfo || userLoginDone) {
+      router.push('/');
+    }
+  }, [userInfo, userLoginDone]);
+
   return (
     <>
       <Head>
