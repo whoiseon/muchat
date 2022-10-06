@@ -71,12 +71,10 @@ export const loadMyInfo = createAsyncThunk("LOAD_MY_INFO", async ({ token }) => 
       },
     });
 
-    const myInfo = {
+    return {
       data: response.data,
       token,
     };
-
-    return myInfo;
   } catch (error) {
     console.log(error);
   }
@@ -135,6 +133,7 @@ const userSlice = createSlice({
     [loadMyInfo.fulfilled]: (state, action) => {
       state.loadMyInfoLoading = false;
       state.loadMyInfoDone = true;
+      console.log(action.payload);
       state.userInfo = action.payload.data;
       state.userInfo.token = action.payload.token;
     },

@@ -1,5 +1,12 @@
 import styled from "@emotion/styled";
-import {BACKGROUND_WHITE, BACKGROUND_WHITE_CLICK, RED_COLOR, SEMI_GRAY_COLOR, WHITE_COLOR} from "../../styles/common";
+import {
+  BACKGROUND_WHITE,
+  BACKGROUND_WHITE_CLICK,
+  GRAY_COLOR,
+  RED_COLOR,
+  SEMI_GRAY_COLOR,
+  WHITE_COLOR
+} from "../../styles/common";
 
 export const CardWrapper = styled.li`
   display: flex;
@@ -37,6 +44,11 @@ export const CardWrapper = styled.li`
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    i {
+      font-style: normal;
+      color: ${SEMI_GRAY_COLOR};
+      margin-right: 10px;
+    }
   }
 `;
 

@@ -1,5 +1,5 @@
 import {Background, CurrentUserWrapper, Header, UserList} from "./styles";
-import UserProfile from "../UserProfile";
+import UserChatProfile from "../UserChatProfile";
 
 const dummyUser = [
   {
@@ -36,7 +36,7 @@ const ChatCurrentUser = () => {
           {
             dummyUser.map((user, i) => {
               return (
-                <UserProfile key={user.name} user={user} />
+                <UserChatProfile key={user.name} user={user} />
               );
             })
           }

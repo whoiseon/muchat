@@ -2,6 +2,7 @@ import {useCallback, useState} from "react";
 import PersonIcon from '@mui/icons-material/Person';
 import {useRouter} from "next/router";
 import {CardWrapper, ChatInfo, CurrentUserBox} from "./styles";
+import UserProfile from "../UserProfile";
 
 const SupportersCard = ({ data }) => {
   const [showCurrentUser, setShowCurrentUser] = useState(false);
@@ -25,17 +26,21 @@ const SupportersCard = ({ data }) => {
       onMouseEnter={onMouseEnterCurrentUser}
       onMouseLeave={onMouseLeaveCurrentUser}
     >
+      <p>[{data.genre}]</p>
       <h1>
         {data.title}
       </h1>
       <ChatInfo>
         <div>
           방장
-          <span>{ data.manager.name }</span>
+          <UserProfile
+            mucorn={data.manager.mucorn}
+            userName={data.manager.nickname}
+          />
         </div>
         <div>
           멤버십 회원
-          <span>{ data.membership }명</span>
+          <span>{ data.member } 명</span>
         </div>
       </ChatInfo>
       {

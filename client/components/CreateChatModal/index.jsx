@@ -6,6 +6,7 @@ import useInput from "../../hooks/useInput";
 import {ErrorMessage} from "../../styles/common";
 import {createChat} from "../../slices/chatSlice";
 import {loadMyInfo} from "../../slices/userSlice";
+import {genreList} from "../../utils/genreList";
 
 const CreateChatModal = ({ setShowCreateChat }) => {
   const { userInfo } = useSelector((state) => state.user);
@@ -57,8 +58,6 @@ const CreateChatModal = ({ setShowCreateChat }) => {
     }
   }, [inputRef, createChatDone]);
 
-  const genreList = ['게임', '애니메이션', '공부'];
-
   return (
     <Background onClick={onCloseBackgroundModal}>
       <ModalWrapper>
@@ -88,10 +87,10 @@ const CreateChatModal = ({ setShowCreateChat }) => {
                 genreList.map((item, i) => {
                   return (
                     <option
-                      key={item}
-                      value={item}
+                      key={item.code}
+                      value={item.name}
                     >
-                      {item}
+                      {item.name}
                     </option>
                   );
                 })

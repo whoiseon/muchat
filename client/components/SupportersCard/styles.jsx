@@ -28,6 +28,10 @@ export const CardWrapper = styled.div`
   &:not(:last-of-type) {
     margin-right: 20px;
   }
+  & > p {
+    margin-bottom: 10px;
+    color: ${SEMI_GRAY_COLOR};
+  }
   h1 {
     width: 100%;
     max-width: 200px;
@@ -51,7 +55,14 @@ export const ChatInfo = styled.div`
     align-items: center;
   }
   div:nth-of-type(1) {
-    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    & > div {
+      margin-left: auto;
+    }
+  }
+  div:nth-of-type(2) {
+    margin-top: 10px;
   }
   span {
     display: block;

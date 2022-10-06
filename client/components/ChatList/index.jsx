@@ -10,61 +10,9 @@ import ChatRoomCard from "../ChatRoomCard";
 import CreateChatModal from "../CreateChatModal";
 import {useSelector} from "react-redux";
 
-const dummySupporters = [
-  {
-    title: '롤 듀오 모집방',
-    manager: {
-      cornId: '1001',
-      name: '마스터',
-    },
-    membership: '1,028',
-    current: '240',
-    code: '11022',
-  },
-  {
-    title: '진지하게 고민상담 좀 들어주실 분 서포터즈',
-    manager: {
-      cornId: '1001',
-      name: '강동원',
-    },
-    membership: '138',
-    current: '1,512',
-    code: '11023',
-  },
-  {
-    title: '발로란트 팀 모집 초월자 이상',
-    manager: {
-      cornId: '1001',
-      name: '차은우',
-    },
-    membership: '1,002',
-    current: '523',
-    code: '11024',
-  },
-  {
-    title: '프론트엔드 개발은 왜 이렇게 어려운 걸까요?',
-    manager: {
-      cornId: '1001',
-      name: '꿈나무',
-    },
-    membership: '620',
-    current: '1,002',
-    code: '11025',
-  },
-  {
-    title: '엥 이게 뭐야 흑흑',
-    manager: {
-      cornId: '1001',
-      name: '지림',
-    },
-    membership: '620',
-    current: '1,002',
-    code: '11026',
-  },
-];
-
 const ChatList = () => {
   const {userInfo} = useSelector((state) => state.user);
+  const { mainChatList, supportersChatList } = useSelector((state) => state.chat);
 
   const [showCreateChat, setShowCreateChat] = useState(false);
   const router = useRouter();
@@ -76,6 +24,14 @@ const ChatList = () => {
   const onClickTest = useCallback(() => {
     router.push('/search');
   }, [router]);
+
+  const testObject = [
+    {
+      name: 'sun',
+    },
+  ];
+
+  console.log(testObject.filter((v) => v.name === 'sun'))
 
   return (
     <ChatListWrapper>
@@ -105,23 +61,31 @@ const ChatList = () => {
         }
       </Header>
       <Content>
-        <MainSection title="서포터즈">
+        <MainSection title="서포터즈" subMenu={false}>
           {
-            dummySupporters.map((data, i) => {
-              return (
-                <SupportersCard key={data.code} data={data} />
-              );
-            })
+            supportersChatList.length > 0
+              ? (
+                supportersChatList?.map((data, i) => {
+                  return (
+                    <SupportersCard key={data.code} data={data} />
+                  );
+                })
+              )
+              : '서포터즈 채팅방이 없습니다.'
           }
         </MainSection>
-        <MainSection title="개설된 채팅방">
+        <MainSection title="개설된 채팅방" subMenu={true}>
           <ul>
             {
-              dummySupporters.map((data, i) => {
-                return (
-                  <ChatRoomCard key={data.code} data={data} />
-                );
-              })
+              mainChatList?.length > 0
+                ? (
+                  mainChatList?.map((data, i) => {
+                    return (
+                      <ChatRoomCard key={data.code} data={data} />
+                    );
+                  })
+                )
+                : '개설된 채팅방이 없습니다.'
             }
           </ul>
         </MainSection>

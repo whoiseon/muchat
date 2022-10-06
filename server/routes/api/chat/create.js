@@ -38,6 +38,7 @@ router.post("/", auth, async (req, res) => {
       title,
       genre,
       introduce,
+      member: [manager],
     });
 
     await chat.save();
@@ -53,21 +54,27 @@ router.post("/", auth, async (req, res) => {
           manager,
           title,
           genre,
-          introduce,
+          current: chat.current.length,
+          member: chat.member.length,
         },
         operatedChat: {
           code,
           title,
           genre,
-          introduce,
+          current: chat.current.length,
+          member: chat.member.length,
         }
       },
     });
 
     res.status(200).json({
       code: chat.code,
-      title: chat.title,
+      createdAt: chat.createdAt,
+      current: chat.current.length,
       genre: chat.genre,
+      manager: chat.manager,
+      member: chat.member.length,
+      title: chat.title,
     });
   } catch (error) {
     console.error(error.message);

@@ -1,22 +1,10 @@
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import {useCallback, useState} from "react";
-import {ProfileModal, ProfileWrapper} from "./styles";
-import UserProfileModal from "../UserProfileModal";
+import {ProfileWrapper} from "./styles";
 
-const UserProfile = ({ user }) => {
-  const [showProfileModal, setShowProfileModal] = useState(false);
-
-  const onClickProfileModal = useCallback(() => {
-    setShowProfileModal((prev) => !prev);
-  }, []);
-
+const UserProfile = ({ mucorn, userName }) => {
   return (
-    <ProfileWrapper onClick={onClickProfileModal}>
-      <div>
-        <AccountCircleIcon />
-        { user.nickname }
-      </div>
-      { showProfileModal && <UserProfileModal setShowProfileModal={setShowProfileModal} /> }
+    <ProfileWrapper>
+      <img src={`/image/mucorn/${mucorn}.png`} alt={`mucorn_${mucorn}`} />
+      <span>{ userName }</span>
     </ProfileWrapper>
   );
 };

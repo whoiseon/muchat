@@ -6,7 +6,7 @@ const chatSchema = new Schema({
   manager: {
     type: ObjectId,
     required: true,
-    ref: 'user',
+    ref: 'user'
   },
   code: {
     type: String,

@@ -2,8 +2,11 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = {
-  chatList: [],
+  mainChatList: [],
   supportersChatList: [],
+  loadMainChatLoading: false,
+  loadMainChatDone: false,
+  loadMainChatError: null,
   createChatLoading: false,
   createChatDone: false,
   createChatError: null,
@@ -30,11 +33,46 @@ export const createChat = createAsyncThunk("CREATE_CHAT", async ({ manager, titl
   }
 });
 
+export const loadMainChat = createAsyncThunk("LOAD_MAIN_CHAT", async () => {
+  try {
+    const response = await axios.get("http://localhost:3065/api/chats");
+
+    response.data.forEach((v) => {
+      v.member = v.member.length;
+      v.current = v.current.length;
+    });
+
+    const supportersChats = response.data.filter((v) => v.supporters === true);
+
+    return {
+      chats: response.data,
+      supportersChats,
+    };
+  } catch (error) {
+    throw error.response.data.errors.message;
+  }
+});
+
 const chatSlice = createSlice({
   name: 'chat',
   initialState,
   reducers: {},
   extraReducers: {
+    [loadMainChat.pending]: (state) => {
+      state.loadMainChatLoading = true;
+      state.loadMainChatDone = false;
+      state.loadMainChatError = null;
+    },
+    [loadMainChat.fulfilled]: (state, action) => {
+      state.loadMainChatLoading = false;
+      state.loadMainChatDone = true;
+      state.mainChatList = action.payload.chats;
+      state.supportersChatList = action.payload.supportersChats;
+    },
+    [loadMainChat.rejected]: (state, action) => {
+      state.loadMainChatLoading = false;
+      state.loadMainChatError = action.error.message;
+    },
     [createChat.pending]: (state) => {
       state.createChatLoading = true;
       state.createChatDone = false;
@@ -43,7 +81,7 @@ const chatSlice = createSlice({
     [createChat.fulfilled]: (state, action) => {
       state.createChatLoading = false;
       state.createChatDone = true;
-      state.chatList.unshift(action.payload);
+      state.mainChatList.unshift(action.payload);
     },
     [createChat.rejected]: (state, action) => {
       state.createChatLoading = false;

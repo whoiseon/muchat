@@ -54,12 +54,12 @@ router.post("/", async (req, res) => {
       jwt.sign(
         payload,
         process.env.ACCESS_SECRET_KEY,
-        { expiresIn: "1h" },
+        { expiresIn: "2h" },
         (err, token) => {
           if (err) throw err;
           res.cookie('AccessToken', token, {
             httpOnly: true,
-            maxAge: 1000 * 60 * 120,
+            maxAge: 1000 * 60 * 119,
           })
           res.status(200).json({
             token,
