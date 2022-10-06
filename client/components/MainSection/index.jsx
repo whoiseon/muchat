@@ -2,6 +2,8 @@ import {Content, Header, SectionWrapper, SubMenu} from "./styles";
 import {genreList} from "../../utils/genreList";
 
 const MainSection = ({ children, title, subMenu }) => {
+  const category = 'active'
+
   return (
     <SectionWrapper>
       <Header>
@@ -18,6 +20,7 @@ const MainSection = ({ children, title, subMenu }) => {
                     <button
                       key={item.code}
                       type="button"
+                      className={category}
                     >
                       {item.name}
                     </button>

@@ -10,7 +10,6 @@ router.get('/', async (req, res) => {
       introduce: 0,
     }).sort({ createdAt: -1 }).populate('manager');
 
-    console.log(chats);
     return res.status(200).json(chats);
   } catch (error) {
     console.error(error);

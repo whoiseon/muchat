@@ -3,12 +3,14 @@ import {useDispatch, useSelector} from "react-redux";
 import {Background, ModalWrapper} from "./styles";
 import {userLogout} from "../../slices/userSlice";
 import {useCookies} from "react-cookie";
+import {useRouter} from "next/router";
 
 const MyProfileModal = ({ setShowMyProfileModal }) => {
   const { userInfo } = useSelector((state) => state.user);
 
   const ModalRef = useRef();
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const [cookie, setCookie] = useCookies();
 
@@ -36,7 +38,7 @@ const MyProfileModal = ({ setShowMyProfileModal }) => {
   return (
     <Background onClick={onClickCloseModal} ref={ModalRef}>
       <ModalWrapper>
-        <li>
+        <li onClick={() => router.push('/profile')}>
           <img src={`/image/mucorn/${userInfo?.mucorn}.png`} alt={`mucorn_${userInfo?.mucorn}`} />
           <div>
             <p>{ userInfo?.nickname }</p>

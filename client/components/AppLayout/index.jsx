@@ -45,7 +45,11 @@ const AppLayout = ({ children }) => {
     <AppWrapper>
       <ChatTab>
         <h1 style={
-          router.pathname === "/" || router.pathname === "/search" || router.pathname === "/mucorn" || router.pathname === "/support"
+          (
+            router.pathname === "/" || router.pathname === "/search"
+            || router.pathname === "/mucorn" || router.pathname === "/support"
+            || router.pathname === "/profile"
+          )
             ? active
             : {}
           }
