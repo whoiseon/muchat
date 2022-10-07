@@ -29,7 +29,7 @@ const AuthRouter = require('./routes/api/user/auth');
 const logoutRouter = require('./routes/api/user/logout');
 const createRouter = require('./routes/api/chat/create')
 const loadChatsRouter = require('./routes/api/chat/chats');
-const {load} = require("nodemon/lib/rules");
+const loadChatByGenreRouter = require('./routes/api/chat/genres');
 
 
 // MongoDB connection
@@ -47,6 +47,7 @@ app.use('/api/logout', logoutRouter);
   // Chat api
 app.use('/api/create', createRouter);
 app.use('/api/chats', loadChatsRouter);
+app.use('/api/genres', loadChatByGenreRouter);
 
 
 app.listen(port, () => {

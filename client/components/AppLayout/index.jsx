@@ -48,7 +48,7 @@ const AppLayout = ({ children }) => {
           (
             router.pathname === "/" || router.pathname === "/search"
             || router.pathname === "/mucorn" || router.pathname === "/support"
-            || router.pathname === "/profile"
+            || router.pathname === "/profile" || router.pathname === "/genre/[genre]"
           )
             ? active
             : {}

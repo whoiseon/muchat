@@ -28,6 +28,7 @@ export const SubMenu = styled.div`
     &:hover {
       background-color: ${BACKGROUND_WHITE};
       color: ${WHITE_COLOR};
+      font-weight: bold;
     }
   }
 `;

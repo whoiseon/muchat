@@ -1,6 +1,4 @@
 import Head from "next/head";
-import {useDispatch, useSelector} from "react-redux";
-import {useEffect} from "react";
 import AppLayout from "../components/AppLayout";
 import ChatList from "../components/ChatList";
 import {MainWrapper} from "../styles/common";
@@ -16,7 +14,7 @@ const Home = () => {
       </Head>
       <AppLayout>
         <MainWrapper>
-          <ChatList />
+          <ChatList supporters={true} />
         </MainWrapper>
       </AppLayout>
     </>

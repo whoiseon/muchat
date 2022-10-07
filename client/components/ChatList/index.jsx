@@ -10,9 +10,9 @@ import ChatRoomCard from "../ChatRoomCard";
 import CreateChatModal from "../CreateChatModal";
 import {useSelector} from "react-redux";
 
-const ChatList = () => {
+const ChatList = ({ supporters }) => {
   const {userInfo} = useSelector((state) => state.user);
-  const { mainChatList, supportersChatList } = useSelector((state) => state.chat);
+  const { mainChatList, supportersChatList, chatListByGenre } = useSelector((state) => state.chat);
 
   const [showCreateChat, setShowCreateChat] = useState(false);
   const router = useRouter();
@@ -61,31 +61,45 @@ const ChatList = () => {
         }
       </Header>
       <Content>
-        <MainSection title="서포터즈" subMenu={false}>
-          {
-            supportersChatList.length > 0
-              ? (
-                supportersChatList?.map((data, i) => {
-                  return (
-                    <SupportersCard key={data.code} data={data} />
-                  );
-                })
-              )
-              : '서포터즈 채팅방이 없습니다.'
-          }
-        </MainSection>
+        {
+          supporters && (
+            <MainSection title="서포터즈" subMenu={false}>
+              {
+                supportersChatList.length > 0
+                  ? (
+                    supportersChatList?.map((data, i) => {
+                      return (
+                        <SupportersCard key={data.code} data={data} />
+                      );
+                    })
+                  )
+                  : '서포터즈 채팅방이 없습니다.'
+              }
+            </MainSection>
+          )
+        }
         <MainSection title="개설된 채팅방" subMenu={true}>
           <ul>
             {
-              mainChatList?.length > 0
+              chatListByGenre.length > 0
                 ? (
-                  mainChatList?.map((data, i) => {
+                  chatListByGenre?.map((data, i) => {
                     return (
                       <ChatRoomCard key={data.code} data={data} />
                     );
                   })
                 )
-                : '개설된 채팅방이 없습니다.'
+                : (
+                  mainChatList?.length > 0
+                    ? (
+                      mainChatList?.map((data, i) => {
+                        return (
+                          <ChatRoomCard key={data.code} data={data} />
+                        );
+                      })
+                    )
+                    : '개설된 채팅방이 없습니다.'
+                )
             }
           </ul>
         </MainSection>
