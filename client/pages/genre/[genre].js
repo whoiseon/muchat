@@ -1,16 +1,25 @@
 import Head from "next/head";
-import {useDispatch, useSelector} from "react-redux";
-import {useEffect} from "react";
 import {useRouter} from "next/router";
+import {useEffect} from "react";
 import AppLayout from "../../components/AppLayout";
 import ChatList from "../../components/ChatList";
 import {MainWrapper} from "../../styles/common";
 import {loadMyInfo} from "../../slices/userSlice";
 import wrapper from "../../store/configureStore";
 import {loadChatByGenre, loadMainChat} from "../../slices/chatSlice";
+import {genreList} from "../../utils/genreList";
+import Error from "next/error";
 
 const Tag = () => {
   const router = useRouter();
+
+  useEffect(() => {
+
+  }, []);
+
+  if (genreList.find((v) => v.name === router.query.genre) === undefined) {
+    return <Error statusCode={404} />;
+  }
 
   return (
     <>

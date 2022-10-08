@@ -31,8 +31,6 @@ const ChatList = ({ supporters }) => {
     },
   ];
 
-  console.log(testObject.filter((v) => v.name === 'sun'))
-
   return (
     <ChatListWrapper>
       <Header>

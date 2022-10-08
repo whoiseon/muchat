@@ -65,6 +65,11 @@ export const loadChatByGenre = createAsyncThunk("LOAD_CHAT_BY_GENRE", async ({ g
       },
     });
 
+    response.data.forEach((v) => {
+      v.member = v.member.length;
+      v.current = v.current.length;
+    });
+
     return response.data;
   } catch (error) {
     throw error.response.data.errors.message;
