@@ -6,6 +6,7 @@ import Chat from "../../components/Chat";
 import ChatCurrentUser from "../../components/ChatCurrentUser";
 import wrapper from "../../store/configureStore";
 import {loadMyInfo} from "../../slices/userSlice";
+import {loadSupporterChats} from "../../slices/chatSlice";
 
 const ChatRoom = () => {
   const router = useRouter();

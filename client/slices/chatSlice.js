@@ -8,6 +8,9 @@ const initialState = {
   loadMainChatLoading: false,
   loadMainChatDone: false,
   loadMainChatError: null,
+  loadSupporterChatsLoading: false,
+  loadSupporterChatsDone: false,
+  loadSupporterChatsError: null,
   loadChatByGenreLoading: false,
   loadChatByGenreDone: false,
   loadChatByGenreError: null,
@@ -46,12 +49,22 @@ export const loadMainChat = createAsyncThunk("LOAD_MAIN_CHAT", async () => {
       v.current = v.current.length;
     });
 
-    const supportersChats = response.data.filter((v) => v.supporters === true);
+    return response.data;
+  } catch (error) {
+    throw error.response.data.errors.message;
+  }
+});
 
-    return {
-      chats: response.data,
-      supportersChats,
-    };
+export const loadSupporterChats = createAsyncThunk("LOAD_SUPPORTER_CHATS", async () => {
+  try {
+    const response = await axios.get("http://localhost:3065/api/supporters");
+
+    response.data.forEach((v) => {
+      v.member = v.member.length;
+      v.current = v.current.length;
+    });
+
+    return response.data;
   } catch (error) {
     throw error.response.data.errors.message;
   }
@@ -89,12 +102,25 @@ const chatSlice = createSlice({
     [loadMainChat.fulfilled]: (state, action) => {
       state.loadMainChatLoading = false;
       state.loadMainChatDone = true;
-      state.mainChatList = action.payload.chats;
-      state.supportersChatList = action.payload.supportersChats;
+      state.mainChatList = action.payload;
     },
     [loadMainChat.rejected]: (state, action) => {
       state.loadMainChatLoading = false;
       state.loadMainChatError = action.error.message;
+    },
+    [loadSupporterChats.pending]: (state) => {
+      state.loadSupporterChatsLoading = true;
+      state.loadSupporterChatsDone = false;
+      state.loadSupporterChatsError = null;
+    },
+    [loadSupporterChats.fulfilled]: (state, action) => {
+      state.loadSupporterChatsLoading = false;
+      state.loadSupporterChatsDone = true;
+      state.supportersChatList = action.payload;
+    },
+    [loadSupporterChats.rejected]: (state, action) => {
+      state.loadSupporterChatsLoading = false;
+      state.loadSupporterChatsError = action.error.message;
     },
     [loadChatByGenre.pending]: (state) => {
       state.loadChatByGenreLoading = true;

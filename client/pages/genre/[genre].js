@@ -6,20 +6,18 @@ import ChatList from "../../components/ChatList";
 import {MainWrapper} from "../../styles/common";
 import {loadMyInfo} from "../../slices/userSlice";
 import wrapper from "../../store/configureStore";
-import {loadChatByGenre, loadMainChat} from "../../slices/chatSlice";
+import {loadChatByGenre, loadMainChat, loadSupporterChats} from "../../slices/chatSlice";
 import {genreList} from "../../utils/genreList";
-import Error from "next/error";
 
-const Tag = () => {
+const Genre = () => {
   const router = useRouter();
 
-  useEffect(() => {
-
-  }, []);
-
-  if (genreList.find((v) => v.name === router.query.genre) === undefined) {
-    return <Error statusCode={404} />;
-  }
+  //
+  // useEffect(() => {
+  //   if (genreList.find((v) => v.name === router.query.genre) === undefined) {
+  //     router.push('/404');
+  //   }
+  // }, [genreList, router]);
 
   return (
     <>
@@ -28,7 +26,7 @@ const Tag = () => {
       </Head>
       <AppLayout>
         <MainWrapper>
-          <ChatList supporters={false} />
+          <ChatList />
         </MainWrapper>
       </AppLayout>
     </>
@@ -37,7 +35,6 @@ const Tag = () => {
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async ({req, res, query}) => {
   const { AccessToken } = req.cookies;
-  console.log(query.genre);
 
   if (AccessToken) {
     await store.dispatch(loadMyInfo({
@@ -45,13 +42,21 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async ({re
     }));
   }
 
+  await store.dispatch(loadSupporterChats());
   await store.dispatch(loadChatByGenre({
     genre: query.genre,
   }));
+
+  if (genreList.find((v) => v.name === query.genre) === undefined) {
+    res.setHeader("location", "/404");
+    res.statusCode = 301;
+    res.end();
+    return;
+  }
 
   return {
     props: {},
   };
 });
 
-export default Tag;
+export default Genre;

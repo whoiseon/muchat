@@ -59,23 +59,19 @@ const ChatList = ({ supporters }) => {
         }
       </Header>
       <Content>
-        {
-          supporters && (
-            <MainSection title="서포터즈" subMenu={false}>
-              {
-                supportersChatList.length > 0
-                  ? (
-                    supportersChatList?.map((data, i) => {
-                      return (
-                        <SupportersCard key={data.code} data={data} />
-                      );
-                    })
-                  )
-                  : '서포터즈 채팅방이 없습니다.'
-              }
-            </MainSection>
-          )
-        }
+        <MainSection title="서포터즈" subMenu={false}>
+          {
+            supportersChatList.length > 0
+              ? (
+                supportersChatList?.map((data, i) => {
+                  return (
+                    <SupportersCard key={data.code} data={data} />
+                  );
+                })
+              )
+              : '서포터즈 채팅방이 없습니다.'
+          }
+        </MainSection>
         <MainSection title="개설된 채팅방" subMenu={true}>
           <ul>
             {

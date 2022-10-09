@@ -22,13 +22,16 @@ app.use(cookieParser());
 const connectDB = require('./Models');
 
 // Routers
+  // User
 const indexRouter = require('./routes');
 const registerRouter = require('./routes/api/user/register');
 const loginRouter = require('./routes/api/user/login');
 const AuthRouter = require('./routes/api/user/auth');
 const logoutRouter = require('./routes/api/user/logout');
+  // Chat
 const createRouter = require('./routes/api/chat/create')
 const loadChatsRouter = require('./routes/api/chat/chats');
+const loadSupportersRouter = require('./routes/api/chat/supporters');
 const loadChatByGenreRouter = require('./routes/api/chat/genres');
 
 
@@ -37,16 +40,16 @@ connectDB();
 
 // Routes
 
-  // User api
+  // User
 app.use('/', indexRouter);
 app.use('/api/register', registerRouter);
 app.use('/api/login', loginRouter);
 app.use('/api/auth', AuthRouter);
 app.use('/api/logout', logoutRouter);
-
-  // Chat api
+  // Chat
 app.use('/api/create', createRouter);
 app.use('/api/chats', loadChatsRouter);
+app.use('/api/supporters', loadSupportersRouter);
 app.use('/api/genres', loadChatByGenreRouter);
 
 
