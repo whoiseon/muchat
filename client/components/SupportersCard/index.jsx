@@ -1,16 +1,23 @@
 import {useCallback, useState} from "react";
 import PersonIcon from '@mui/icons-material/Person';
 import {useRouter} from "next/router";
+import {useSelector} from "react-redux";
 import {CardWrapper, ChatInfo, CurrentUserBox} from "./styles";
 import UserProfile from "../UserProfile";
 
-const SupportersCard = ({ data }) => {
-  const [showCurrentUser, setShowCurrentUser] = useState(false);
+const SupportersCard = ({ data, setNonLoginModal }) => {
+  const { userInfo } = useSelector((state) => state.user);
+
   const router = useRouter();
 
+  const [showCurrentUser, setShowCurrentUser] = useState(false);
+
   const onClickMoveChat = useCallback(() => {
+    if (!userInfo) {
+      return setNonLoginModal(true);
+    }
     router.push(`/chat/${data.code}`);
-  }, [data.code]);
+  }, [userInfo, data.code]);
 
   const onMouseEnterCurrentUser = useCallback(() => {
     setShowCurrentUser(true);

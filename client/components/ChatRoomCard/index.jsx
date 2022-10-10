@@ -1,14 +1,20 @@
 import PersonIcon from '@mui/icons-material/Person';
-import {useCallback} from "react";
+import {useCallback, useEffect, useState} from "react";
 import {useRouter} from "next/router";
+import {useSelector} from "react-redux";
 import {CardWrapper, ChatInfo} from "./styles";
 
-const ChatRoomCard = ({ data }) => {
+const ChatRoomCard = ({ data, setNonLoginModal }) => {
+  const { userInfo } = useSelector((state) => state.user);
+
   const router = useRouter();
 
   const onClickMoveChat = useCallback(() => {
+    if (!userInfo) {
+      return setNonLoginModal(true);
+    }
     router.push(`/chat/${data.code}`);
-  }, [data.code]);
+  }, [data, userInfo]);
 
   return (
     <CardWrapper onClick={onClickMoveChat}>

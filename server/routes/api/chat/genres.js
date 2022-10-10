@@ -10,7 +10,6 @@ router.get('/', async (req, res) => {
     const chatByGenre = await Chat.find({ genre })
       .sort({ createdAt: -1 }).populate('manager');
 
-    console.log(chatByGenre);
     return res.status(200).json(chatByGenre);
   } catch (error) {
     console.error(error);

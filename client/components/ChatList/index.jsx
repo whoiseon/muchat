@@ -1,21 +1,23 @@
 import SearchIcon from '@mui/icons-material/Search';
 import {useCallback, useState} from "react";
 import {useRouter} from "next/router";
+import {useSelector} from "react-redux";
 import {ChatListWrapper, Content, Header, SearchWrapper, TopMenu} from "./styles";
 import Link from "next/link";
-import {WHITE_COLOR} from "../../styles/common";
 import MainSection from "../MainSection";
 import SupportersCard from "../SupportersCard";
 import ChatRoomCard from "../ChatRoomCard";
 import CreateChatModal from "../CreateChatModal";
-import {useSelector} from "react-redux";
+import DefaultModal from "../CommonModal/Default";
 
 const ChatList = ({ supporters }) => {
   const {userInfo} = useSelector((state) => state.user);
   const { mainChatList, supportersChatList, chatListByGenre } = useSelector((state) => state.chat);
 
-  const [showCreateChat, setShowCreateChat] = useState(false);
   const router = useRouter();
+
+  const [showCreateChat, setShowCreateChat] = useState(false);
+  const [nonLoginModal, setNonLoginModal] = useState(false);
 
   const onClickShowCreateChatModal = useCallback(() => {
     setShowCreateChat(true);
@@ -24,12 +26,6 @@ const ChatList = ({ supporters }) => {
   const onClickTest = useCallback(() => {
     router.push('/search');
   }, [router]);
-
-  const testObject = [
-    {
-      name: 'sun',
-    },
-  ];
 
   return (
     <ChatListWrapper>
@@ -65,7 +61,11 @@ const ChatList = ({ supporters }) => {
               ? (
                 supportersChatList?.map((data, i) => {
                   return (
-                    <SupportersCard key={data.code} data={data} />
+                    <SupportersCard
+                      key={data.code}
+                      data={data}
+                      setNonLoginModal={setNonLoginModal}
+                    />
                   );
                 })
               )
@@ -79,7 +79,11 @@ const ChatList = ({ supporters }) => {
                 ? (
                   chatListByGenre?.map((data, i) => {
                     return (
-                      <ChatRoomCard key={data.code} data={data} />
+                      <ChatRoomCard
+                        key={data.code}
+                        data={data}
+                        setNonLoginModal={setNonLoginModal}
+                      />
                     );
                   })
                 )
@@ -88,7 +92,11 @@ const ChatList = ({ supporters }) => {
                     ? (
                       mainChatList?.map((data, i) => {
                         return (
-                          <ChatRoomCard key={data.code} data={data} />
+                          <ChatRoomCard
+                            key={data.code}
+                            data={data}
+                            setNonLoginModal={setNonLoginModal}
+                          />
                         );
                       })
                     )
@@ -99,6 +107,15 @@ const ChatList = ({ supporters }) => {
         </MainSection>
       </Content>
       { showCreateChat && <CreateChatModal setShowCreateChat={setShowCreateChat} /> }
+      { nonLoginModal && (
+        <DefaultModal
+          setNonLoginModal={setNonLoginModal}
+          header="비로그인 회원"
+          content="로그인 후 이용 가능한 서비스입니다."
+          buttonText="로그인 하러갈래요"
+          router="/login"
+        />
+      )}
     </ChatListWrapper>
   );
 };
