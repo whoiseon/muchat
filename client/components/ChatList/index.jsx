@@ -1,4 +1,6 @@
 import SearchIcon from '@mui/icons-material/Search';
+import CommentsDisabledIcon from '@mui/icons-material/CommentsDisabled';
+import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
 import {useCallback, useState} from "react";
 import {useRouter} from "next/router";
 import {useSelector} from "react-redux";
@@ -9,6 +11,7 @@ import SupportersCard from "../SupportersCard";
 import ChatRoomCard from "../ChatRoomCard";
 import CreateChatModal from "../CreateChatModal";
 import DefaultModal from "../CommonModal/Default";
+import NoChatList from "./NoChatList";
 
 const ChatList = ({ supporters }) => {
   const {userInfo} = useSelector((state) => state.user);
@@ -69,7 +72,12 @@ const ChatList = ({ supporters }) => {
                   );
                 })
               )
-              : '서포터즈 채팅방이 없습니다.'
+              : (
+                <NoChatList
+                  icon={<CommentsDisabledIcon />}
+                  comment="현재 등록된 서포터즈가 없습니다"
+                />
+              )
           }
         </MainSection>
         <MainSection title="개설된 채팅방" subMenu={true}>
@@ -100,7 +108,12 @@ const ChatList = ({ supporters }) => {
                         );
                       })
                     )
-                    : '개설된 채팅방이 없습니다.'
+                    : (
+                      <NoChatList
+                        icon={<CommentsDisabledIcon />}
+                        comment="현재 개설된 채팅방이 없습니다"
+                      />
+                    )
                 )
             }
           </ul>
