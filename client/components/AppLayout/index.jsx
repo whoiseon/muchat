@@ -5,6 +5,7 @@ import {useState, useCallback} from "react";
 import {AppWrapper, ChatTab, ContentWrapper, LoginBtn, Logo, MyProfile} from "./styles";
 import {BACKGROUND_COLOR, WHITE_COLOR} from "../../styles/common";
 import MyProfileModal from "../MyProfileModal";
+import Footer from "../Footer";
 
 const dummyCurrentChat = [
   {
@@ -100,7 +101,10 @@ const AppLayout = ({ children }) => {
             )
         }
       </ChatTab>
-      <ContentWrapper>{children}</ContentWrapper>
+      <ContentWrapper>
+        {children}
+      </ContentWrapper>
+      <Footer />
     </AppWrapper>
   );
 };
