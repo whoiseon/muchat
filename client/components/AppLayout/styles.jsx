@@ -58,6 +58,27 @@ export const ChatTab = styled.div`
       font-weight: 500;
       padding: 6px;
       color: ${GRAY_COLOR};
+      button {
+        width: 18px;
+        height: 18px;
+        top: 15px;
+        right: 16px;
+        position: absolute;
+        border-radius: 4px;
+        padding: 2px;
+        background-color: ${BACKGROUND_BLACK};
+        svg {
+          width: 14px;
+          height: 14px;
+          color: ${SEMI_GRAY_COLOR};
+        }
+        &:hover {
+          background-color: ${BACKGROUND_WHITE};
+          svg {
+            color: ${WHITE_COLOR};
+          }
+        }
+      }
       a {
         display: block;
         width: 100%;

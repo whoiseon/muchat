@@ -2,6 +2,7 @@ import Link from "next/link";
 import {useRouter} from "next/router";
 import {useSelector} from "react-redux";
 import {useState, useCallback} from "react";
+import CloseIcon from '@mui/icons-material/Close';
 import {AppWrapper, ChatTab, ContentWrapper, LoginBtn, Logo, MyProfile} from "./styles";
 import {BACKGROUND_COLOR, WHITE_COLOR} from "../../styles/common";
 import MyProfileModal from "../MyProfileModal";
@@ -32,9 +33,18 @@ const AppLayout = ({ children }) => {
   const router = useRouter();
 
   const [showMyProfileModal, setShowMyProfileModal] = useState(false);
+  const [showCloseBtn, setShowCloseBtn] = useState(false);
 
   const onClickMyProfileModal = useCallback(() => {
     setShowMyProfileModal((prev) => !prev);
+  }, []);
+
+  const onMouseEnterCloseBtn = useCallback(() => {
+    setShowCloseBtn(true);
+  }, []);
+
+  const onMouseLeaveCloseBtn = useCallback(() => {
+    setShowCloseBtn(false);
   }, []);
 
   const active = {
@@ -68,10 +78,13 @@ const AppLayout = ({ children }) => {
                 <li
                   key={chat.code}
                   style={router.query.code === chat.code ? active : {}}
+                  onMouseEnter={onMouseEnterCloseBtn}
+                  onMouseLeave={onMouseLeaveCloseBtn}
                 >
                   <Link href={`/chat/${chat.code}`}>
                     <a>{ chat.title }</a>
                   </Link>
+                  { showCloseBtn && <button type="button"><CloseIcon /></button> }
                 </li>
               );
             })
