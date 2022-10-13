@@ -42,7 +42,6 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async ({re
     }));
   }
 
-  await store.dispatch(loadSupporterChats());
   await store.dispatch(loadChatByGenre({
     genre: query.genre,
   }));

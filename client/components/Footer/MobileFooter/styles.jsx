@@ -1,34 +1,22 @@
 import styled from "@emotion/styled";
-import {BACKGROUND_BLACK, SEMI_GRAY_COLOR, WHITE_COLOR} from "../../styles/common";
+import {BACKGROUND_BLACK, GRAY_COLOR, SEMI_GRAY_COLOR, WHITE_COLOR} from "../../../styles/common";
 
 export const FooterWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  width: 1680px;
-  overflow: hidden;
-  margin: 0 auto;
-  padding: 40px;
-`;
-
-export const FooterLogo = styled.div`
-  display: flex;
-  align-items: center;
-  opacity: 0.5;
-  img {
-    width: 40px;
-    height: 40px;
-    margin-right: 20px;
-  }
-  span {
-    font-weight: 600;
-    color: ${SEMI_GRAY_COLOR};
+  width: 100%;
+  margin-top: 80px;
+  p {
+    width: 100%;
+    text-align: center;
+    color: ${GRAY_COLOR};
   }
 `;
 
 export const DeveloperLink = styled.div`
-  margin-left: auto;
+  margin-top: 20px;
   ul {
     display: flex;
+    align-items: center;
+    justify-content: center;
     li {
       display: flex;
       width: 36px;

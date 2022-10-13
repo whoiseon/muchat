@@ -6,6 +6,7 @@ import {FormWrapper, Header, LoginInput, LoginWrapper} from "./styles";
 import {ErrorMessage} from "../../styles/common";
 import useInput from "../../hooks/useInput";
 import {userLogin} from "../../slices/userSlice";
+import MobileFooter from "../Footer/MobileFooter";
 
 const LoginForm = () => {
   const {
@@ -65,6 +66,7 @@ const LoginForm = () => {
           회원가입
         </Link>
       </span>
+      <MobileFooter />
     </FormWrapper>
   );
 };

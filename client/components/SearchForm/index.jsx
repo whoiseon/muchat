@@ -1,5 +1,4 @@
 import SearchIcon from "@mui/icons-material/Search";
-import CloseIcon from '@mui/icons-material/Close';
 import {useCallback, useEffect, useRef, useState} from "react";
 import {useRouter} from "next/router";
 import {SearchBar, SearchFormWrapper} from "./styles";
@@ -9,19 +8,23 @@ const SearchForm = () => {
   const InputRef = useRef();
   const router = useRouter();
 
-  const [searchInput, onChangeSearchInput, setSearchInput] = useInput('');
+  const [searchInput, setSearchInput] = useState('');
   const [searched, setSearched] = useState(false);
 
   const onSubmitSearch = useCallback((e) => {
     e.preventDefault();
+  }, []);
+
+  const onChangeSearchInput = useCallback((e) => {
     setSearched(true);
+    setSearchInput(e.target.value);
   }, []);
 
   const onBlurSearchBar = useCallback((e) => {
-    if (!searched) {
+    if (searchInput === '') {
       router.back();
     }
-  }, [searched]);
+  }, [searchInput]);
 
   useEffect(() => {
     InputRef.current.focus();

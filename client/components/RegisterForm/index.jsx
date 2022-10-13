@@ -7,6 +7,7 @@ import useInput from "../../hooks/useInput";
 import {AgreementWrapper, CheckBox} from "../LoginForm/styles";
 import {userSignUp} from "../../slices/userSlice";
 import {ErrorMessage} from "../../styles/common";
+import MobileFooter from "../Footer/MobileFooter";
 
 const emailCheck = (email) => {
   const reg = /^([\w\.\_\-])*[a-zA-Z0-9]+([\w\.\_\-])*([a-zA-Z0-9])+([\w\.\_\-])+@([a-zA-Z0-9]+\.)+[a-zA-Z0-9]{2,8}$/i;
@@ -123,6 +124,7 @@ const RegisterForm = () => {
           로그인
         </Link>
       </span>
+      <MobileFooter />
     </FormWrapper>
   );
 };

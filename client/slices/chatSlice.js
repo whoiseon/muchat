@@ -3,7 +3,6 @@ import axios from "axios";
 
 const initialState = {
   mainChatList: [],
-  supportersChatList: [],
   chatListByGenre: [],
   loadMainChatLoading: false,
   loadMainChatDone: false,
@@ -55,21 +54,6 @@ export const loadMainChat = createAsyncThunk("LOAD_MAIN_CHAT", async () => {
   }
 });
 
-export const loadSupporterChats = createAsyncThunk("LOAD_SUPPORTER_CHATS", async () => {
-  try {
-    const response = await axios.get("http://localhost:3065/api/supporters");
-
-    response.data.forEach((v) => {
-      v.member = v.member.length;
-      v.current = v.current.length;
-    });
-
-    return response.data;
-  } catch (error) {
-    throw error.response.data.errors.message;
-  }
-});
-
 export const loadChatByGenre = createAsyncThunk("LOAD_CHAT_BY_GENRE", async ({ genre }) => {
   try {
     const response = await axios.get("http://localhost:3065/api/genres", {
@@ -107,20 +91,6 @@ const chatSlice = createSlice({
     [loadMainChat.rejected]: (state, action) => {
       state.loadMainChatLoading = false;
       state.loadMainChatError = action.error.message;
-    },
-    [loadSupporterChats.pending]: (state) => {
-      state.loadSupporterChatsLoading = true;
-      state.loadSupporterChatsDone = false;
-      state.loadSupporterChatsError = null;
-    },
-    [loadSupporterChats.fulfilled]: (state, action) => {
-      state.loadSupporterChatsLoading = false;
-      state.loadSupporterChatsDone = true;
-      state.supportersChatList = action.payload;
-    },
-    [loadSupporterChats.rejected]: (state, action) => {
-      state.loadSupporterChatsLoading = false;
-      state.loadSupporterChatsError = action.error.message;
     },
     [loadChatByGenre.pending]: (state) => {
       state.loadChatByGenreLoading = true;

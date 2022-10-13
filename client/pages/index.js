@@ -4,7 +4,7 @@ import ChatList from "../components/ChatList";
 import {MainWrapper} from "../styles/common";
 import {loadMyInfo} from "../slices/userSlice";
 import wrapper from "../store/configureStore";
-import {loadMainChat, loadSupporterChats} from "../slices/chatSlice";
+import {loadMainChat} from "../slices/chatSlice";
 
 const Home = () => {
   return (
@@ -31,7 +31,6 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async ({re
   }
 
   await store.dispatch(loadMainChat());
-  await store.dispatch(loadSupporterChats());
 
   return {
     props: {},

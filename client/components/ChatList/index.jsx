@@ -4,11 +4,10 @@ import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
 import {useCallback, useState} from "react";
 import {useRouter} from "next/router";
 import {useSelector} from "react-redux";
-import {ChatListWrapper, Content, Header, SearchWrapper, TopMenu} from "./styles";
 import Link from "next/link";
+import {ChatListWrapper, Content, Header, SearchWrapper, TopMenu} from "./styles";
 import MainSection from "../MainSection";
-import SupportersCard from "../SupportersCard";
-import ChatRoomCard from "../ChatRoomCard";
+import ChatCard from "../ChatCard";
 import CreateChatModal from "../CreateChatModal";
 import DefaultModal from "../CommonModal/Default";
 import NoChatList from "./NoChatList";
@@ -58,13 +57,13 @@ const ChatList = ({ supporters }) => {
         }
       </Header>
       <Content>
-        <MainSection title="서포터즈" subMenu={false}>
+        <MainSection title="개설된 채팅방" subMenu={false}>
           {
-            supportersChatList.length > 0
+            chatListByGenre.length > 0
               ? (
-                supportersChatList?.map((data, i) => {
+                chatListByGenre?.map((data, i) => {
                   return (
-                    <SupportersCard
+                    <ChatCard
                       key={data.code}
                       data={data}
                       setNonLoginModal={setNonLoginModal}
@@ -73,50 +72,26 @@ const ChatList = ({ supporters }) => {
                 })
               )
               : (
-                <NoChatList
-                  icon={<CommentsDisabledIcon />}
-                  comment="현재 등록된 서포터즈가 없습니다"
-                />
+                mainChatList.length > 0
+                  ? (
+                    mainChatList?.map((data, i) => {
+                      return (
+                        <ChatCard
+                          key={data.code}
+                          data={data}
+                          setNonLoginModal={setNonLoginModal}
+                        />
+                      );
+                    })
+                  )
+                  : (
+                    <NoChatList
+                      icon={<CommentsDisabledIcon />}
+                      comment="현재 개설된 채팅방이 없습니다"
+                    />
+                  )
               )
           }
-        </MainSection>
-        <MainSection title="개설된 채팅방" subMenu={true}>
-          <ul>
-            {
-              chatListByGenre.length > 0
-                ? (
-                  chatListByGenre?.map((data, i) => {
-                    return (
-                      <ChatRoomCard
-                        key={data.code}
-                        data={data}
-                        setNonLoginModal={setNonLoginModal}
-                      />
-                    );
-                  })
-                )
-                : (
-                  mainChatList?.length > 0
-                    ? (
-                      mainChatList?.map((data, i) => {
-                        return (
-                          <ChatRoomCard
-                            key={data.code}
-                            data={data}
-                            setNonLoginModal={setNonLoginModal}
-                          />
-                        );
-                      })
-                    )
-                    : (
-                      <NoChatList
-                        icon={<CommentsDisabledIcon />}
-                        comment="현재 개설된 채팅방이 없습니다"
-                      />
-                    )
-                )
-            }
-          </ul>
         </MainSection>
       </Content>
       { showCreateChat && <CreateChatModal setShowCreateChat={setShowCreateChat} /> }
