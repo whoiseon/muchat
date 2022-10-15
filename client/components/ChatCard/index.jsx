@@ -4,8 +4,9 @@ import {useRouter} from "next/router";
 import {useSelector} from "react-redux";
 import {CardWrapper, ChatInfo, CurrentUserBox} from "./styles";
 import UserProfile from "../UserProfile";
+import {MAIN_COLOR, RED_COLOR} from "../../styles/common";
 
-const SupportersCard = ({ data, setNonLoginModal }) => {
+const ChatCard = ({ data, setNonLoginModal }) => {
   const { userInfo } = useSelector((state) => state.user);
 
   const router = useRouter();
@@ -27,11 +28,16 @@ const SupportersCard = ({ data, setNonLoginModal }) => {
     setShowCurrentUser(false);
   }, []);
 
+  const supportersStyle = {
+    border: `2px solid ${RED_COLOR}`,
+  };
+
   return (
     <CardWrapper
       onClick={onClickMoveChat}
       onMouseEnter={onMouseEnterCurrentUser}
       onMouseLeave={onMouseLeaveCurrentUser}
+      style={data.supporters ? supportersStyle : {}}
     >
       <p>[{data.genre}]</p>
       <h1>
@@ -62,4 +68,4 @@ const SupportersCard = ({ data, setNonLoginModal }) => {
   );
 };
 
-export default SupportersCard;
+export default ChatCard;

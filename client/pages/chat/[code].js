@@ -12,7 +12,7 @@ const ChatRoom = () => {
   const router = useRouter();
 
   return (
-    <AppLayout>
+    <AppLayout chatRoom={true}>
       <ChatWrapper>
         <ChatInfo />
         <Chat />

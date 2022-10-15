@@ -27,24 +27,15 @@ const dummyCurrentChat = [
   },
 ];
 
-const AppLayout = ({ children }) => {
+const AppLayout = ({ children, chatRoom }) => {
   const { userInfo } = useSelector((state) => state.user);
 
   const router = useRouter();
 
   const [showMyProfileModal, setShowMyProfileModal] = useState(false);
-  const [showCloseBtn, setShowCloseBtn] = useState(false);
 
   const onClickMyProfileModal = useCallback(() => {
     setShowMyProfileModal((prev) => !prev);
-  }, []);
-
-  const onMouseEnterCloseBtn = useCallback(() => {
-    setShowCloseBtn(true);
-  }, []);
-
-  const onMouseLeaveCloseBtn = useCallback(() => {
-    setShowCloseBtn(false);
   }, []);
 
   const active = {
@@ -78,13 +69,10 @@ const AppLayout = ({ children }) => {
                 <li
                   key={chat.code}
                   style={router.query.code === chat.code ? active : {}}
-                  onMouseEnter={onMouseEnterCloseBtn}
-                  onMouseLeave={onMouseLeaveCloseBtn}
                 >
                   <Link href={`/chat/${chat.code}`}>
                     <a>{ chat.title }</a>
                   </Link>
-                  { showCloseBtn && <button type="button"><CloseIcon /></button> }
                 </li>
               );
             })
@@ -117,7 +105,7 @@ const AppLayout = ({ children }) => {
       <ContentWrapper>
         {children}
       </ContentWrapper>
-      <Footer />
+      { !chatRoom && <Footer /> }
     </AppWrapper>
   );
 };
