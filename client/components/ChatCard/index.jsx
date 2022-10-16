@@ -1,8 +1,9 @@
 import {useCallback, useState} from "react";
 import PersonIcon from '@mui/icons-material/Person';
+import WhatshotIcon from '@mui/icons-material/Whatshot';
 import {useRouter} from "next/router";
 import {useSelector} from "react-redux";
-import {CardWrapper, ChatInfo, CurrentUserBox} from "./styles";
+import {CardWrapper, ChatInfo, CurrentUserBox, SupportersMark} from "./styles";
 import UserProfile from "../UserProfile";
 import {MAIN_COLOR, RED_COLOR} from "../../styles/common";
 
@@ -39,6 +40,16 @@ const ChatCard = ({ data, setNonLoginModal }) => {
       onMouseLeave={onMouseLeaveCurrentUser}
       style={data.supporters ? supportersStyle : {}}
     >
+      {
+        data.supporters && (
+          <SupportersMark>
+            <div>
+              <WhatshotIcon />
+              <span>서포터즈</span>
+            </div>
+          </SupportersMark>
+        )
+      }
       <p>[{data.genre}]</p>
       <h1>
         {data.title}
@@ -58,10 +69,19 @@ const ChatCard = ({ data, setNonLoginModal }) => {
       </ChatInfo>
       {
         showCurrentUser && (
-          <CurrentUserBox>
-            <PersonIcon />
-            { data.current } 명
-          </CurrentUserBox>
+          data.supporters
+            ? (
+              <CurrentUserBox style={{ backgroundColor: RED_COLOR }}>
+                <PersonIcon />
+                { data.current } 명
+              </CurrentUserBox>
+            )
+            : (
+              <CurrentUserBox>
+                <PersonIcon />
+                { data.current } 명
+              </CurrentUserBox>
+            )
         )
       }
     </CardWrapper>

@@ -86,3 +86,29 @@ export const CurrentUserBox = styled.div`
     margin-right: 4px;
   }
 `;
+
+export const SupportersMark = styled.div`
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  top: -15px;
+  left: 0;
+  div {
+    width: 100px;
+    height: 30px;
+    background-color: ${RED_COLOR};
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    svg {
+      margin-right: 6px;
+      width: 18px;
+      height: 18px;
+    }
+    span {
+      font-weight: bold;
+    }
+  }
+`;

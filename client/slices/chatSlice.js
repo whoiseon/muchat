@@ -43,12 +43,17 @@ export const loadMainChat = createAsyncThunk("LOAD_MAIN_CHAT", async () => {
   try {
     const response = await axios.get("http://localhost:3065/api/chats");
 
-    response.data.forEach((v) => {
+    await response.data.forEach((v) => {
       v.member = v.member.length;
       v.current = v.current.length;
     });
 
-    return response.data;
+    const normalChat = response.data.filter((v) => v.supporters === false);
+    const supporterChat = response.data.filter((v) => v.supporters === true);
+
+    const chatData = [...supporterChat, ...normalChat];
+
+    return chatData;
   } catch (error) {
     throw error.response.data.errors.message;
   }
