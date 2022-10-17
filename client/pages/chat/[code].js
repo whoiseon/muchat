@@ -6,15 +6,16 @@ import Chat from "../../components/Chat";
 import ChatCurrentUser from "../../components/ChatCurrentUser";
 import wrapper from "../../store/configureStore";
 import {loadMyInfo} from "../../slices/userSlice";
-import {loadSupporterChats} from "../../slices/chatSlice";
+import {loadChatData} from "../../slices/chatSlice";
+import {useSelector} from "react-redux";
 
 const ChatRoom = () => {
-  const router = useRouter();
+  const { nowConnectedChat } = useSelector((state) => state.chat);
 
   return (
     <AppLayout chatRoom={true}>
       <ChatWrapper>
-        <ChatInfo />
+        <ChatInfo data={nowConnectedChat} />
         <Chat />
         <ChatCurrentUser />
       </ChatWrapper>
@@ -30,7 +31,7 @@ const ChatWrapper = styled.div`
   padding: 40px
 `;
 
-export const getServerSideProps = wrapper.getServerSideProps(store => async ({req, res}) => {
+export const getServerSideProps = wrapper.getServerSideProps(store => async ({req, res, query}) => {
   const { AccessToken } = req.cookies;
 
   if (AccessToken) {
@@ -38,6 +39,10 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async ({re
       token: AccessToken,
     }));
   }
+
+  await store.dispatch(loadChatData({
+    code: query.code,
+  }));
 
   return {
     props: {},

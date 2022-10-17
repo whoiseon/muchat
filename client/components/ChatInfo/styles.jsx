@@ -9,7 +9,7 @@ export const Background = styled.div`
 `;
 
 export const Membership = styled.div`
-  margin-bottom: 40px;
+  margin-bottom: 10px;
   button {
     width: 100%;
     padding: 21px 0;
@@ -28,18 +28,22 @@ export const InfoWrapper = styled.div`
   height: 100%;
   h1 {
     font-size: 24px;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
   }
   & > div {
     height: 100%;
   }
 `;
 
-export const Info = styled.p`
+export const Info = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 10px;
   color: ${SEMI_GRAY_COLOR};
+  div {
+    margin-left: auto;
+    color: ${WHITE_COLOR};
+  }
   span {
     margin-left: auto;
     color: ${WHITE_COLOR};
@@ -53,5 +57,6 @@ export const Description = styled.div`
   p {
     line-height: 24px;
     height: 100%;
+    white-space: pre-line;
   }
 `;

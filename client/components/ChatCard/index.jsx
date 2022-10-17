@@ -45,7 +45,6 @@ const ChatCard = ({ data, setNonLoginModal }) => {
           <SupportersMark>
             <div>
               <WhatshotIcon />
-              <span>서포터즈</span>
             </div>
           </SupportersMark>
         )

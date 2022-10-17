@@ -1,9 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import dayjs from "dayjs";
 
 const initialState = {
   mainChatList: [],
   chatListByGenre: [],
+  nowConnectedChat: null,
   loadMainChatLoading: false,
   loadMainChatDone: false,
   loadMainChatError: null,
@@ -16,6 +18,9 @@ const initialState = {
   createChatLoading: false,
   createChatDone: false,
   createChatError: null,
+  loadChatDataLoading: false,
+  loadChatDataDone: false,
+  loadChatDataError: null,
 };
 
 export const createChat = createAsyncThunk("CREATE_CHAT", async ({ manager, title, genre, introduce, token }) => {
@@ -67,10 +72,31 @@ export const loadChatByGenre = createAsyncThunk("LOAD_CHAT_BY_GENRE", async ({ g
       },
     });
 
-    response.data.forEach((v) => {
+    await response.data.forEach((v) => {
       v.member = v.member.length;
       v.current = v.current.length;
     });
+
+    const normalChat = response.data.filter((v) => v.supporters === false);
+    const supporterChat = response.data.filter((v) => v.supporters === true);
+
+    const chatData = [...supporterChat, ...normalChat];
+
+    return chatData;
+  } catch (error) {
+    throw error.response.data.errors.message;
+  }
+});
+
+export const loadChatData = createAsyncThunk("LOAD_CHAT_DATA", async ({ code }) => {
+  try {
+    const response = await axios.get('http://localhost:3065/api/chat', {
+      params: {
+        code,
+      },
+    });
+
+    response.data.createdAt = dayjs(response.data.createdAt).format("YY.MM.DD");
 
     return response.data;
   } catch (error) {
@@ -124,6 +150,20 @@ const chatSlice = createSlice({
     [createChat.rejected]: (state, action) => {
       state.createChatLoading = false;
       state.createChatError = action.error.message;
+    },
+    [loadChatData.pending]: (state) => {
+      state.loadChatDataLoading = true;
+      state.loadChatDataDone = false;
+      state.loadChatDataError = null;
+    },
+    [loadChatData.fulfilled]: (state, action) => {
+      state.loadChatDataLoading = false;
+      state.loadChatDataDone = true;
+      state.nowConnectedChat = action.payload;
+    },
+    [loadChatData.rejected]: (state, action) => {
+      state.loadChatDataLoading = false;
+      state.loadChatDataError = action.error.message;
     },
   },
 });

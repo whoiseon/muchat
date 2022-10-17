@@ -8,7 +8,13 @@ router.get('/', async (req, res) => {
 
   try {
     const chatByGenre = await Chat.find({ genre })
-      .sort({ createdAt: -1 }).populate('manager');
+      .sort({ createdAt: -1 }).populate({
+        path: "manager",
+        select: {
+          nickname: 1,
+          mucorn: 1,
+        }
+      });
 
     return res.status(200).json(chatByGenre);
   } catch (error) {

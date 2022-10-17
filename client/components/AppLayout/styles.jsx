@@ -132,13 +132,11 @@ export const MyProfile = styled.div`
   position: relative;
   margin-left: auto;
   margin-right: 20px;
-  width: 100px;
   height: 48px;
   padding: 6px;
   & > div:nth-of-type(1) {
     display: flex;
     align-items: center;
-    width: 100px;
     background-color: ${BACKGROUND_COLOR};
     padding: 8px 14px;
     cursor: pointer;

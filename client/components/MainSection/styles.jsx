@@ -36,9 +36,9 @@ export const SubMenu = styled.div`
 export const Content = styled.div`
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   ul {
     width: 100%;
     display: flex;
-    flex-wrap: wrap;
   }
 `;

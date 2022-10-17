@@ -19,13 +19,14 @@ export const CardWrapper = styled.div`
   cursor: pointer;
   transition: all 0.12s ease-in;
   border: 2px solid ${BACKGROUND_COLOR};
+  margin-bottom: 20px;
   &:hover {
     transform: scale(1.04);
     background-color: ${BACKGROUND_WHITE_CLICK};
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
     border: 2px solid ${MAIN_COLOR};
   }
-  &:not(:last-of-type) {
+  &:not(:nth-of-type(5n)) {
     margin-right: 20px;
   }
   & > p {
@@ -91,24 +92,18 @@ export const SupportersMark = styled.div`
   position: absolute;
   display: flex;
   justify-content: center;
-  width: 100%;
-  top: -15px;
-  left: 0;
+  top: -14px;
+  left: -14px;
   div {
-    width: 100px;
-    height: 30px;
     background-color: ${RED_COLOR};
     border-radius: 4px;
+    padding: 4px;
     display: flex;
     align-items: center;
     justify-content: center;
     svg {
-      margin-right: 6px;
       width: 18px;
       height: 18px;
-    }
-    span {
-      font-weight: bold;
     }
   }
 `;

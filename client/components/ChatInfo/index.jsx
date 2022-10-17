@@ -1,28 +1,32 @@
 import {Background, Description, Info, InfoWrapper, Membership, Wrapper} from "./styles";
+import UserProfile from "../UserProfile";
 
-const ChatInfo = () => {
+const ChatInfo = ({ data }) => {
+
   return (
     <Background>
       <Membership>
         <button type="button">멤버십 가입하기</button>
       </Membership>
       <InfoWrapper>
-        <h1>롤 듀오 모집방</h1>
+        <h1>{data?.title}</h1>
         <div>
           <Info>
-            방장 <span>매니저</span>
+            방장
+            <UserProfile
+              mucorn={data?.manager.mucorn}
+              userName={data?.manager.nickname}
+            />
           </Info>
           <Info>
-            개설일 <span>22.09.27.</span>
+            개설일 <span>{ data?.createdAt }</span>
           </Info>
           <Info>
-            멤버십 가입자 <span>230명</span>
+            멤버십 회원 <span>{ data?.member.length }명</span>
           </Info>
           <Description>
             <p>
-              안녕하세요 롤 듀오를 모집하는 방입니다.
-              친목질은 자유이고 방 규칙에 철저히 따라주세요
-              일반 - 글씨크기 X 색상 X 배경 X 굵기 X
+              { data?.introduce }
             </p>
           </Description>
         </div>
