@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {Background, CreateChatForm, Header, ModalInput, ModalSelect, ModalTextArea, ModalWrapper} from "./styles";
 import useInput from "../../hooks/useInput";
 import {ErrorMessage} from "../../styles/common";
-import {createChat} from "../../slices/chatSlice";
+import {createChat, loadMainChat} from "../../slices/chatSlice";
 import {loadMyInfo} from "../../slices/userSlice";
 import {genreList} from "../../utils/genreList";
 
@@ -54,9 +54,10 @@ const CreateChatModal = ({ setShowCreateChat }) => {
   useEffect(() => {
     inputRef.current.focus();
     if (createChatDone) {
+      dispatch(loadMainChat());
       setShowCreateChat(false);
     }
-  }, [inputRef, createChatDone]);
+  }, [inputRef, createChatDone, loadMainChat]);
 
   return (
     <Background onClick={onCloseBackgroundModal}>

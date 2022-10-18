@@ -145,7 +145,6 @@ const chatSlice = createSlice({
     [createChat.fulfilled]: (state, action) => {
       state.createChatLoading = false;
       state.createChatDone = true;
-      state.mainChatList.unshift(action.payload);
     },
     [createChat.rejected]: (state, action) => {
       state.createChatLoading = false;

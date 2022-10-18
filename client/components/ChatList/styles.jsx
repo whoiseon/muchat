@@ -20,7 +20,8 @@ export const Header = styled.div`
   button {
     margin-left: auto;
     width: 180px;
-    font-size: 16px;
+    height: 56px;
+    font-size: 14px;
     color: ${WHITE_COLOR};
     background-color: ${MAIN_COLOR};
     border-radius: 6px;
@@ -34,6 +35,7 @@ export const Header = styled.div`
 export const SearchWrapper = styled.div`
   position: relative;
   width: 24%;
+  height: 56px;
   margin-right: 20px;
   input {
     width: 100%;

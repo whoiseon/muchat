@@ -1,13 +1,38 @@
-import {Background, Description, Info, InfoWrapper, Membership, Wrapper} from "./styles";
+import {useSelector} from "react-redux";
+import SettingsIcon from '@mui/icons-material/Settings';
+import {Background, ChatConfigButton, Description, Info, InfoWrapper, Membership, Wrapper} from "./styles";
 import UserProfile from "../UserProfile";
 
 const ChatInfo = ({ data }) => {
+  const {userInfo} = useSelector((state) => state.user);
 
   return (
     <Background>
-      <Membership>
-        <button type="button">멤버십 가입하기</button>
-      </Membership>
+      {
+        userInfo?._id === data?.manager._id
+          ? (
+            <ChatConfigButton>
+              <button type="button">
+                <SettingsIcon />
+                방 설정
+              </button>
+            </ChatConfigButton>
+          )
+          : data?.member.includes(userInfo?._id)
+            ? (
+              <ChatConfigButton>
+                <button type="button">
+                  <SettingsIcon />
+                  채팅방 설정
+                </button>
+              </ChatConfigButton>
+            )
+            : (
+              <Membership>
+                <button type="button">멤버십 가입하기</button>
+              </Membership>
+            )
+      }
       <InfoWrapper>
         <h1>{data?.title}</h1>
         <div>

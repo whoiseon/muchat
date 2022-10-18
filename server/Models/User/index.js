@@ -26,6 +26,10 @@ const userSchema = new Schema({
     type: String,
     default: '1001',
   },
+  mucornList: {
+    type: Array,
+    default: ['1001'],
+  },
   openedChat: {
     type: Array,
     default: [],

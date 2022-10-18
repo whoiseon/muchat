@@ -7,6 +7,7 @@ import {AppWrapper, ChatTab, ContentWrapper, LoginBtn, Logo, MyProfile} from "./
 import {BACKGROUND_COLOR, WHITE_COLOR} from "../../styles/common";
 import MyProfileModal from "../MyProfileModal";
 import Footer from "../Footer";
+import OpenedChatItem from "../OpenedChatItem";
 
 const dummyCurrentChat = [
   {
@@ -66,14 +67,11 @@ const AppLayout = ({ children, chatRoom }) => {
           {
             userInfo?.openedChat.map((chat, i) => {
               return (
-                <li
+                <OpenedChatItem
                   key={chat.code}
+                  chat={chat}
                   style={router.query.code === chat.code ? active : {}}
-                >
-                  <Link href={`/chat/${chat.code}`}>
-                    <a>{ chat.title }</a>
-                  </Link>
-                </li>
+                />
               );
             })
           }

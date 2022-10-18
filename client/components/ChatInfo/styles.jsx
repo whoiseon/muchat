@@ -1,5 +1,12 @@
 import styled from "@emotion/styled";
-import {MAIN_COLOR, MAIN_COLOR_HOVER, SEMI_GRAY_COLOR, WHITE_COLOR} from "../../styles/common";
+import {
+  BACKGROUND_WHITE,
+  BACKGROUND_WHITE_CLICK,
+  MAIN_COLOR,
+  MAIN_COLOR_HOVER,
+  SEMI_GRAY_COLOR,
+  WHITE_COLOR
+} from "../../styles/common";
 
 export const Background = styled.div`
   width: 14%;
@@ -16,10 +23,37 @@ export const Membership = styled.div`
     background-color: ${MAIN_COLOR};
     color: ${WHITE_COLOR};
     border-radius: 6px;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
     transition: background-color 0.16s ease-in;
     &:hover {
       background-color: ${MAIN_COLOR_HOVER};
+    }
+  }
+`;
+
+export const ChatConfigButton = styled.div`
+  margin-bottom: 10px;
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 59px;
+    padding: 21px 0;
+    font-weight: bold;
+    background-color: ${BACKGROUND_WHITE};
+    color: ${SEMI_GRAY_COLOR};
+    border-radius: 6px;
+    margin-bottom: 40px;
+    transition: all 0.16s ease-in;
+    &:hover {
+      background-color: ${BACKGROUND_WHITE_CLICK};
+      color: ${WHITE_COLOR};
+    }
+    svg {
+      margin-right: 8px;
+      width: 18px;
+      height: 18px;
     }
   }
 `;
@@ -28,7 +62,7 @@ export const InfoWrapper = styled.div`
   height: 100%;
   h1 {
     font-size: 24px;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
   }
   & > div {
     height: 100%;
