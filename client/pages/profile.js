@@ -4,6 +4,7 @@ import {MainWrapper} from "../styles/common";
 import MyProfile from "../components/MyProfile";
 import wrapper from "../store/configureStore";
 import {loadMyInfo} from "../slices/userSlice";
+import {loadMyOpenedChat} from "../slices/chatSlice";
 
 const Profile = () => {
   return (

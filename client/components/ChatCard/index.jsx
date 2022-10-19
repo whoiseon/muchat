@@ -2,15 +2,17 @@ import {useCallback, useState} from "react";
 import PersonIcon from '@mui/icons-material/Person';
 import WhatshotIcon from '@mui/icons-material/Whatshot';
 import {useRouter} from "next/router";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {CardWrapper, ChatInfo, CurrentUserBox, SupportersMark} from "./styles";
 import UserProfile from "../UserProfile";
 import {MAIN_COLOR, RED_COLOR} from "../../styles/common";
+import {chatAccess} from "../../slices/chatSlice";
 
 const ChatCard = ({ data, setNonLoginModal }) => {
   const { userInfo } = useSelector((state) => state.user);
 
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const [showCurrentUser, setShowCurrentUser] = useState(false);
 
@@ -18,8 +20,21 @@ const ChatCard = ({ data, setNonLoginModal }) => {
     if (!userInfo) {
       return setNonLoginModal(true);
     }
+
+    if (userInfo?.openedChat.find((v) => v.code === data.code) === undefined) {
+      dispatch(chatAccess({
+        token: userInfo?.token,
+        code: data.code,
+        title: data.title,
+      }));
+
+      router.push(`/chat/${data.code}`);
+
+      return;
+    }
+
     router.push(`/chat/${data.code}`);
-  }, [userInfo, data.code]);
+  }, [userInfo, data.code, data.title]);
 
   const onMouseEnterCurrentUser = useCallback(() => {
     setShowCurrentUser(true);

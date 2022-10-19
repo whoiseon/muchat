@@ -4,6 +4,7 @@ import SupportPage from "../components/SupportPage";
 import {MainWrapper} from "../styles/common";
 import wrapper from "../store/configureStore";
 import {loadMyInfo} from "../slices/userSlice";
+import {loadMyOpenedChat} from "../slices/chatSlice";
 
 const Support = () => {
   return (

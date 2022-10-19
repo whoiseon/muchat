@@ -6,6 +6,9 @@ const initialState = {
   mainChatList: [],
   chatListByGenre: [],
   nowConnectedChat: null,
+  chatAccessLoading: false,
+  chatAccessDone: false,
+  chatAccessError: null,
   loadMainChatLoading: false,
   loadMainChatDone: false,
   loadMainChatError: null,
@@ -104,6 +107,24 @@ export const loadChatData = createAsyncThunk("LOAD_CHAT_DATA", async ({ code }) 
   }
 });
 
+export const chatAccess = createAsyncThunk("CHAT_ACCESS", async ({ token, code, title }) => {
+  try {
+    const response = await axios.post("http://localhost:3065/api/chat/access", {
+      code,
+      title,
+    }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      withCredentials: true,
+    });
+
+    return response.data;
+  } catch (error) {
+    throw error.response.data.errors.message;
+  }
+});
+
 const chatSlice = createSlice({
   name: 'chat',
   initialState,
@@ -163,6 +184,19 @@ const chatSlice = createSlice({
     [loadChatData.rejected]: (state, action) => {
       state.loadChatDataLoading = false;
       state.loadChatDataError = action.error.message;
+    },
+    [chatAccess.pending]: (state) => {
+      state.chatAccessLoading = true;
+      state.chatAccessDone = false;
+      state.chatAccessError = null;
+    },
+    [chatAccess.fulfilled]: (state, action) => {
+      state.chatAccessLoading = false;
+      state.chatAccessDone = true;
+    },
+    [chatAccess.rejected]: (state, action) => {
+      state.chatAccessLoading = false;
+      state.chatAccessError = action.error.message;
     },
   },
 });

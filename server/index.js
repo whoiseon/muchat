@@ -34,6 +34,7 @@ const loadChatsRouter = require('./routes/api/chat/chats');
 const loadSupportersRouter = require('./routes/api/chat/supporters');
 const loadChatByGenreRouter = require('./routes/api/chat/genres');
 const loadChatDataRouter = require('./routes/api/chat/chat');
+const chatAccessRouter = require('./routes/api/chat/access');
 
 
 // MongoDB connection
@@ -53,6 +54,7 @@ app.use('/api/chats', loadChatsRouter);
 app.use('/api/supporters', loadSupportersRouter);
 app.use('/api/genres', loadChatByGenreRouter);
 app.use('/api/chat', loadChatDataRouter);
+app.use('/api/chat/access', chatAccessRouter);
 
 
 app.listen(port, () => {

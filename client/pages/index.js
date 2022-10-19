@@ -4,7 +4,7 @@ import ChatList from "../components/ChatList";
 import {MainWrapper} from "../styles/common";
 import {loadMyInfo} from "../slices/userSlice";
 import wrapper from "../store/configureStore";
-import {loadMainChat} from "../slices/chatSlice";
+import {loadMainChat, loadMyOpenedChat} from "../slices/chatSlice";
 
 const Home = () => {
   return (

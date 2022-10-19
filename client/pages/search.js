@@ -4,6 +4,7 @@ import SearchForm from "../components/SearchForm";
 import {MainWrapper} from "../styles/common";
 import wrapper from "../store/configureStore";
 import {loadMyInfo} from "../slices/userSlice";
+import {loadMyOpenedChat} from "../slices/chatSlice";
 
 const Search = () => {
   return (
