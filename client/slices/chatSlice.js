@@ -9,6 +9,9 @@ const initialState = {
   chatAccessLoading: false,
   chatAccessDone: false,
   chatAccessError: null,
+  chatClosedLoading: false,
+  chatClosedDone: false,
+  chatClosedError: null,
   loadMainChatLoading: false,
   loadMainChatDone: false,
   loadMainChatError: null,
@@ -125,6 +128,23 @@ export const chatAccess = createAsyncThunk("CHAT_ACCESS", async ({ token, code, 
   }
 });
 
+export const chatClosed = createAsyncThunk("CHAT_CLOSED", async ({ token, code }) => {
+  try {
+    const response = await axios.post("http://localhost:3065/api/chat/closed", {
+      code,
+    }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      withCredentials: true,
+    });
+
+    return response.data;
+  } catch (error) {
+    throw error.response.data.errors.message;
+  }
+});
+
 const chatSlice = createSlice({
   name: 'chat',
   initialState,
@@ -195,6 +215,19 @@ const chatSlice = createSlice({
       state.chatAccessDone = true;
     },
     [chatAccess.rejected]: (state, action) => {
+      state.chatAccessLoading = false;
+      state.chatAccessError = action.error.message;
+    },
+    [chatClosed.pending]: (state) => {
+      state.chatAccessLoading = true;
+      state.chatAccessDone = false;
+      state.chatAccessError = null;
+    },
+    [chatClosed.fulfilled]: (state, action) => {
+      state.chatAccessLoading = false;
+      state.chatAccessDone = true;
+    },
+    [chatClosed.rejected]: (state, action) => {
       state.chatAccessLoading = false;
       state.chatAccessError = action.error.message;
     },

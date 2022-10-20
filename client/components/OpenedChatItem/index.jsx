@@ -2,8 +2,16 @@ import {useCallback, useState} from "react";
 import Link from "next/link";
 import CloseIcon from '@mui/icons-material/Close';
 import {ListWrapper} from "./styles";
+import {useDispatch, useSelector} from "react-redux";
+import {useRouter} from "next/router";
+import {chatClosed} from "../../slices/chatSlice";
 
 const OpenedChatItem = ({ chat, style }) => {
+  const { userInfo } = useSelector((state) => state.user);
+
+  const dispatch = useDispatch();
+  const router = useRouter();
+
   const [showCloseBtn, setShowCloseBtn] = useState(false);
 
   const onMouseEnterImage = useCallback(() => {
@@ -13,6 +21,15 @@ const OpenedChatItem = ({ chat, style }) => {
   const onMouseLeaveImage = useCallback(() => {
     setShowCloseBtn(false);
   }, []);
+
+  const onClickClosedChat = useCallback(() => {
+    dispatch(chatClosed({
+      token: userInfo?.token,
+      code: chat.code,
+    }));
+
+    router.push('/');
+  }, [userInfo, chat.code]);
 
   return (
     <ListWrapper
@@ -25,7 +42,10 @@ const OpenedChatItem = ({ chat, style }) => {
       </Link>
       {
         showCloseBtn && (
-          <button type="button">
+          <button
+            type="button"
+            onClick={onClickClosedChat}
+          >
             <CloseIcon />
           </button>
         )
