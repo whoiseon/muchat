@@ -21,6 +21,7 @@ export const SearchBar = styled.div`
   position: relative;
   width: 100%;
   animation: ${SearchBarAnimation} 0.4s ease-in;
+  margin-bottom: 40px;
   input {
     width: 100%;
     background-color: ${BACKGROUND_BLACK};
@@ -40,4 +41,19 @@ export const SearchBar = styled.div`
     top: 18px;
     left: 20px;
   }
+`;
+
+export const SearchContent = styled.div`
+
+`;
+
+export const Header = styled.div`
+  margin-bottom: 20px;
+  h1 {
+    font-size: 18px;
+  }
+`;
+
+export const SearchResult = styled.div`
+
 `;

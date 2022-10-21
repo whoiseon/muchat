@@ -5,6 +5,7 @@ import dayjs from "dayjs";
 const initialState = {
   mainChatList: [],
   chatListByGenre: [],
+  searchedChatList: [],
   nowConnectedChat: null,
   chatAccessLoading: false,
   chatAccessDone: false,
@@ -27,6 +28,9 @@ const initialState = {
   loadChatDataLoading: false,
   loadChatDataDone: false,
   loadChatDataError: null,
+  searchedChatLoading: false,
+  searchedChatDone: false,
+  searchedChatError: null,
 };
 
 export const createChat = createAsyncThunk("CREATE_CHAT", async ({ manager, title, genre, introduce, token }) => {
@@ -145,6 +149,26 @@ export const chatClosed = createAsyncThunk("CHAT_CLOSED", async ({ token, code }
   }
 });
 
+export const searchedChat = createAsyncThunk("SEARCHED_CHAT", async ({ keyword }) => {
+  try {
+    const response = await axios.get(`http://localhost:3065/api/chat/search`, {
+      params: {
+        keyword,
+      },
+      withCredentials: true,
+    });
+
+    await response.data.forEach((v) => {
+      v.member = v.member.length;
+      v.current = v.current.length;
+    });
+
+    return response.data;
+  } catch (error) {
+    throw error.response.data.errors.message;
+  }
+});
+
 const chatSlice = createSlice({
   name: 'chat',
   initialState,
@@ -230,6 +254,20 @@ const chatSlice = createSlice({
     [chatClosed.rejected]: (state, action) => {
       state.chatAccessLoading = false;
       state.chatAccessError = action.error.message;
+    },
+    [searchedChat.pending]: (state) => {
+      state.searchedChatLoading = true;
+      state.searchedChatDone = false;
+      state.searchedChatError = null;
+    },
+    [searchedChat.fulfilled]: (state, action) => {
+      state.searchedChatLoading = false;
+      state.searchedChatDone = true;
+      state.searchedChatList = action.payload;
+    },
+    [searchedChat.rejected]: (state, action) => {
+      state.searchedChatLoading = false;
+      state.searchedChatError = action.error.message;
     },
   },
 });

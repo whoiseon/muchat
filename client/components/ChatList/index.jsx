@@ -57,7 +57,7 @@ const ChatList = ({ supporters }) => {
         }
       </Header>
       <Content>
-        <MainSection title="전체" subMenu={false}>
+        <MainSection title="전체" subMenu={true}>
           {
             chatListByGenre.length > 0
               ? (

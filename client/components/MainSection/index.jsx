@@ -4,7 +4,7 @@ import {Content, Header, SectionWrapper, SubMenu} from "./styles";
 import {genreList} from "../../utils/genreList";
 import {BACKGROUND_COLOR, BACKGROUND_WHITE, WHITE_COLOR} from "../../styles/common";
 
-const MainSection = ({ children, title }) => {
+const MainSection = ({ children, title, subMenu }) => {
   const router = useRouter();
 
   const onClickChatCategory = useCallback((e) => {
@@ -39,18 +39,20 @@ const MainSection = ({ children, title }) => {
             전체
           </button>
           {
-            genreList.map((item, i) => {
-              return (
-                <button
-                  key={item.code}
-                  type="button"
-                  onClick={onClickChatCategory}
-                  style={router.query.genre === item.name ? active : {}}
-                >
-                  {item.name}
-                </button>
-              );
-            })
+            subMenu && (
+              genreList.map((item, i) => {
+                return (
+                  <button
+                    key={item.code}
+                    type="button"
+                    onClick={onClickChatCategory}
+                    style={router.query.genre === item.name ? active : {}}
+                  >
+                    {item.name}
+                  </button>
+                );
+              })
+            )
           }
         </SubMenu>
       </Header>
