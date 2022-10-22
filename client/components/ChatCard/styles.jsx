@@ -20,14 +20,26 @@ export const CardWrapper = styled.div`
   transition: all 0.12s ease-in;
   border: 2px solid ${BACKGROUND_COLOR};
   margin-bottom: 20px;
+  &:not(:nth-of-type(5n)) {
+    margin-right: 20px;
+  }
+  @media (max-width: 1680px) {
+    min-width: 320px;
+    &:not(:nth-of-type(4n)) {
+      margin-right: 20px;
+    }
+  }
+  @media (max-width: 1440px) {
+    min-width: 380px;
+    &:not(:nth-of-type(4n)) {
+      margin-right: 20px;
+    }
+  }
   &:hover {
     transform: scale(1.04);
     background-color: ${BACKGROUND_WHITE_CLICK};
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
     border: 2px solid ${MAIN_COLOR};
-  }
-  &:not(:nth-of-type(5n)) {
-    margin-right: 20px;
   }
   & > p {
     margin-bottom: 10px;

@@ -82,7 +82,7 @@ const SearchForm = () => {
                         icon={<CommentsDisabledIcon />}
                         comment="검색 결과가 없습니다"
                       />
-                    )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
+                    )
                 }
               </MainSection>
             </SearchContent>
