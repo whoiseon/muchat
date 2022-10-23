@@ -30,31 +30,33 @@ const MainSection = ({ children, title, subMenu }) => {
               : router.query.genre
           }
         </p>
-        <SubMenu>
-          <button
-            type="button"
-            onClick={onClickChatCategory}
-            style={router.pathname === '/' ? active : {}}
-          >
-            전체
-          </button>
-          {
-            subMenu && (
-              genreList.map((item, i) => {
-                return (
-                  <button
-                    key={item.code}
-                    type="button"
-                    onClick={onClickChatCategory}
-                    style={router.query.genre === item.name ? active : {}}
-                  >
-                    {item.name}
-                  </button>
-                );
-              })
-            )
-          }
-        </SubMenu>
+        {
+          subMenu && (
+            <SubMenu>
+              <button
+                type="button"
+                onClick={onClickChatCategory}
+                style={router.pathname === '/' ? active : {}}
+              >
+                전체
+              </button>
+              {
+                genreList.map((item, i) => {
+                  return (
+                    <button
+                      key={item.code}
+                      type="button"
+                      onClick={onClickChatCategory}
+                      style={router.query.genre === item.name ? active : {}}
+                    >
+                      {item.name}
+                    </button>
+                  );
+                })
+              }
+            </SubMenu>
+          )
+        }
       </Header>
       <Content>
         { children }

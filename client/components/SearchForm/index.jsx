@@ -1,4 +1,5 @@
 import SearchIcon from "@mui/icons-material/Search";
+import ManageSearchIcon from '@mui/icons-material/ManageSearch';
 import {useCallback, useEffect, useRef, useState} from "react";
 import {useRouter} from "next/router";
 import {useDispatch, useSelector} from "react-redux";
@@ -87,7 +88,12 @@ const SearchForm = () => {
               </MainSection>
             </SearchContent>
           )
-          : ''
+          : (
+            <NoChatList
+              icon={<ManageSearchIcon />}
+              comment="채팅방을 검색해보세요!"
+            />
+          )
       }
     </SearchFormWrapper>
   );
