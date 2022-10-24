@@ -28,7 +28,7 @@ export const ChatTab = styled.div`
   background-color: ${BACKGROUND_BLACK};
   h1 {
     display: flex;
-    width: 180px;
+    min-width: 180px;
     height: 48px;
     font-size: 14px;
     font-weight: 500;
@@ -131,6 +131,7 @@ export const ContentWrapper = styled.div`
 export const MyProfile = styled.div`
   position: relative;
   margin-left: auto;
+  min-width: 96px;
   margin-right: 20px;
   height: 48px;
   padding: 6px;

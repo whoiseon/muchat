@@ -12,8 +12,6 @@ const MyProfileModal = ({ setShowMyProfileModal }) => {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const [cookie, setCookie] = useCookies();
-
   const onClickCloseModal = useCallback((e) => {
     if (ModalRef.current && !ModalRef.current.contains(e.target)) {
       setShowMyProfileModal(false);
@@ -26,6 +24,8 @@ const MyProfileModal = ({ setShowMyProfileModal }) => {
     dispatch(userLogout({
       token: userInfo.token,
     }));
+
+    router.push('/');
   }, [userInfo]);
 
   useEffect(() => {
