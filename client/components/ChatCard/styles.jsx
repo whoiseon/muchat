@@ -1,8 +1,9 @@
 import styled from "@emotion/styled";
 import {
+  BACKGROUND_BLACK,
   BACKGROUND_COLOR,
   BACKGROUND_WHITE,
-  BACKGROUND_WHITE_CLICK, MAIN_COLOR,
+  BACKGROUND_WHITE_CLICK, GRAY_COLOR, MAIN_COLOR,
   RED_COLOR,
   SEMI_GRAY_COLOR,
   WHITE_COLOR
@@ -40,10 +41,6 @@ export const CardWrapper = styled.div`
     background-color: ${BACKGROUND_WHITE_CLICK};
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
     border: 2px solid ${MAIN_COLOR};
-  }
-  & > p {
-    margin-bottom: 10px;
-    color: ${SEMI_GRAY_COLOR};
   }
   h1 {
     width: 100%;
@@ -117,5 +114,18 @@ export const SupportersMark = styled.div`
       width: 18px;
       height: 18px;
     }
+  }
+`;
+
+export const GenreWrapper = styled.div`
+  span {
+    display: inline-block;
+    margin-bottom: 14px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background-color: ${GRAY_COLOR};
+    font-size: 12px;
+    font-weight: bold;
+    margin-right: 8px;
   }
 `;

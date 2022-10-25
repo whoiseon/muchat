@@ -3,7 +3,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import WhatshotIcon from '@mui/icons-material/Whatshot';
 import {useRouter} from "next/router";
 import {useDispatch, useSelector} from "react-redux";
-import {CardWrapper, ChatInfo, CurrentUserBox, SupportersMark} from "./styles";
+import {CardWrapper, ChatInfo, CurrentUserBox, GenreWrapper, SupportersMark} from "./styles";
 import UserProfile from "../UserProfile";
 import {MAIN_COLOR, RED_COLOR} from "../../styles/common";
 import {chatAccess} from "../../slices/chatSlice";
@@ -55,16 +55,22 @@ const ChatCard = ({ data, setNonLoginModal }) => {
       onMouseLeave={onMouseLeaveCurrentUser}
       style={data.supporters ? supportersStyle : {}}
     >
-      {
-        data.supporters && (
-          <SupportersMark>
-            <div>
-              <WhatshotIcon />
-            </div>
-          </SupportersMark>
-        )
-      }
-      <p>[{data.genre}]</p>
+      <GenreWrapper>
+        {
+          data.supporters && (
+            <span
+              style={{
+                backgroundColor: RED_COLOR,
+              }}
+            >
+              서포터즈
+            </span>
+          )
+        }
+        <span>
+          {data.genre}
+        </span>
+      </GenreWrapper>
       <h1>
         {data.title}
       </h1>
