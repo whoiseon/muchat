@@ -4,7 +4,6 @@ import MucornShop from "../components/MucornShop";
 import {MainWrapper} from "../styles/common";
 import wrapper from "../store/configureStore";
 import {loadMyInfo} from "../slices/userSlice";
-import {loadMyOpenedChat} from "../slices/chatSlice";
 
 const Mucorn = () => {
   return (

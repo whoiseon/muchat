@@ -38,7 +38,7 @@ const MyProfileModal = ({ setShowMyProfileModal }) => {
   return (
     <Background onClick={onClickCloseModal} ref={ModalRef}>
       <ModalWrapper>
-        <li onClick={() => router.push('/profile')}>
+        <li onClick={() => router.push('/profile/account')}>
           <img src={`/image/mucorn/${userInfo?.mucorn}.png`} alt={`mucorn_${userInfo?.mucorn}`} />
           <div>
             <p>{ userInfo?.nickname }</p>
