@@ -15,7 +15,7 @@ export const ListWrapper = styled.li`
   font-weight: 500;
   padding: 6px;
   color: ${GRAY_COLOR};
-  transition: color, background-color 0.14s ease-in;
+  transition: all 0.14s ease-in;
   &:hover {
     a {
       background-color: ${BACKGROUND_COLOR};

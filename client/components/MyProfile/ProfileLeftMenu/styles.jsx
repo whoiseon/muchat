@@ -3,11 +3,14 @@ import {BACKGROUND_BLACK, BACKGROUND_BLACK_HOVER, SEMI_GRAY_COLOR, WHITE_COLOR} 
 
 export const MenuWrapper = styled.div`
   width: 20%;
+  height: 190px;
   background-color: ${BACKGROUND_BLACK};
   border-radius: 6px;
-  padding: 10px 10px 40px;
+  padding: 10px 10px 20px;
   margin-right: 40px;
   ul {
+    display: flex;
+    flex-direction: column;
     width: 100%;
     li {
       margin-bottom: 4px;

@@ -2,9 +2,24 @@ import {Content, Header, Wrapper} from "./styles";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import {useRouter} from "next/router";
 import ProfileLeftMenu from "./ProfileLeftMenu";
+import {useCallback} from "react";
+import MyAccount from "./Setting/MyAccount";
+import MyMucorn from "./Setting/MyMucorn";
+import MyMembership from "./Setting/MyMembership";
 
 const MyProfile = () => {
   const router = useRouter();
+
+  const settingLoader = useCallback((query) => {
+    switch (query) {
+      case 'mucorn':
+        return <MyMucorn />;
+      case 'membership':
+        return <MyMembership />;
+      default:
+        return <MyAccount />;
+    }
+  }, []);
 
   return (
     <Wrapper>
@@ -16,7 +31,9 @@ const MyProfile = () => {
       </Header>
       <Content>
         <ProfileLeftMenu />
-        내 계정
+        {
+          settingLoader(router.query.setting)
+        }
       </Content>
     </Wrapper>
   );

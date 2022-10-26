@@ -9,6 +9,7 @@ const ProfileLeftMenu = () => {
   const active = {
     backgroundColor: BACKGROUND_BLACK_HOVER,
     color: WHITE_COLOR,
+    fontWeight: 'bold',
   };
 
   return (

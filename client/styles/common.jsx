@@ -7,6 +7,8 @@ export const BACKGROUND_BLACK_HOVER = '#24262F';
 export const BACKGROUND_WHITE = '#353541';
 export const BACKGROUND_WHITE_CLICK = '#424250';
 
+export const BORDER_DEFAULT = '#393946';
+
 export const WHITE_COLOR = '#F5F5F5';
 export const MAIN_COLOR = '#5D61ED';
 export const MAIN_COLOR_HOVER = '#7275ED';
