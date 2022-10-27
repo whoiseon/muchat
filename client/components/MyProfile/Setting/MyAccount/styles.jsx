@@ -4,7 +4,7 @@ import {
   BACKGROUND_WHITE,
   BORDER_DEFAULT,
   GRAY_COLOR,
-  MAIN_COLOR, MAIN_COLOR_HOVER,
+  MAIN_COLOR, MAIN_COLOR_HOVER, RED_COLOR,
   SEMI_GRAY_COLOR,
   WHITE_COLOR
 } from "../../../../styles/common";
@@ -23,7 +23,13 @@ export const MySettingWrapper = styled.div`
 `;
 
 export const Header = styled.div`
+  display: flex;
+  align-items: center;
   margin-bottom: 40px;
+  span {
+    margin-left: auto;
+    color: ${RED_COLOR};
+  }
   h1 {
     font-size: 18px;
     font-weight: 500;
@@ -109,4 +115,11 @@ export const ChangePassword = styled.div`
       }
     }
   }
+`;
+
+
+// MUCORN
+
+export const MucornList = styled.ul`
+  display: flex;
 `;
