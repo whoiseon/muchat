@@ -4,7 +4,6 @@ import {
   MySettingWrapper,
 } from "../MyAccount/styles";
 import MucornListItem from "../../../MucornListItem";
-import {MAIN_COLOR} from "../../../../styles/common";
 
 const MyMucorn = () => {
   const { userInfo } = useSelector((state) => state.user);

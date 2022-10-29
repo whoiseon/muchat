@@ -48,9 +48,11 @@ const MyAccount = () => {
         </Header>
         <ChangePassword>
           <div>
-            <Link href="/profile/mucorn">
-              <a>비밀번호 변경하기</a>
-            </Link>
+            <button
+              type="button"
+            >
+              비밀번호 변경하기
+            </button>
           </div>
         </ChangePassword>
       </div>

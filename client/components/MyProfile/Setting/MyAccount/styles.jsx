@@ -105,11 +105,12 @@ export const ChangeNickname = styled.div`
 export const ChangePassword = styled.div`
   display: flex;
   div {
-    a {
+    button {
       padding: 12px 26px;
       background-color: ${MAIN_COLOR};
       border-radius: 6px;
       transition: background-color 0.16s ease-in;
+      color: ${WHITE_COLOR};
       &:hover {
         background-color: ${MAIN_COLOR_HOVER};
       }
@@ -122,4 +123,8 @@ export const ChangePassword = styled.div`
 
 export const MucornList = styled.ul`
   display: flex;
+`;
+
+export const MembershipList = styled.div`
+
 `;
