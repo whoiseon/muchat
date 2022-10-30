@@ -1,11 +1,12 @@
 import {useSelector} from "react-redux";
+import {useState} from "react";
 import {
   Header, MembershipList,
   MySettingWrapper,
 } from "../MyAccount/styles";
-import MucornListItem from "../../../MucornListItem";
+import ProfilePageChatCard from "../../../ChatCard/ProfilePageChatCard";
 
-const MyMembeership = () => {
+const MyMembership = () => {
   const { userInfo } = useSelector((state) => state.user);
 
   console.log(userInfo);
@@ -14,22 +15,22 @@ const MyMembeership = () => {
     <MySettingWrapper>
       <div>
         <Header>
-          <h1>운영중인 채팅방</h1>
+          <h1>가입된 멤버십</h1>
         </Header>
         <MembershipList>
-          123
-        </MembershipList>
-      </div>
-      <div>
-        <Header>
-          <h1>가입된 채팅방</h1>
-        </Header>
-        <MembershipList>
-          123
+          {
+            userInfo?.membership.map((data, i) => {
+              return (
+                <ProfilePageChatCard
+                  data={data}
+                />
+              );
+            })
+          }
         </MembershipList>
       </div>
     </MySettingWrapper>
   );
 };
 
-export default MyMembeership;
+export default MyMembership;

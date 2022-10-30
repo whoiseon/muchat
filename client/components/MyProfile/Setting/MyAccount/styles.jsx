@@ -118,13 +118,21 @@ export const ChangePassword = styled.div`
   }
 `;
 
-
 // MUCORN
 
 export const MucornList = styled.ul`
   display: flex;
 `;
 
-export const MembershipList = styled.div`
+// MEMBERSHIP
 
+export const MembershipList = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  & > div {
+    margin-bottom: 20px;
+    &:nth-of-type(2n - 1) {
+      margin-right: 20px;
+    }
+  }
 `;

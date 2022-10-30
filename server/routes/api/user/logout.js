@@ -13,7 +13,7 @@ router.post("/", auth, async (req, res) => {
 
     await res.clearCookie('AccessToken', { path: "/", });
 
-    res.status(200).json({
+    return res.status(200).json({
       logoutSuccess: true,
     });
   } catch (error) {
