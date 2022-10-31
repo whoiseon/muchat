@@ -4,7 +4,7 @@ import {
   BACKGROUND_COLOR,
   BACKGROUND_WHITE,
   BACKGROUND_WHITE_CLICK,
-  MAIN_COLOR, MAIN_COLOR_HOVER,
+  MAIN_COLOR, MAIN_COLOR_HOVER, SEMI_GRAY_COLOR,
   WHITE_COLOR
 } from "../../../styles/common";
 
@@ -71,8 +71,8 @@ export const Header = styled.div`
   align-items: center;
   margin-bottom: 30px;
   h1 {
-    font-size: 20px;
-    
+    font-size: 18px;
+    color: ${SEMI_GRAY_COLOR};
   }
   button {
     margin-left: auto;

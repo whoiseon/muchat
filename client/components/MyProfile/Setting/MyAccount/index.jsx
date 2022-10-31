@@ -1,3 +1,6 @@
+import {useSelector} from "react-redux";
+import Link from "next/link";
+import {useCallback, useState} from "react";
 import {
   Header,
   MySettingWrapper,
@@ -7,11 +10,18 @@ import {
   ChangeNickname,
   ChangePassword
 } from "./styles";
-import {useSelector} from "react-redux";
-import Link from "next/link";
+import UpdateModal from "../../../CommonModal/UpdateModal";
 
 const MyAccount = () => {
   const { userInfo } = useSelector((state) => state.user);
+
+  const [showUpdateModal, setShowUpdateModal] = useState(false);
+  const [updateKind, setUpdateKind] = useState('');
+
+  const onClickUpdate = useCallback(async (e) => {
+    await setUpdateKind(e.target.textContent);
+    setShowUpdateModal(true);
+  }, []);
 
   return (
     <MySettingWrapper>
@@ -36,9 +46,12 @@ const MyAccount = () => {
         <ChangeNickname>
           <p>먹보</p>
           <div>
-            <Link href="/profile/mucorn">
-              <a>수정하기</a>
-            </Link>
+            <button
+              type="button"
+              onClick={onClickUpdate}
+            >
+              수정하기
+            </button>
           </div>
         </ChangeNickname>
       </div>
@@ -50,12 +63,27 @@ const MyAccount = () => {
           <div>
             <button
               type="button"
+              onClick={onClickUpdate}
             >
               비밀번호 변경하기
             </button>
           </div>
         </ChangePassword>
       </div>
+      {
+        showUpdateModal && (
+          <UpdateModal
+            setShowUpdateModal={setShowUpdateModal}
+            header={updateKind}
+          >
+            {
+              updateKind === '비밀번호 변경하기'
+                ? '비밀번호'
+                : '닉네임'
+            }
+          </UpdateModal>
+        )
+      }
     </MySettingWrapper>
   );
 };

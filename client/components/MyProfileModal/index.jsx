@@ -22,7 +22,7 @@ const MyProfileModal = ({ setShowMyProfileModal }) => {
 
   const onClickLogout = useCallback(() => {
     dispatch(userLogout({
-      token: userInfo.token,
+      token: userInfo?.token,
     }));
 
     router.push('/');

@@ -85,16 +85,18 @@ export const AccountInfo = styled.div`
 
 export const ChangeNickname = styled.div`
   display: flex;
+  align-items: center;
   p {
     font-size: 16px;
   }
   div {
     margin-left: auto;
-    a {
+    button {
       padding: 12px 26px;
       background-color: ${GRAY_COLOR};
       border-radius: 6px;
       transition: background-color 0.16s ease-in;
+      color: ${WHITE_COLOR};
       &:hover {
         background-color: ${SEMI_GRAY_COLOR};
       }

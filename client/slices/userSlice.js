@@ -119,6 +119,7 @@ const userSlice = createSlice({
     [userLogout.fulfilled]: (state, action) => {
       state.userLogoutLoading = false;
       state.userLogoutDone = true;
+      state.userLoginDone = false;
       state.userInfo = null;
     },
     [userLogout.rejected]: (state, action) => {
@@ -133,7 +134,6 @@ const userSlice = createSlice({
     [loadMyInfo.fulfilled]: (state, action) => {
       state.loadMyInfoLoading = false;
       state.loadMyInfoDone = true;
-      console.log(action.payload);
       state.userInfo = action.payload.data;
       state.userInfo.token = action.payload.token;
     },

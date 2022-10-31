@@ -99,10 +99,11 @@ const ChatList = ({ supporters }) => {
         <DefaultModal
           setNonLoginModal={setNonLoginModal}
           header="비로그인 회원"
-          content="로그인 후 이용 가능한 서비스입니다."
           buttonText="로그인 하러갈래요"
           router="/login"
-        />
+        >
+          로그인 후 이용 가능한 서비스입니다
+        </DefaultModal>
       )}
     </ChatListWrapper>
   );

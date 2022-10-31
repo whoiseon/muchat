@@ -1,17 +1,17 @@
 import {useCallback} from "react";
 import CloseIcon from "@mui/icons-material/Close";
-import {Background, Content, Header, ModalWrapper} from "./styles";
 import Link from "next/link";
+import {Background, Content, Header, ModalWrapper} from "../Default/styles";
 
-const DefaultModal = ({ setNonLoginModal, header, children, buttonText, router }) => {
+const UpdateModal = ({ children, setShowUpdateModal, header, buttonText}) => {
   const onCloseBackgroundModal = useCallback((e) => {
     if (e.target === e.currentTarget) {
-      setNonLoginModal(false);
+      setShowUpdateModal(false);
     }
   }, []);
 
   const onCloseModal = useCallback(() => {
-    setNonLoginModal(false);
+    setShowUpdateModal(false);
   }, []);
 
   return (
@@ -28,14 +28,14 @@ const DefaultModal = ({ setNonLoginModal, header, children, buttonText, router }
         <Content>
           { children }
         </Content>
-        <Link href={router}>
-          <a>
-            { buttonText }
-          </a>
-        </Link>
+        <button
+          type="button"
+        >
+          { buttonText }
+        </button>
       </ModalWrapper>
     </Background>
   );
 };
 
-export default DefaultModal;
+export default UpdateModal;
