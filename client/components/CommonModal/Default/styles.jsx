@@ -95,7 +95,5 @@ export const Header = styled.div`
 `;
 
 export const Content = styled.p`
-  text-align: center;
-  margin-bottom: 40px;
-  font-size: 16px;
+  font-size: 14px;
 `;

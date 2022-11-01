@@ -28,11 +28,6 @@ const UpdateModal = ({ children, setShowUpdateModal, header, buttonText}) => {
         <Content>
           { children }
         </Content>
-        <button
-          type="button"
-        >
-          { buttonText }
-        </button>
       </ModalWrapper>
     </Background>
   );

@@ -11,6 +11,8 @@ import {
   ChangePassword
 } from "./styles";
 import UpdateModal from "../../../CommonModal/UpdateModal";
+import NicknameChangeForm from "./NicknameChangeForm";
+import PasswordChangeForm from "./PasswordChangeForm";
 
 const MyAccount = () => {
   const { userInfo } = useSelector((state) => state.user);
@@ -78,8 +80,8 @@ const MyAccount = () => {
           >
             {
               updateKind === '비밀번호 변경하기'
-                ? '비밀번호'
-                : '닉네임'
+                ? <PasswordChangeForm />
+                : <NicknameChangeForm />
             }
           </UpdateModal>
         )
