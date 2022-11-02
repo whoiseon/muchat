@@ -94,6 +94,6 @@ export const Header = styled.div`
   }
 `;
 
-export const Content = styled.p`
+export const Content = styled.div`
   font-size: 14px;
 `;

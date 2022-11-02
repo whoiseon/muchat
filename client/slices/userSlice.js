@@ -15,6 +15,9 @@ const initialState = {
   loadMyInfoLoading: false,
   loadMyInfoDone: false,
   loadMyInfoError: null,
+  updateMyNicknameLoading: false,
+  updateMyNicknameDone: false,
+  updateMyNicknameError: null,
 };
 
 export const userSignUp = createAsyncThunk("USER_SIGNUP", async ({ nickname, email, password }) => {
@@ -80,6 +83,24 @@ export const loadMyInfo = createAsyncThunk("LOAD_MY_INFO", async ({ token }) => 
   }
 });
 
+export const updateMyNickname = createAsyncThunk("UPDATE_MY_NICKNAME", async ({ nickname, password, token }) => {
+  try {
+    const response = await axios.post("http://localhost:3065/api/update/nickname", {
+      nickname,
+      password,
+    }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      withCredentials: true,
+    });
+
+    return response.data;
+  } catch (error) {
+    throw error.response.data.errors.message;
+  }
+});
+
 const userSlice = createSlice({
   name: 'user',
   initialState,
@@ -140,6 +161,19 @@ const userSlice = createSlice({
     [loadMyInfo.rejected]: (state, action) => {
       state.loadMyInfoLoading = false;
       state.loadMyInfoError = action.error;
+    },
+    [updateMyNickname.pending]: (state) => {
+      state.updateMyNicknameLoading = true;
+      state.updateMyNicknameDone = false;
+      state.updateMyNicknameError = null;
+    },
+    [updateMyNickname.fulfilled]: (state, action) => {
+      state.updateMyNicknameLoading = false;
+      state.updateMyNicknameDone = true;
+    },
+    [updateMyNickname.rejected]: (state, action) => {
+      state.updateMyNicknameLoading = false;
+      state.updateMyNicknameError = action.error;
     },
   },
 });

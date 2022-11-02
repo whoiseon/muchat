@@ -28,6 +28,8 @@ const registerRouter = require('./routes/api/user/register');
 const loginRouter = require('./routes/api/user/login');
 const AuthRouter = require('./routes/api/user/auth');
 const logoutRouter = require('./routes/api/user/logout');
+const updateNicknameRouter = require('./routes/api/user/update/nickname');
+
   // Chat
 const createRouter = require('./routes/api/chat/create')
 const loadChatsRouter = require('./routes/api/chat/chats');
@@ -50,6 +52,8 @@ app.use('/api/register', registerRouter);
 app.use('/api/login', loginRouter);
 app.use('/api/auth', AuthRouter);
 app.use('/api/logout', logoutRouter);
+app.use('/api/update/nickname', updateNicknameRouter);
+
   // Chat
 app.use('/api/create', createRouter);
 app.use('/api/chats', loadChatsRouter);
