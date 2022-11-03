@@ -1,4 +1,4 @@
-import {useCallback} from "react";
+import {useCallback, useState} from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import {Background, Content, Header, ModalWrapper} from "../Default/styles";
 

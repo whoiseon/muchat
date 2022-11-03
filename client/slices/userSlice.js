@@ -173,7 +173,7 @@ const userSlice = createSlice({
     },
     [updateMyNickname.rejected]: (state, action) => {
       state.updateMyNicknameLoading = false;
-      state.updateMyNicknameError = action.error;
+      state.updateMyNicknameError = action.error.message;
     },
   },
 });

@@ -1,20 +1,23 @@
 import {useDispatch, useSelector} from "react-redux";
-import {useCallback, useEffect, useRef} from "react";
+import {useCallback, useEffect, useRef, useState} from "react";
 import {FormWrapper, UpdateInput} from "./styles";
 import useInput from "../../../../../hooks/useInput";
 import {updateMyNickname} from "../../../../../slices/userSlice";
+import {ErrorMessage} from "../../../../../styles/common";
+import {useRouter} from "next/router";
 
-const NicknameChangeForm = () => {
-  const { userInfo } = useSelector((state) => state.user);
+const NicknameChangeForm = ({ setShowUpdateModal }) => {
+  const { userInfo, updateMyNicknameError, updateMyNicknameDone } = useSelector((state) => state.user);
 
   const NicknameRef = useRef();
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const [nickname, onChangeNickname, setNickname] = useInput(userInfo?.nickname);
   const [password, onChangePassword, setPassword] = useInput('');
 
-  const onClickChangeNickname = useCallback(() => {
-    dispatch(updateMyNickname({
+  const onClickChangeNickname = useCallback(async () => {
+    await dispatch(updateMyNickname({
       token: userInfo?.token,
       nickname,
       password,
@@ -23,7 +26,12 @@ const NicknameChangeForm = () => {
 
   useEffect(() => {
     NicknameRef.current.focus();
-  }, [NicknameRef]);
+
+    if (updateMyNicknameDone) {
+      setShowUpdateModal(false);
+      router.push('/');
+    }
+  }, [NicknameRef, updateMyNicknameDone]);
 
   return (
     <FormWrapper>
@@ -44,6 +52,7 @@ const NicknameChangeForm = () => {
           onChange={onChangePassword}
         />
       </UpdateInput>
+      {updateMyNicknameError && <ErrorMessage>{updateMyNicknameError}</ErrorMessage>}
       <button
         type="button"
         onClick={onClickChangeNickname}

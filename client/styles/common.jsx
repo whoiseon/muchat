@@ -16,7 +16,7 @@ export const RED_COLOR = '#E25D5D';
 export const GRAY_COLOR = '#4B4B5C';
 export const SEMI_GRAY_COLOR = '#66667C';
 
-export const ErrorMessage = styled.p`
+export const ErrorMessage = styled.div`
   color: ${RED_COLOR};
   margin-bottom: 20px;
 `;

@@ -80,8 +80,8 @@ const MyAccount = () => {
           >
             {
               updateKind === '비밀번호 변경하기'
-                ? <PasswordChangeForm />
-                : <NicknameChangeForm />
+                ? <PasswordChangeForm setShowUpdateModal={setShowUpdateModal} />
+                : <NicknameChangeForm setShowUpdateModal={setShowUpdateModal }/>
             }
           </UpdateModal>
         )

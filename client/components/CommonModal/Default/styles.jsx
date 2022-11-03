@@ -74,7 +74,7 @@ export const Header = styled.div`
     font-size: 18px;
     color: ${SEMI_GRAY_COLOR};
   }
-  button {
+  & > button {
     margin-left: auto;
     color: ${WHITE_COLOR};
     border-radius: 6px;

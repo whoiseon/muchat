@@ -10,9 +10,8 @@ import {
 
 export const FormWrapper = styled.div`
   text-align: left;
-  button {
+  & > button {
     width: 100%;
-    margin-top: 20px;
     padding: 20px;
     background-color: ${MAIN_COLOR};
     border-radius: 6px;
