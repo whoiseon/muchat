@@ -1,13 +1,18 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useCallback, useEffect, useRef, useState} from "react";
+import {useRouter} from "next/router";
 import {FormWrapper, UpdateInput} from "./styles";
 import useInput from "../../../../../hooks/useInput";
 import {updateMyNickname} from "../../../../../slices/userSlice";
 import {ErrorMessage} from "../../../../../styles/common";
-import {useRouter} from "next/router";
+import ConfirmModal from "../../../../CommonModal/ConfirmModal";
 
 const NicknameChangeForm = ({ setShowUpdateModal }) => {
-  const { userInfo, updateMyNicknameError, updateMyNicknameDone } = useSelector((state) => state.user);
+  const {
+    userInfo,
+    updateMyNicknameError,
+    updateMyNicknameDone,
+  } = useSelector((state) => state.user);
 
   const NicknameRef = useRef();
   const dispatch = useDispatch();
@@ -15,8 +20,12 @@ const NicknameChangeForm = ({ setShowUpdateModal }) => {
 
   const [nickname, onChangeNickname, setNickname] = useInput(userInfo?.nickname);
   const [password, onChangePassword, setPassword] = useInput('');
+  const [confirmModal, setConfirmModal] = useState(false);
 
   const onClickChangeNickname = useCallback(async () => {
+    setConfirmModal(false);
+    setShowUpdateModal(false);
+
     await dispatch(updateMyNickname({
       token: userInfo?.token,
       nickname,
@@ -24,11 +33,18 @@ const NicknameChangeForm = ({ setShowUpdateModal }) => {
     }));
   }, [userInfo?.token, nickname, password]);
 
+  const onClickShowConfirmModal = useCallback(() => {
+    setConfirmModal(true);
+  }, []);
+
+  const onClickCloseConfirmModal = useCallback(() => {
+    setConfirmModal(false);
+  });
+
   useEffect(() => {
     NicknameRef.current.focus();
 
     if (updateMyNicknameDone) {
-      setShowUpdateModal(false);
       router.push('/');
     }
   }, [NicknameRef, updateMyNicknameDone]);
@@ -55,10 +71,35 @@ const NicknameChangeForm = ({ setShowUpdateModal }) => {
       {updateMyNicknameError && <ErrorMessage>{updateMyNicknameError}</ErrorMessage>}
       <button
         type="button"
-        onClick={onClickChangeNickname}
+        onClick={onClickShowConfirmModal}
       >
         변경하기
       </button>
+      {
+        confirmModal && (
+          <ConfirmModal
+            header="닉네임 변경"
+            setConfirmModal={setConfirmModal}
+          >
+            <p>닉네임을 변경하시면 복구하실 수 없습니다.</p>
+            <p>정말로 <i>{nickname}</i>으로 변경하시겠습니까?</p>
+            <div>
+              <button
+                type="button"
+                onClick={onClickCloseConfirmModal}
+              >
+                취소
+              </button>
+              <button
+                type="button"
+                onClick={onClickChangeNickname}
+              >
+                변경
+              </button>
+            </div>
+          </ConfirmModal>
+        )
+      }
     </FormWrapper>
   );
 };
