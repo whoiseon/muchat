@@ -1,10 +1,17 @@
 import useInput from "../../../../../hooks/useInput";
 import {FormWrapper, UpdateInput} from "../NicknameChangeForm/styles";
+import {useEffect, useRef} from "react";
 
 const PasswordChangeForm = () => {
+  const passwordRef = useRef();
+
   const [nowPassword, onChangeNowPassword, setNowPassword] = useInput('');
   const [newPassword, onChangeNewPassword, setNewPassword] = useInput('');
   const [newPasswordCheck, onChangeNewPasswordCheck, setNewPasswordCheck] = useInput('');
+
+  useEffect(() => {
+    passwordRef.current.focus();
+  }, []);
 
   return (
     <FormWrapper>
@@ -14,6 +21,7 @@ const PasswordChangeForm = () => {
           type="password"
           value={nowPassword}
           onChange={onChangeNowPassword}
+          ref={passwordRef}
         />
       </UpdateInput>
       <UpdateInput>

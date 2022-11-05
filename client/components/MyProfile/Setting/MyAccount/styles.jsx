@@ -26,14 +26,13 @@ export const Header = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 40px;
+  color: ${SEMI_GRAY_COLOR};
   span {
-    margin-left: auto;
-    color: ${RED_COLOR};
+    margin-left: 20px;
   }
   h1 {
     font-size: 18px;
     font-weight: 500;
-    color: ${SEMI_GRAY_COLOR};
   }
 `;
 
