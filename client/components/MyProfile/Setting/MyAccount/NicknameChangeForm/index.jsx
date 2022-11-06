@@ -14,7 +14,7 @@ const NicknameChangeForm = ({ setShowUpdateModal }) => {
     updateMyNicknameDone,
   } = useSelector((state) => state.user);
 
-  const NicknameRef = useRef();
+  const nicknameRef = useRef();
   const dispatch = useDispatch();
   const router = useRouter();
 
@@ -42,12 +42,12 @@ const NicknameChangeForm = ({ setShowUpdateModal }) => {
   });
 
   useEffect(() => {
-    NicknameRef.current.focus();
+    nicknameRef.current.focus();
 
     if (updateMyNicknameDone) {
       router.push('/');
     }
-  }, [NicknameRef, updateMyNicknameDone]);
+  }, [nicknameRef, updateMyNicknameDone]);
 
   return (
     <FormWrapper>
@@ -55,7 +55,7 @@ const NicknameChangeForm = ({ setShowUpdateModal }) => {
         <p>사용자명</p>
         <input
           type="text"
-          ref={NicknameRef}
+          ref={nicknameRef}
           value={nickname}
           onChange={onChangeNickname}
         />

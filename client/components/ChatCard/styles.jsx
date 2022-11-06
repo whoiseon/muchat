@@ -124,6 +124,7 @@ export const GenreWrapper = styled.div`
     padding: 4px 10px;
     border-radius: 6px;
     background-color: ${GRAY_COLOR};
+    color: ${WHITE_COLOR};
     font-size: 12px;
     font-weight: bold;
     margin-right: 8px;

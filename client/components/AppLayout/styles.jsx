@@ -129,15 +129,15 @@ export const ContentWrapper = styled.div`
 `;
 
 export const MyProfile = styled.div`
+  display: flex;
   position: relative;
   margin-left: auto;
-  min-width: 96px;
   margin-right: 20px;
-  height: 48px;
   padding: 6px;
   & > div:nth-of-type(1) {
     display: flex;
     align-items: center;
+    min-width: 96px;
     background-color: ${BACKGROUND_COLOR};
     padding: 8px 14px;
     cursor: pointer;
