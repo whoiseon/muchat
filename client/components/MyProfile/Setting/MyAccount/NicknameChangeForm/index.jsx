@@ -39,7 +39,7 @@ const NicknameChangeForm = ({ setShowUpdateModal }) => {
 
   const onClickCloseConfirmModal = useCallback(() => {
     setConfirmModal(false);
-  });
+  }, []);
 
   useEffect(() => {
     nicknameRef.current.focus();
