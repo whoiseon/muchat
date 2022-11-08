@@ -1,9 +1,22 @@
+import {useEffect, useRef, useCallback, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import useInput from "../../../../../hooks/useInput";
 import {FormWrapper, UpdateInput} from "../NicknameChangeForm/styles";
-import {useEffect, useRef, useCallback, useState} from "react";
 import ConfirmModal from "../../../../CommonModal/ConfirmModal";
+import {updateMyPassword, userLogout} from "../../../../../slices/userSlice";
+import {ErrorMessage} from "../../../../../styles/common";
+import {useRouter} from "next/router";
 
-const PasswordChangeForm = () => {
+const PasswordChangeForm = ({ setShowUpdateModal }) => {
+  const {
+    userInfo,
+    updateMyPasswordError,
+    updateMyPasswordDone,
+    userLogoutDone,
+  } = useSelector((state) => state.user);
+
+  const dispatch = useDispatch();
+  const router = useRouter();
   const passwordRef = useRef();
 
   const [nowPassword, onChangeNowPassword, setNowPassword] = useInput('');
@@ -11,6 +24,21 @@ const PasswordChangeForm = () => {
   const [newPasswordCheck, onChangeNewPasswordCheck, setNewPasswordCheck] = useInput('');
 
   const [confirmModal, setConfirmModal] = useState(false);
+
+  const onClickChangeNickname = useCallback(async () => {
+    setConfirmModal(false);
+
+    await dispatch(updateMyPassword({
+      token: userInfo?.token,
+      nowPassword,
+      newPassword,
+      newPasswordCheck,
+    }));
+
+    await dispatch(userLogout({
+      token: userInfo?.token,
+    }));
+  }, [userInfo?.token, nowPassword, newPassword, newPasswordCheck]);
 
   const onClickShowConfirmModal = useCallback(() => {
     setConfirmModal(true);
@@ -22,7 +50,11 @@ const PasswordChangeForm = () => {
 
   useEffect(() => {
     passwordRef.current.focus();
-  }, []);
+
+    if (userLogoutDone || updateMyPasswordDone) {
+      router.push('/');
+    }
+  }, [updateMyPasswordDone, userLogoutDone]);
 
   return (
     <FormWrapper>
@@ -51,6 +83,7 @@ const PasswordChangeForm = () => {
           onChange={onChangeNewPasswordCheck}
         />
       </UpdateInput>
+      {updateMyPasswordError && <ErrorMessage>{updateMyPasswordError}</ErrorMessage>}
       <button
         type="button"
         onClick={onClickShowConfirmModal}
@@ -65,6 +98,7 @@ const PasswordChangeForm = () => {
           >
             <p>사용 가능한 비밀번호 입니다</p>
             <p>정말 비밀번호를 변경하시겠습니까?</p>
+            <p>비밀번호 변경시 로그아웃 됩니다.</p>
             <div>
               <button
                 type="button"
@@ -74,6 +108,7 @@ const PasswordChangeForm = () => {
               </button>
               <button
                 type="button"
+                onClick={onClickChangeNickname}
               >
                 변경
               </button>

@@ -24,7 +24,6 @@ const NicknameChangeForm = ({ setShowUpdateModal }) => {
 
   const onClickChangeNickname = useCallback(async () => {
     setConfirmModal(false);
-    setShowUpdateModal(false);
 
     await dispatch(updateMyNickname({
       token: userInfo?.token,

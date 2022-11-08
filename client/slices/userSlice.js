@@ -18,6 +18,9 @@ const initialState = {
   updateMyNicknameLoading: false,
   updateMyNicknameDone: false,
   updateMyNicknameError: null,
+  updateMyPasswordLoading: false,
+  updateMyPasswordDone: false,
+  updateMyPasswordError: null,
 };
 
 export const userSignUp = createAsyncThunk("USER_SIGNUP", async ({ nickname, email, password }) => {
@@ -88,6 +91,25 @@ export const updateMyNickname = createAsyncThunk("UPDATE_MY_NICKNAME", async ({ 
     const response = await axios.post("http://localhost:3065/api/update/nickname", {
       nickname,
       password,
+    }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      withCredentials: true,
+    });
+
+    return response.data;
+  } catch (error) {
+    throw error.response.data.errors.message;
+  }
+});
+
+export const updateMyPassword = createAsyncThunk("UPDATE_MY_PASSWORD", async ({ nowPassword, newPassword, newPasswordCheck, token }) => {
+  try {
+    const response = await axios.post("http://localhost:3065/api/update/password", {
+      nowPassword,
+      newPassword,
+      newPasswordCheck,
     }, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -174,6 +196,19 @@ const userSlice = createSlice({
     [updateMyNickname.rejected]: (state, action) => {
       state.updateMyNicknameLoading = false;
       state.updateMyNicknameError = action.error.message;
+    },
+    [updateMyPassword.pending]: (state) => {
+      state.updateMyPasswordLoading = true;
+      state.updateMyPasswordDone = false;
+      state.updateMyPasswordError = null;
+    },
+    [updateMyPassword.fulfilled]: (state, action) => {
+      state.updateMyPasswordLoading = false;
+      state.updateMyPasswordDone = true;
+    },
+    [updateMyPassword.rejected]: (state, action) => {
+      state.updateMyPasswordLoading = false;
+      state.updateMyPasswordError = action.error.message;
     },
   },
 });

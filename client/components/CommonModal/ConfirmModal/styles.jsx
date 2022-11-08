@@ -4,7 +4,7 @@ import {
   BACKGROUND_WHITE_CLICK,
   MAIN_COLOR,
   MAIN_COLOR_HOVER,
-  RED_COLOR,
+  RED_COLOR, SEMI_GRAY_COLOR,
   WHITE_COLOR
 } from "../../../styles/common";
 
@@ -20,6 +20,9 @@ export const Content = styled.div`
   }
   p:nth-of-type(1) {
     margin-bottom: 10px;
+  }
+  p:nth-of-type(3) {
+    color: ${SEMI_GRAY_COLOR};
   }
   & > div {
     text-align: right;
