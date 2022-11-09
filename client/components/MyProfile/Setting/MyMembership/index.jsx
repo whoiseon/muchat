@@ -4,12 +4,12 @@ import {
   Header, MembershipList,
   MySettingWrapper,
 } from "../MyAccount/styles";
+import CommentsDisabledIcon from '@mui/icons-material/CommentsDisabled';
 import ProfilePageChatCard from "../../../ChatCard/ProfilePageChatCard";
+import NoChatList from "../../../ChatList/NoChatList";
 
 const MyMembership = () => {
   const { userInfo } = useSelector((state) => state.user);
-
-  console.log(userInfo);
 
   return (
     <MySettingWrapper>
@@ -19,13 +19,22 @@ const MyMembership = () => {
         </Header>
         <MembershipList>
           {
-            userInfo?.membership.map((data, i) => {
-              return (
-                <ProfilePageChatCard
-                  data={data}
+            userInfo?.membership.length > 0
+              ? (
+                userInfo?.membership.map((data, i) => {
+                  return (
+                    <ProfilePageChatCard
+                      data={data}
+                    />
+                  );
+                })
+              )
+              : (
+                <NoChatList
+                  icon={<CommentsDisabledIcon />}
+                  comment="가입된 멤버십이 없습니다"
                 />
-              );
-            })
+              )
           }
         </MembershipList>
       </div>
