@@ -1,16 +1,24 @@
 import {useSelector} from "react-redux";
-import {useEffect} from "react";
+import {useCallback, useEffect} from "react";
 import styled from "@emotion/styled";
+import {useRouter} from "next/router";
+import {io} from "socket.io-client";
 import AppLayout from "../../components/AppLayout";
 import ChatInfo from "../../components/ChatInfo";
 import Chat from "../../components/Chat";
 import ChatCurrentUser from "../../components/ChatCurrentUser";
 import wrapper from "../../store/configureStore";
 import {loadMyInfo} from "../../slices/userSlice";
-import {loadChatData, loadMyOpenedChat} from "../../slices/chatSlice";
-import {useRouter} from "next/router";
+import {loadChatData} from "../../slices/chatSlice";
 
 const ChatRoom = () => {
+  const socket = io("http://localhost:3075", { transports: ["websocket"] });
+
+  const initSocketConnection = () => {
+    if (socket) return;
+    socket.connect();
+  };
+
   const { nowConnectedChat } = useSelector((state) => state.chat);
   const { userInfo } = useSelector((state) => state.user);
 
@@ -26,7 +34,9 @@ const ChatRoom = () => {
     <AppLayout chatRoom={true}>
       <ChatWrapper>
         <ChatInfo data={nowConnectedChat} />
-        <Chat />
+        <Chat
+          socket={socket}
+        />
         <ChatCurrentUser />
       </ChatWrapper>
     </AppLayout>

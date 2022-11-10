@@ -1,6 +1,7 @@
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import {Background, ChatSendForm, ChatTools, ChatWrapper, Header, SendWrapper} from "./styles";
 import {useCallback, useRef} from "react";
+import {io} from "socket.io-client";
+import {Background, ChatSendForm, ChatTools, ChatWrapper, Header, SendWrapper} from "./styles";
 import useInput from "../../hooks/useInput";
 
 const dummyChat = [
@@ -26,7 +27,7 @@ const dummyChat = [
   },
 ];
 
-const Chat = () => {
+const Chat = ({ socket }) => {
   const MessageRef = useRef();
 
   const [chatMessage, onChangeChatMessage, setChatMessage] = useInput('');
@@ -34,6 +35,7 @@ const Chat = () => {
   const onClickChatSend = useCallback(() => {
     if (chatMessage === '') return;
     console.log(chatMessage);
+    socket.emit('message', chatMessage);
     setChatMessage('');
   }, [chatMessage]);
 
