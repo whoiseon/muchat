@@ -1,8 +1,10 @@
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import {useCallback, useRef} from "react";
+import {memo, useCallback, useEffect, useRef, useState} from "react";
 import {io} from "socket.io-client";
+import {useSelector} from "react-redux";
 import {Background, ChatSendForm, ChatTools, ChatWrapper, Header, SendWrapper} from "./styles";
 import useInput from "../../hooks/useInput";
+import useSocket from "../../hooks/useSocket";
 
 const dummyChat = [
   {
@@ -27,17 +29,23 @@ const dummyChat = [
   },
 ];
 
-const Chat = ({ socket }) => {
+const Chat = ({ socket, disconnect }) => {
+  const { userInfo } = useSelector((state) => state.user);
+
   const MessageRef = useRef();
 
+  const [message, setMessage] = useState();
   const [chatMessage, onChangeChatMessage, setChatMessage] = useInput('');
 
   const onClickChatSend = useCallback(() => {
     if (chatMessage === '') return;
     console.log(chatMessage);
-    socket.emit('message', chatMessage);
+    socket.emit('message', {
+      user: userInfo,
+      message: chatMessage,
+    });
     setChatMessage('');
-  }, [chatMessage]);
+  }, [userInfo, chatMessage]);
 
   const onKeyDownSendArea = useCallback((e) => {
     if (e.keyCode === 13) {
@@ -47,6 +55,14 @@ const Chat = ({ socket }) => {
       }
     }
   }, [onClickChatSend]);
+
+  useEffect(() => {
+    socket.on('messageList', (data) => {
+      setMessage(data);
+    });
+  }, []);
+
+  console.log(message);
 
   return (
     <Background>
@@ -97,4 +113,4 @@ const Chat = ({ socket }) => {
   );
 };
 
-export default Chat;
+export default memo(Chat);

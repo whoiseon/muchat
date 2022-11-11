@@ -2,6 +2,7 @@ import {useSelector} from "react-redux";
 import SettingsIcon from '@mui/icons-material/Settings';
 import {Background, ChatConfigButton, Description, Info, InfoWrapper, Membership, Wrapper} from "./styles";
 import UserProfile from "../UserProfile";
+import {memo} from "react";
 
 const ChatInfo = ({ data }) => {
   const {userInfo} = useSelector((state) => state.user);
@@ -60,4 +61,4 @@ const ChatInfo = ({ data }) => {
   );
 };
 
-export default ChatInfo;
+export default memo(ChatInfo);

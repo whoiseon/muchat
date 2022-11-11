@@ -2,7 +2,6 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const app = express();
 const port = 3065;
-const websocketPort = 3075;
 const cors = require('cors');
 require('dotenv').config();
 
@@ -13,20 +12,7 @@ app.use(cors({
 }));
 
 // socket.io
-const server = require('http').createServer(app);
-const io = require('socket.io')(server, {
-  cors: {
-    origin: '*',
-  }
-});
-
-io.on('connection', (socket) => {
-  console.log('접속');
-
-  socket.on('message', (data) => {
-    console.log(data);
-  })
-})
+const socketIO = require('./socket');
 
 // body-parser
 app.use(express.json());
@@ -83,10 +69,8 @@ app.use('/api/chat/access', chatAccessRouter);
 app.use('/api/chat/closed', chatClosedRouter);
 app.use('/api/chat/search', searchedChatRouter);
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`Listening on Port is ${port}`);
 });
 
-io.listen(websocketPort, () => {
-  console.log(`Listening on Websocket Port is ${websocketPort}`);
-});
+socketIO(server, app);

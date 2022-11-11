@@ -1,3 +1,5 @@
+import {memo, useEffect, useState} from "react";
+import {useRouter} from "next/router";
 import {Background, CurrentUserWrapper, Header, UserList} from "./styles";
 import UserChatProfile from "../UserChatProfile";
 
@@ -25,6 +27,8 @@ const dummyUser = [
 ];
 
 const ChatCurrentUser = () => {
+  const router = useRouter();
+
   return (
     <Background>
       <Header>
@@ -46,4 +50,4 @@ const ChatCurrentUser = () => {
   );
 };
 
-export default ChatCurrentUser;
+export default memo(ChatCurrentUser);

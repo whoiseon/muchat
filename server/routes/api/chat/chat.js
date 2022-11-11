@@ -13,6 +13,14 @@ router.get('/', async (req, res) => {
       }
     });
 
+    if (!code) {
+      return res.status(400).json({
+        errors: {
+          message: "존재하지 않는 방입니다",
+        },
+      });
+    }
+
     return res.status(200).json(chatData);
   } catch (error) {
     console.error(error);
