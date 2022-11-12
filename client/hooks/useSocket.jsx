@@ -14,7 +14,7 @@ const useSocket = (code) => {
 
   if (!code) return [undefined, disconnect];
 
-  sockets[code] = io(`${backUrl}`, { transports: ["websocket"] });
+  sockets[code] = io(`${backUrl}/muchat`, { transports: ["websocket"] });
 
   return [sockets[code], disconnect];
 };

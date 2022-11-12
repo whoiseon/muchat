@@ -1,5 +1,5 @@
 import {useSelector} from "react-redux";
-import {memo, useCallback, useEffect} from "react";
+import {memo, useCallback, useEffect, useState} from "react";
 import styled from "@emotion/styled";
 import {useRouter} from "next/router";
 import AppLayout from "../../components/AppLayout";
@@ -18,12 +18,17 @@ const ChatRoom = () => {
   const router = useRouter();
 
   const [socket, disconnect] = useSocket(router.query.code);
+  const [chat, setChat] = useState();
 
   useEffect(() => {
     if (!userInfo) {
       router.push('/');
     }
   }, [userInfo]);
+
+  useEffect(() => {
+
+  }, []);
 
   return (
     <AppLayout chatRoom={true}>

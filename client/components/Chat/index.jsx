@@ -1,10 +1,8 @@
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import {memo, useCallback, useEffect, useRef, useState} from "react";
-import {io} from "socket.io-client";
 import {useSelector} from "react-redux";
 import {Background, ChatSendForm, ChatTools, ChatWrapper, Header, SendWrapper} from "./styles";
 import useInput from "../../hooks/useInput";
-import useSocket from "../../hooks/useSocket";
 
 const dummyChat = [
   {

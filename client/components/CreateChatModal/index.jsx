@@ -1,5 +1,5 @@
 import CloseIcon from '@mui/icons-material/Close';
-import {useCallback, useEffect, useRef, useState} from "react";
+import {useCallback, useEffect, useMemo, useRef, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Background, CreateChatForm, Header, ModalInput, ModalSelect, ModalTextArea, ModalWrapper} from "./styles";
 import useInput from "../../hooks/useInput";
@@ -7,6 +7,8 @@ import {ErrorMessage} from "../../styles/common";
 import {createChat, loadMainChat} from "../../slices/chatSlice";
 import {loadMyInfo} from "../../slices/userSlice";
 import {genreList} from "../../utils/genreList";
+
+const randomCode = Math.random().toString(36).substr(2, 6);
 
 const CreateChatModal = ({ setShowCreateChat }) => {
   const { userInfo } = useSelector((state) => state.user);
@@ -39,6 +41,7 @@ const CreateChatModal = ({ setShowCreateChat }) => {
 
   const onClickCreateChat = useCallback(async () => {
     await dispatch(createChat({
+      code: randomCode,
       manager: userInfo?._id,
       title,
       genre,

@@ -7,6 +7,7 @@ import {CardWrapper, ChatInfo, CurrentUserBox, GenreWrapper, SupportersMark} fro
 import UserProfile from "../UserProfile";
 import {MAIN_COLOR, RED_COLOR} from "../../styles/common";
 import {chatAccess} from "../../slices/chatSlice";
+import useSocket from "../../hooks/useSocket";
 
 const ChatCard = ({ data, setNonLoginModal }) => {
   const { userInfo } = useSelector((state) => state.user);
@@ -15,6 +16,7 @@ const ChatCard = ({ data, setNonLoginModal }) => {
   const dispatch = useDispatch();
 
   const [showCurrentUser, setShowCurrentUser] = useState(false);
+  const [socket] = useSocket(router.query.code);
 
   const onClickMoveChat = useCallback(() => {
     if (!userInfo) {
@@ -29,6 +31,10 @@ const ChatCard = ({ data, setNonLoginModal }) => {
       }));
 
       router.push(`/chat/${data.code}`);
+
+      socket.emit('roomCode', {
+        code: router.query.code,
+      });
 
       return;
     }

@@ -33,10 +33,10 @@ const initialState = {
   searchedChatError: null,
 };
 
-export const createChat = createAsyncThunk("CREATE_CHAT", async ({ manager, title, genre, introduce, token }) => {
+export const createChat = createAsyncThunk("CREATE_CHAT", async ({ code, manager, title, genre, introduce, token }) => {
   try {
     const response = await axios.post("http://localhost:3065/api/create", {
-      code: Math.random().toString(36).substr(2, 6),
+      code,
       manager,
       title,
       genre,
