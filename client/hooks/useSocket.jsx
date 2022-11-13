@@ -1,7 +1,7 @@
 import { useCallback, memo } from 'react';
 import io from 'socket.io-client';
 
-const backUrl = 'http://localhost:3065';
+const ENDPOINT = 'http://localhost:3065';
 const sockets = {};
 
 const useSocket = (code) => {
@@ -14,7 +14,16 @@ const useSocket = (code) => {
 
   if (!code) return [undefined, disconnect];
 
-  sockets[code] = io(`${backUrl}/muchat`, { transports: ["websocket"] });
+  sockets[code] = io(`${ENDPOINT}/chat`, {
+    cors: {
+      origin: '*',
+      credentials: true,
+    },
+    transports: ["websocket"],
+    query: {
+      code,
+    },
+  });
 
   return [sockets[code], disconnect];
 };

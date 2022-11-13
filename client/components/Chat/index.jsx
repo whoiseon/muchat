@@ -3,6 +3,8 @@ import {memo, useCallback, useEffect, useRef, useState} from "react";
 import {useSelector} from "react-redux";
 import {Background, ChatSendForm, ChatTools, ChatWrapper, Header, SendWrapper} from "./styles";
 import useInput from "../../hooks/useInput";
+import useSocket from "../../hooks/useSocket";
+import {useRouter} from "next/router";
 
 const dummyChat = [
   {
@@ -27,12 +29,12 @@ const dummyChat = [
   },
 ];
 
-const Chat = ({ socket, disconnect }) => {
+const Chat = ({ socket }) => {
   const { userInfo } = useSelector((state) => state.user);
 
   const MessageRef = useRef();
+  const router = useRouter();
 
-  const [message, setMessage] = useState();
   const [chatMessage, onChangeChatMessage, setChatMessage] = useInput('');
 
   const onClickChatSend = useCallback(() => {
@@ -53,14 +55,6 @@ const Chat = ({ socket, disconnect }) => {
       }
     }
   }, [onClickChatSend]);
-
-  useEffect(() => {
-    socket.on('messageList', (data) => {
-      setMessage(data);
-    });
-  }, []);
-
-  console.log(message);
 
   return (
     <Background>

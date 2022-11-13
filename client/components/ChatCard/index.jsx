@@ -1,6 +1,5 @@
 import {useCallback, useState} from "react";
 import PersonIcon from '@mui/icons-material/Person';
-import WhatshotIcon from '@mui/icons-material/Whatshot';
 import {useRouter} from "next/router";
 import {useDispatch, useSelector} from "react-redux";
 import {CardWrapper, ChatInfo, CurrentUserBox, GenreWrapper, SupportersMark} from "./styles";
@@ -31,10 +30,6 @@ const ChatCard = ({ data, setNonLoginModal }) => {
       }));
 
       router.push(`/chat/${data.code}`);
-
-      socket.emit('roomCode', {
-        code: router.query.code,
-      });
 
       return;
     }

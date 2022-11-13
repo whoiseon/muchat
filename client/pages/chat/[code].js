@@ -18,7 +18,7 @@ const ChatRoom = () => {
   const router = useRouter();
 
   const [socket, disconnect] = useSocket(router.query.code);
-  const [chat, setChat] = useState();
+  const [socketRoom, setSocketRoom] = useState();
 
   useEffect(() => {
     if (!userInfo) {
@@ -27,8 +27,12 @@ const ChatRoom = () => {
   }, [userInfo]);
 
   useEffect(() => {
-
-  }, []);
+    return (() => {
+      if (socketRoom) {
+        disconnect();
+      }
+    });
+  }, [socketRoom, disconnect]);
 
   return (
     <AppLayout chatRoom={true}>

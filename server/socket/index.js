@@ -7,24 +7,28 @@ module.exports = (server, app) => {
     }
   });
   app.set('io', io); // req.app.get('io')
-  const muchat = io.of('/muchat');
+  const chat = io.of('/chat');
 
-  muchat.on('connection', (socket) => {
+  chat.on('connection', (socket) => {
     const req = socket.request;
     const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-    console.log('새로운 클라이언트 접속', ip, socket.id, req.ip);
+    const roomId = socket.handshake.query.code;
 
-    socket.on('roomCode', (data) => {
-      socket.join(data.code);
+    console.log('새로운 클라이언트 접속', ip, socket.id);
+    socket.join(roomId);
 
-      socket.to(data.code).emit('join', {
-        user: 'system',
-        chat: 'hello',
-      })
-    });
+    socket.to(roomId).emit('join', {
+      user: 'system',
+      body: `님이 입장하셨습니다.`
+    })
+
+    socket.on('message', (data) => {
+      console.log(data);
+    })
 
     socket.on('disconnect', () => {
       console.log('클라이언트 접속 해제', ip, socket.id);
+      socket.leave(roomId);
       clearInterval(socket.interval);
     });
 
