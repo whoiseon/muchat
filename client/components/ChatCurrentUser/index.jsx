@@ -2,6 +2,7 @@ import {memo, useEffect, useState} from "react";
 import {useRouter} from "next/router";
 import {Background, CurrentUserWrapper, Header, UserList} from "./styles";
 import UserChatProfile from "../UserChatProfile";
+import useSocket from "../../hooks/useSocket";
 
 const dummyUser = [
   {
@@ -29,18 +30,29 @@ const dummyUser = [
 const ChatCurrentUser = () => {
   const router = useRouter();
 
+  const [socket] = useSocket(router.query.code);
+  const [onlineList, setOnlineList] = useState([]);
+
+  useEffect(() => {
+    socket.on('onlineList', (data) => {
+      setOnlineList(data);
+    });
+  }, []);
+
+  console.log(onlineList);
+
   return (
     <Background>
       <Header>
         접속중인 회원
-        <span>1,293명</span>
+        <span>{onlineList.length} 명</span>
       </Header>
       <UserList>
         <ul>
           {
-            dummyUser.map((user, i) => {
+            onlineList.map((user, i) => {
               return (
-                <UserChatProfile key={user.name} user={user} />
+                <UserChatProfile key={user.nickname} user={user} />
               );
             })
           }

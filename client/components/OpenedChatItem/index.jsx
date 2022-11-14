@@ -1,9 +1,9 @@
-import {useCallback, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import Link from "next/link";
 import CloseIcon from '@mui/icons-material/Close';
-import {ListWrapper} from "./styles";
 import {useDispatch, useSelector} from "react-redux";
 import {useRouter} from "next/router";
+import {ListWrapper} from "./styles";
 import {chatClosed} from "../../slices/chatSlice";
 
 const OpenedChatItem = ({ chat, style }) => {

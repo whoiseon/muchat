@@ -23,11 +23,10 @@ export const ProfileWrapper = styled.div`
     &:active {
       background-color: ${BACKGROUND_WHITE_CLICK};
     }
-    svg {
-      width: 24px;
-      height: 24px;
-      margin-right: 10px;
-      color: ${SEMI_GRAY_COLOR};
+    img {
+      width: 20px;
+      height: 20px;
+      margin-right: 8px;
     }
   }
 `;

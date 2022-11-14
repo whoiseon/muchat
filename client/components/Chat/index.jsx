@@ -1,10 +1,10 @@
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import {memo, useCallback, useEffect, useRef, useState} from "react";
 import {useSelector} from "react-redux";
+import {useRouter} from "next/router";
 import {Background, ChatSendForm, ChatTools, ChatWrapper, Header, SendWrapper} from "./styles";
 import useInput from "../../hooks/useInput";
 import useSocket from "../../hooks/useSocket";
-import {useRouter} from "next/router";
 
 const dummyChat = [
   {
@@ -29,12 +29,13 @@ const dummyChat = [
   },
 ];
 
-const Chat = ({ socket }) => {
+const Chat = () => {
   const { userInfo } = useSelector((state) => state.user);
 
   const MessageRef = useRef();
   const router = useRouter();
 
+  const [socket] = useSocket(router.query.code);
   const [chatMessage, onChangeChatMessage, setChatMessage] = useInput('');
 
   const onClickChatSend = useCallback(() => {

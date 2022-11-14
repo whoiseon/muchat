@@ -1,7 +1,7 @@
 import Link from "next/link";
 import {useRouter} from "next/router";
 import {useSelector} from "react-redux";
-import {useState, useCallback} from "react";
+import {useState, useCallback, useEffect} from "react";
 import {AppWrapper, ChatTab, ContentWrapper, LoginBtn, Logo, MyProfile} from "./styles";
 import {BACKGROUND_COLOR, WHITE_COLOR} from "../../styles/common";
 import MyProfileModal from "../MyProfileModal";
