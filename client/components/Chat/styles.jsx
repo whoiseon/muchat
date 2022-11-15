@@ -44,11 +44,10 @@ export const ChatWrapper = styled.div`
         padding: 12px 16px;
         border-radius: 6px;
         background-color: ${BACKGROUND_COLOR};
-        svg {
-          width: 24px;
-          height: 24px;
-          color: ${SEMI_GRAY_COLOR};
-          margin-right: 10px;
+        img {
+          width: 20px;
+          height: 20px;
+          margin-right: 8px;
         }
       }
       div:nth-of-type(2) {

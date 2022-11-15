@@ -18,18 +18,24 @@ module.exports = (server, app) => {
 
     console.log('새로운 클라이언트 접속 ' + roomId);
 
-    socket.join(roomId);
+    socket.on('join room', (data) => {
+      socket.join(data);
+    });
+
+    socket.on('join send', (data) => {
+      chat.emit('broadcast', data);
+    });
 
     socket.on('connection', (data) => {
       if (onlineList.filter((v) => v._id === data._id).length === 0) {
         onlineList.push(data);
       }
 
-      socket.emit('onlineList', onlineList);
+      chat.emit('onlineList', onlineList);
     });
 
-    socket.on('message', (data) => {
-      console.log(data);
+    socket.on('user-send', (data) => {
+      chat.emit('broadcast', data);
     });
 
     socket.on('disconnect', () => {

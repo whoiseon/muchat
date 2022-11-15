@@ -36,12 +36,13 @@ const Chat = () => {
   const router = useRouter();
 
   const [socket] = useSocket(router.query.code);
+  const [chatData, setChatData] = useState([]);
   const [chatMessage, onChangeChatMessage, setChatMessage] = useInput('');
 
   const onClickChatSend = useCallback(() => {
     if (chatMessage === '') return;
     console.log(chatMessage);
-    socket.emit('message', {
+    socket.emit('user-send', {
       user: userInfo,
       message: chatMessage,
     });
@@ -57,6 +58,14 @@ const Chat = () => {
     }
   }, [onClickChatSend]);
 
+  useEffect(() => {
+    socket.on('broadcast', (data) => {
+      setChatData((prev) => [...prev, data]);
+    });
+  }, [socket]);
+
+  console.log(chatData);
+
   return (
     <Background>
       <Header>
@@ -65,16 +74,16 @@ const Chat = () => {
       <ChatWrapper>
         <ul>
           {
-            dummyChat.map((chat, i) => {
+            chatData.map((chat, i) => {
               return (
-                <li key={chat.content}>
+                <li key={chat.message}>
                   <div>
-                    <AccountCircleIcon />
-                    { chat.nickname }
+                    <img src={`/image/mucorn/${chat.user.mucorn}.png`} alt={`mucorn_${chat.user.mucorn}`} />
+                    {chat.user.nickname}
                   </div>
                   <div>
                     <p>
-                      { chat.content }
+                      { chat.message }
                     </p>
                   </div>
                 </li>

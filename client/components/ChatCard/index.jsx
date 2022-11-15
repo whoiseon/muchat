@@ -29,6 +29,8 @@ const ChatCard = ({ data, setNonLoginModal }) => {
         title: data.title,
       }));
 
+      socket.emit('join room', data.code);
+
       router.push(`/chat/${data.code}`);
 
       return;
