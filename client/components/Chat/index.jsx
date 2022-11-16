@@ -1,10 +1,8 @@
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import {memo, useCallback, useEffect, useRef, useState} from "react";
 import {useSelector} from "react-redux";
-import {useRouter} from "next/router";
 import {Background, ChatSendForm, ChatTools, ChatWrapper, Header, SendWrapper} from "./styles";
 import useInput from "../../hooks/useInput";
-import useSocket from "../../hooks/useSocket";
+import {useRouter} from "next/router";
 
 const dummyChat = [
   {
@@ -29,42 +27,48 @@ const dummyChat = [
   },
 ];
 
-const Chat = () => {
+const Chat = ({ socket }) => {
   const { userInfo } = useSelector((state) => state.user);
 
   const MessageRef = useRef();
   const router = useRouter();
 
-  const [socket] = useSocket(router.query.code);
-  const [chatData, setChatData] = useState([]);
+  const [messageList, setMessageList] = useState([]);
   const [chatMessage, onChangeChatMessage, setChatMessage] = useInput('');
 
-  const onClickChatSend = useCallback(() => {
+  const socketMessage = useCallback(async () => {
+    const messageData = {
+      roomId: router.query.code,
+      userInfo,
+      content: chatMessage,
+      time: new Date(),
+    };
+
+    setMessageList((list) => [...list, messageData]);
+    await socket.emit('send_message, messageData');
+  }, [userInfo, router, chatMessage]);
+
+  const onClickChatSend = useCallback(async () => {
     if (chatMessage === '') return;
     console.log(chatMessage);
-    socket.emit('user-send', {
-      user: userInfo,
-      message: chatMessage,
-    });
+    await socketMessage();
     setChatMessage('');
   }, [userInfo, chatMessage]);
 
-  const onKeyDownSendArea = useCallback((e) => {
+  const onKeyDownSendArea = useCallback(async (e) => {
     if (e.keyCode === 13) {
       if (!e.shiftKey) {
         e.preventDefault();
-        onClickChatSend();
+        await onClickChatSend();
       }
     }
   }, [onClickChatSend]);
 
   useEffect(() => {
-    socket.on('broadcast', (data) => {
-      setChatData((prev) => [...prev, data]);
+    socket.on('receive_message', (data) => {
+      setMessageList((list) => [...list, data]);
     });
   }, [socket]);
-
-  console.log(chatData);
 
   return (
     <Background>
@@ -74,16 +78,16 @@ const Chat = () => {
       <ChatWrapper>
         <ul>
           {
-            chatData.map((chat, i) => {
+            messageList.map((chat, i) => {
               return (
-                <li key={chat.message}>
+                <li key={chat.time}>
                   <div>
-                    <img src={`/image/mucorn/${chat.user.mucorn}.png`} alt={`mucorn_${chat.user.mucorn}`} />
-                    {chat.user.nickname}
+                    <img src={`/image/mucorn/${chat.userInfo.mucorn}.png`} alt={`mucorn_${chat.userInfo.mucorn}`} />
+                    {chat.userInfo.nickname}
                   </div>
                   <div>
                     <p>
-                      { chat.message }
+                      { chat.content }
                     </p>
                   </div>
                 </li>

@@ -26,18 +26,29 @@ const ChatRoom = () => {
   }, [userInfo]);
 
   useEffect(() => {
-    socket.emit('connection', {
-      _id: userInfo?._id,
-      nickname: userInfo?.nickname,
-      mucorn: userInfo?.mucorn,
+    socket.emit('join_room', {
+      userInfo: {
+        _id: userInfo?._id,
+        nickname: userInfo?.nickname,
+        mucorn: userInfo?.mucorn,
+      },
+      roomId: router.query.code,
     });
-  }, [userInfo]);
+  }, [socket, router.query.code, userInfo]);
+
+  useEffect(() => {
+    return () => {
+      disconnect();
+    };
+  }, [router.query.code]);
 
   return (
     <AppLayout chatRoom={true}>
       <ChatWrapper>
         <ChatInfo data={nowConnectedChat} />
-        <Chat />
+        <Chat
+          socket={socket}
+        />
         <ChatCurrentUser />
       </ChatWrapper>
     </AppLayout>

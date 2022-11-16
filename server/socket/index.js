@@ -10,46 +10,24 @@ module.exports = (server, app) => {
   const chat = io.of('/chat');
 
   chat.on('connection', (socket) => {
-    const onlineList = [];
+    console.log(`User connected: ${socket.id}`);
 
-    const req = socket.request;
-    const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-    const roomId = socket.handshake.query.code;
 
-    console.log('새로운 클라이언트 접속 ' + roomId);
+    socket.on('join_room', (data) => {
+      socket.join(data.roomId);
 
-    socket.on('join room', (data) => {
-      socket.join(data);
+      socket.channel = data.roomId;
+
+      console.log(`User with Id: ${socket.id} joined room: ${data.roomId}`);
     });
 
-    socket.on('join send', (data) => {
-      chat.emit('broadcast', data);
-    });
-
-    socket.on('connection', (data) => {
-      if (onlineList.filter((v) => v._id === data._id).length === 0) {
-        onlineList.push(data);
-      }
-
-      chat.emit('onlineList', onlineList);
-    });
-
-    socket.on('user-send', (data) => {
-      chat.emit('broadcast', data);
+    socket.on('send_message', (data) => {
+      console.log(data);
+      chat.in(socket.channel).emit('receive_message', data);
     });
 
     socket.on('disconnect', () => {
-      console.log('클라이언트 접속 해제', ip, socket.id);
-      socket.leave(roomId);
-      clearInterval(socket.interval);
-    });
-
-    socket.on('error', (error) => {
-      console.error(error);
-    });
-
-    socket.on('message', (data) => {
-      io.emit('messageList', data);
-    });
+      console.log(`User Disconnected, ${socket.id}`);
+    })
   })
 };
